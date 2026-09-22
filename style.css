@@ -30,9 +30,10 @@ body.dark-theme {
 }
 
 /* ==========================================================
-   PENGUNCIAN FONT MUTLAK (Mencegah perubahan saat ganti bahasa)
+   PENGUNCIAN FONT MUTLAK (Menahan perubahan saat ganti bahasa)
    ================================================---------- */
-body, body *, body font, body span, body p, body h1, body h2, body a, 
+*, *::before, *::after, 
+body, body *, html, font, span, p, a, h1, h2, h3, h4, h5, h6, 
 .goog-text-highlight, [style*="font-family"] {
   font-family: var(--font-main) !important;
 }
@@ -43,7 +44,7 @@ body, body *, body font, body span, body p, body h1, body h2, body a,
 .music-title { font-size: 0.85rem !important; font-weight: 600 !important; }
 .music-artist { font-size: 0.75rem !important; font-weight: 400 !important; }
 
-/* Elemen dengan font code */
+/* Elemen khusus dengan font code/mono */
 .profile-bio, 
 .card-sub, 
 .section-title, 
