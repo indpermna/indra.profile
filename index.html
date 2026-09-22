@@ -6,7 +6,6 @@
   <title>Indra Permana</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
   
-  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -419,6 +418,65 @@
       color: var(--accent-color);
     }
 
+    /* Styling untuk Kucing Kicau Mania Update Section */
+    .update-soon-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .update-soon-card:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 4px 20px rgba(0, 255, 157, 0.15);
+    }
+
+    .update-media-container {
+      width: 100%;
+      max-height: 180px;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+      margin-bottom: 10px;
+    }
+
+    .update-media-container video {
+      height: 160px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .update-badge-container {
+      margin-top: 4px;
+    }
+
+    .update-badge-text {
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: textGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 5px rgba(0, 255, 157, 0.4); opacity: 0.8; }
+      100% { text-shadow: 0 0 15px rgba(0, 255, 157, 0.9), 0 0 20px rgba(0, 255, 157, 0.4); opacity: 1; }
+    }
+
     .music-card {
       display: flex;
       align-items: center;
@@ -727,7 +785,6 @@
         <span class="status-indicator" title="System Online"></span>
       </div>
       
-      <!-- Nama panggilan (Inper) sudah dihapus -->
       <h1 class="profile-name">Indra Permana</h1>
 
       <p class="profile-bio">
@@ -769,7 +826,6 @@
     <section class="links-section">
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       <div class="cert-grid">
-        <!-- Certificate 1 -->
         <div class="link-card" onclick="openCertModal('CompTIA Security+', 'CompTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security', 'Threat Analysis', 'Risk Management', 'Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <div class="card-icon"><i data-lucide="award"></i></div>
           <div class="card-text">
@@ -779,7 +835,6 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
-        <!-- Certificate 2 -->
         <div class="link-card" onclick="openCertModal('Fortinet Associate', 'Fortinet', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman mendalam infrastruktur keamanan perimeter.', ['Firewall Concepts', 'Network Perimeter', 'Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
           <div class="card-icon"><i data-lucide="shield-check"></i></div>
           <div class="card-text">
@@ -789,7 +844,6 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
-        <!-- Certificate 3 -->
         <div class="link-card" onclick="openCertModal('Forcepoint DLP Admin', 'Forcepoint', 'Keahlian dalam manajemen Data Loss Prevention (DLP), pengawasan perlindungan data sensitif perusahaan, serta pencegahan kebocoran informasi krusial.', ['Data Protection', 'DLP Policies', 'Compliance', 'Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
           <div class="card-icon"><i data-lucide="lock"></i></div>
           <div class="card-text">
@@ -799,7 +853,6 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
-        <!-- Certificate 4 -->
         <div class="link-card" onclick="openCertModal('Ransomware Defense', 'SOC Radar', 'Pemahaman taktik mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem darurat dari ancaman enkripsi berbahaya.', ['Incident Response', 'Malware Analysis', 'Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
           <div class="card-icon"><i data-lucide="file-warning"></i></div>
           <div class="card-text">
@@ -809,7 +862,6 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
-        <!-- Certificate 5 -->
         <div class="link-card" onclick="openCertModal('GenAI for SOC Analysts', 'SOC Radar', 'Pemanfaatan teknologi Generative AI untuk mengoptimalkan operasional Security Operations Center (SOC), otomatisasi analisis log, dan deteksi ancaman cepat.', ['Generative AI', 'SOC Automation', 'Log Analysis', 'Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
           <div class="card-icon"><i data-lucide="cpu"></i></div>
           <div class="card-text">
@@ -817,6 +869,21 @@
             <span class="card-sub">SOC Radar</span>
           </div>
           <i data-lucide="info" class="arrow-icon"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="links-section">
+      <h2 class="section-title">FEATURED PROJECT</h2>
+      <div class="update-soon-card">
+        <div class="update-media-container">
+          <video autoplay muted loop playsinline>
+            <source src="kucing_kicau_mania.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="update-badge-container">
+          <span class="update-badge-text">UPDATE SOON</span>
         </div>
       </div>
     </section>
@@ -866,7 +933,6 @@
     </footer>
   </main>
 
-  <!-- Certificate Detail Modal Popup -->
   <div class="modal-overlay" id="cert-modal" onclick="closeCertModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -878,8 +944,7 @@
       
       <div class="modal-skills-title">KEY SKILLS & COMPETENCIES</div>
       <div class="modal-skills-list" id="modal-skills-container">
-        <!-- Dynamically injected skills tags -->
-      </div>
+        </div>
 
       <div class="modal-actions">
         <a href="#" id="modal-verify-link" target="_blank" rel="noopener noreferrer" class="modal-btn-verify">
