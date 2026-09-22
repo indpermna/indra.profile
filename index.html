@@ -8,12 +8,27 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Mengunci font agar tidak berubah saat diterjemahkan oleh Google Translate */
-    .goog-text-highlight, 
+    /* Mengunci font secara agresif pada semua elemen terjemahan Google Translate */
+    body *, 
     body font, 
-    body span[style*="font-family"], 
-    body div[style*="font-family"] {
+    body span, 
+    body p, 
+    body h1, 
+    body h2, 
+    body a, 
+    .goog-text-highlight,
+    [style*="font-family"] {
       font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+
+    /* Khusus untuk teks dengan font code/mono */
+    .profile-bio, 
+    .card-sub, 
+    .section-title, 
+    .music-label, 
+    .profile-footer,
+    .lang-btn {
+      font-family: 'JetBrains Mono', monospace !important;
     }
 
     .header-controls {
@@ -40,7 +55,6 @@
       border: none;
       color: #6b7280;
       font-size: 11px;
-      font-family: var(--font-code, monospace);
       font-weight: bold;
       padding: 4px 8px;
       border-radius: 4px;
@@ -118,7 +132,6 @@
       color: #00ff9d;
       padding: 8px 16px;
       border-radius: 20px;
-      font-family: var(--font-code, monospace);
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
