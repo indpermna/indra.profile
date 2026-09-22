@@ -4,27 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indra Permana - Profile</title>
-  <!-- FontAwesome CDN -->
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Background Matrix / Kode Berjatuhan -->
+  <canvas id="matrix-bg"></canvas>
+
   <div class="container">
     <!-- Terminal Bar -->
     <div class="terminal-bar">
-      <div class="terminal-dots">
+      <div class="terminal-dots" onclick="openTerminalSession()" title="Klik untuk buka terminal session" style="cursor: pointer;">
         <div class="dot red"></div>
         <div class="dot yellow"></div>
         <div class="dot green"></div>
       </div>
       <div class="controls-wrapper">
         <div class="lang-switcher">
-          <button class="lang-btn active">EN</button>
-          <button class="lang-btn">ID</button>
-          <button class="lang-btn">JP</button>
+          <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+          <button class="lang-btn" onclick="setLanguage('id')">ID</button>
+          <button class="lang-btn" onclick="setLanguage('jp')">JP</button>
         </div>
-        <button class="theme-btn">☀️</button>
+        <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">☀️</button>
       </div>
     </div>
 
@@ -65,7 +69,7 @@
       </div>
     </div>
 
-    <!-- Verified Certifications -->
+    <!-- Verified Certifications (Grid Seimbang) -->
     <div class="links-section">
       <div class="section-title">Verified Certifications</div>
       <div class="grid-container">
@@ -138,5 +142,131 @@
     </div>
   </div>
 
+  <!-- Modal Terminal Kosong (Aktif lewat klik titik 3) -->
+  <div id="terminalModal" class="terminal-modal" style="display:none;">
+    <div class="terminal-modal-content">
+      <div class="terminal-modal-bar">
+        <span>inper@sec-terminal:~</span>
+        <button onclick="closeTerminalSession()">×</button>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <p>Welcome to Inper Security Terminal v1.0.0</p>
+        <p>Type 'help' for available commands or click close.</p>
+        <div class="terminal-input-line">
+          <span>&gt;</span> <input type="text" id="termInput" autofocus onkeypress="handleTerminalCommand(event)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Interaktif Lengkap -->
+  <script>
+    /* 1. Efek Matrix Background (Kode Berjatuhan) */
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const letters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#@$%&*';
+    const fontSize = 14;
+    let columns = canvas.width / fontSize;
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(8, 12, 16, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ff9d';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 35);
+
+    /* 2. Tombol Bahasa (Translate Handler) */
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Contoh aksi perubahan bahasa (bisa dikustomisasi teksnya sesuai kebutuhan)
+      if(lang === 'id') {
+        alert("Bahasa diubah ke Indonesia");
+      } else if(lang === 'jp') {
+        alert("言語が日本語に切り替わりました");
+      } else {
+        alert("Language switched to English");
+      }
+    }
+
+    /* 3. Dark Mode / Light Mode Switcher */
+    function toggleTheme() {
+      const body = document.body;
+      const themeBtn = document.getElementById('themeToggle');
+      body.classList.toggle('light-theme');
+      
+      if (body.classList.contains('light-theme')) {
+        themeBtn.textContent = '🌙';
+      } else {
+        themeBtn.textContent = '☀️';
+      }
+    }
+
+    /* 4. Terminal Modal Session (Klik Titik 3) */
+    function openTerminalSession() {
+      document.getElementById('terminalModal').style.display = 'flex';
+    }
+
+    function closeTerminalSession() {
+      document.getElementById('terminalModal').style.display = 'none';
+    }
+
+    function handleTerminalCommand(e) {
+      if (e.key === 'Enter') {
+        const input = document.getElementById('termInput');
+        const termBody = document.getElementById('terminalBody');
+        const val = input.value.trim();
+        
+        const p = document.createElement('p');
+        p.textContent = '> ' + val;
+        termBody.insertBefore(p, document.querySelector('.terminal-input-line'));
+
+        if(val === 'help') {
+          const res = document.createElement('p');
+          res.style.color = '#00ff9d';
+          res.textContent = 'Commands: whoami, skills, clear, exit';
+          termBody.insertBefore(res, document.querySelector('.terminal-input-line'));
+        } else if(val === 'whoami') {
+          const res = document.createElement('p');
+          res.style.color = '#00ff9d';
+          res.textContent = 'Indra Permana (Inper) - Security & Network Engineer';
+          termBody.insertBefore(res, document.querySelector('.terminal-input-line'));
+        } else if(val === 'clear') {
+          termBody.innerHTML = '<div class="terminal-input-line"><span>&gt;</span> <input type="text" id="termInput" autofocus onkeypress="handleTerminalCommand(event)"></div>';
+        } else if(val === 'exit') {
+          closeTerminalSession();
+        } else if(val !== '') {
+          const res = document.createElement('p');
+          res.style.color = '#ff5f56';
+          res.textContent = "Command not found: " + val;
+          termBody.insertBefore(res, document.querySelector('.terminal-input-line'));
+        }
+        input.value = '';
+      }
+    }
+  </script>
 </body>
 </html>
