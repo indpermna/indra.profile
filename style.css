@@ -169,10 +169,10 @@ body.dark-theme .lang-switcher {
   cursor: pointer;
 }
 
-body.light-theme .sun-icon { display: block; }
-body.light-theme .moon-icon { display: none; }
-body.dark-theme .sun-icon { display: none; }
-body.dark-theme .moon-icon { display: block; }
+body.light-theme .sun-icon { display: none; }
+body.light-theme .moon-icon { display: block; }
+body.dark-theme .sun-icon { display: block; }
+body.dark-theme .moon-icon { display: none; }
 
 .profile-header {
   text-align: center;
@@ -351,6 +351,7 @@ body.dark-theme .moon-icon { display: block; }
   cursor: default;
 }
 
+/* MUSIC CARD STYLING PERFECTION */
 .music-card {
   display: flex;
   align-items: center;
