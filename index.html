@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Styling Custom Language Selector Responsif Tema */
     .header-controls {
       display: flex;
       align-items: center;
@@ -65,13 +64,11 @@
       border: 1px solid rgba(0, 255, 157, 0.4) !important;
     }
 
-    /* Mencegah efek highlight kuning bawaan Google Translate */
     .goog-text-highlight {
       background-color: transparent !important;
       box-shadow: none !important;
     }
 
-    /* Sembunyikan Elemen Bawaan Google Translate yang Mengganggu */
     #google_translate_element,
     .goog-te-banner-frame,
     .skiptranslate,
@@ -83,7 +80,6 @@
       top: 0px !important;
     }
 
-    /* Styling Easter Egg untuk Area Titik Terminal */
     .terminal-dots {
       cursor: pointer;
       display: flex;
@@ -100,7 +96,6 @@
       pointer-events: none;
     }
 
-    /* Animasi Container saat disembunyikan secara rahasia */
     .container {
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -110,7 +105,6 @@
       pointer-events: none;
     }
 
-    /* Tombol Rahasia (Restore Button) */
     #secret-restore-btn {
       position: fixed;
       bottom: 24px;
@@ -138,7 +132,6 @@
       pointer-events: auto;
     }
 
-    /* Mencegah teks terblok putih saat diklik berulang kali */
     .link-card, .music-card, .profile-header, .terminal-bar {
       user-select: none;
       -webkit-user-select: none;
@@ -149,12 +142,14 @@
 </head>
 <body class="dark-theme">
   
-  <div class="cyber-background"></div>
+  <!-- Latar Belakang Matrix Code Rain Dinamis -->
+  <div class="cyber-background">
+    <canvas id="matrix-canvas"></canvas>
+  </div>
 
   <main class="container">
     <!-- Header Window -->
     <div class="terminal-bar">
-      <!-- Area Titik Terminal dengan Fitur Easter Egg -->
       <div class="terminal-dots" onclick="toggleSecretWindow()" title="???">
         <span class="dot red"></span>
         <span class="dot yellow"></span>
@@ -162,17 +157,14 @@
       </div>
       
       <div class="header-controls">
-        <!-- Custom Language Switcher (Urutan: EN, ID, JV) -->
         <div class="lang-switcher">
           <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
           <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
           <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
         </div>
 
-        <!-- Hidden Google Translate Element -->
         <div id="google_translate_element"></div>
 
-        <!-- Theme Toggle Button -->
         <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
           <i data-lucide="sun" class="sun-icon"></i>
           <i data-lucide="moon" class="moon-icon"></i>
@@ -194,7 +186,6 @@
         IT Security & Network Engineer <span class="divider">•</span> Cyber Security Analyst
       </p>
 
-      <!-- Badge Status Kolaborasi -->
       <div class="collaboration-badge">
         <span class="pulse-dot"></span> Open for Tech Collaboration
       </div>
@@ -283,7 +274,6 @@
     <section class="links-section">
       <h2 class="section-title">HOBBIES</h2>
       <div class="grid-container">
-        <!-- 1. Street Photography -->
         <div class="link-card hobby-card">
           <div class="card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
@@ -293,7 +283,6 @@
           </div>
         </div>
 
-        <!-- 2. Billiard -->
         <div class="link-card hobby-card">
           <div class="card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 1 0 10 10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v3"/></svg>
@@ -329,11 +318,58 @@
     </footer>
   </main>
 
-  <!-- Tombol Easter Egg untuk Restore Terminal -->
   <button id="secret-restore-btn" onclick="toggleSecretWindow()">[ Restore Terminal Session ]</button>
 
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
+
+  <!-- Script Matrix Code Rain Animasi -->
+  <script>
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>//:;{}[]+-*\\';
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = [];
+
+    for (let i = 0; i < columns; i++) {
+      drops[i] = 1;
+    }
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(11, 15, 20, 0.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        
+        if (Math.random() > 0.9) {
+          ctx.fillStyle = '#ffffff';
+        } else {
+          ctx.fillStyle = '#059669';
+        }
+
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 45);
+  </script>
 
   <!-- Script Google Translate & State Selector Controller -->
   <script type="text/javascript">
@@ -345,7 +381,6 @@
       }, 'google_translate_element');
     }
 
-    // Fungsi memastikan hanya tombol yang sesuai dengan localStorage yang aktif
     function updateActiveButton() {
       const currentLang = localStorage.getItem('user_lang') || 'id';
       document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -374,7 +409,6 @@
       location.reload();
     }
 
-    // Fungsi Pengendali Easter Egg Terminal Dots
     function toggleSecretWindow() {
       const container = document.querySelector('.container');
       const secretBtn = document.getElementById('secret-restore-btn');
