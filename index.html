@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indra Permana - Profile</title>
-  <!-- CDN FontAwesome untuk Ikon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,11 +18,11 @@
       </div>
       <div class="controls-wrapper">
         <div class="lang-switcher">
-          <button class="lang-btn active" type="button" onclick="changeLang(this, 'en')">EN</button>
-          <button class="lang-btn" type="button" onclick="changeLang(this, 'id')">ID</button>
-          <button class="lang-btn" type="button" onclick="changeLang(this, 'jp')">JP</button>
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">ID</button>
+          <button class="lang-btn">JP</button>
         </div>
-        <button class="theme-btn" id="themeToggle" type="button" onclick="toggleTheme()">☀️</button>
+        <button class="theme-btn">☀️</button>
       </div>
     </div>
 
@@ -47,7 +45,7 @@
       <div class="section-title">Networks & Socials</div>
       <div class="grid-container">
         <a href="https://linkedin.com/in/indpermana" target="_blank" class="link-card">
-          <div class="card-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+          <div class="card-icon">in</div>
           <div class="card-text">
             <span class="card-title">LinkedIn</span>
             <span class="card-sub">linkedin.com/in/indpermana</span>
@@ -55,7 +53,7 @@
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
         <a href="https://instagram.com/indpermana" target="_blank" class="link-card">
-          <div class="card-icon"><i class="fa-brands fa-instagram"></i></div>
+          <div class="card-icon">ig</div>
           <div class="card-text">
             <span class="card-title">Instagram</span>
             <span class="card-sub">@indpermana</span>
@@ -70,27 +68,27 @@
       <div class="section-title">Verified Certifications</div>
       <div class="grid-container">
         <a href="#" class="link-card">
-          <div class="card-icon"><i class="fa-solid fa-certificate"></i></div>
+          <div class="card-icon">📜</div>
           <div class="card-text"><span class="card-title">CompTIA Security+</span><span class="card-sub">CompTIA</span></div>
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
         <a href="#" class="link-card">
-          <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="card-icon">🛡️</div>
           <div class="card-text"><span class="card-title">Fortinet Associate</span><span class="card-sub">Fortinet</span></div>
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
         <a href="#" class="link-card">
-          <div class="card-icon"><i class="fa-solid fa-lock"></i></div>
+          <div class="card-icon">🔒</div>
           <div class="card-text"><span class="card-title">Forcepoint DLP Admin</span><span class="card-sub">Forcepoint</span></div>
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
         <a href="#" class="link-card">
-          <div class="card-icon"><i class="fa-solid fa-shield-virus"></i></div>
+          <div class="card-icon">🛡️</div>
           <div class="card-text"><span class="card-title">Ransomware Defense</span><span class="card-sub">SOC Radar</span></div>
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
         <a href="#" class="link-card cert-last">
-          <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
+          <div class="card-icon">🤖</div>
           <div class="card-text"><span class="card-title">GenAI for SOC Analysts</span><span class="card-sub">SOC Radar</span></div>
           <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
@@ -102,11 +100,11 @@
       <div class="section-title">Hobbies</div>
       <div class="grid-container">
         <div class="link-card hobby-card">
-          <div class="card-icon"><i class="fa-solid fa-camera"></i></div>
+          <div class="card-icon">📸</div>
           <div class="card-text"><span class="card-title">Street Photography</span></div>
         </div>
         <div class="link-card hobby-card">
-          <div class="card-icon"><i class="fa-solid fa-circle-dot"></i></div>
+          <div class="card-icon">🎱</div>
           <div class="card-text"><span class="card-title">Billiard</span></div>
         </div>
       </div>
@@ -138,30 +136,5 @@
     </div>
   </div>
 
-  <!-- SCRIPT JAVASCRIPT UTAMA (DIJAMIN JALAN) -->
-  <script>
-    function changeLang(element, lang) {
-      // Hapus kelas aktif dari semua tombol bahasa
-      const buttons = document.querySelectorAll('.lang-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      
-      // Tambahkan kelas aktif ke tombol yang diklik
-      element.classList.add('active');
-      console.log("Bahasa diubah ke:", lang);
-    }
-
-    function toggleTheme() {
-      const body = document.body;
-      const themeBtn = document.getElementById('themeToggle');
-      
-      body.classList.toggle('light-theme');
-      
-      if (body.classList.contains('light-theme')) {
-        themeBtn.textContent = '🌙';
-      } else {
-        themeBtn.textContent = '☀️';
-      }
-    }
-  </script>
 </body>
 </html>
