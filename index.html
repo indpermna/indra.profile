@@ -137,6 +137,14 @@
       opacity: 1;
       pointer-events: auto;
     }
+
+    /* Mencegah teks terblok putih saat diklik berulang kali */
+    .link-card, .music-card, .profile-header, .terminal-bar {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
   </style>
 </head>
 <body class="dark-theme">
