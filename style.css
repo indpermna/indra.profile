@@ -102,15 +102,12 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.terminal-dots .dot {
-  pointer-events: none;
-}
-
 .dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   display: inline-block;
+  pointer-events: none;
 }
 
 .dot.red { background-color: #ff5f56; }
@@ -350,7 +347,6 @@ body.dark-theme .moon-icon { display: block; }
   color: var(--accent-color);
 }
 
-/* Hobbies & Music Specific Styles */
 .hobby-card {
   cursor: default;
 }
@@ -466,4 +462,134 @@ body.dark-theme .moon-icon { display: block; }
   transform: translateX(-50%) translateY(0);
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Certification Modal Styles */
+.cert-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.cert-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cert-modal-box {
+  width: 100%;
+  max-width: 440px;
+  background: var(--container-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-modal-overlay.active .cert-modal-box {
+  transform: scale(1) translateY(0);
+}
+
+.cert-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cert-modal-tag {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.cert-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-sub);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cert-modal-close:hover {
+  background: var(--card-hover);
+  color: var(--text-main);
+}
+
+.cert-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.cert-modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cert-modal-issuer {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  margin-top: -10px;
+  font-family: var(--font-code);
+}
+
+.cert-modal-desc {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  line-height: 1.5;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.cert-modal-footer {
+  display: flex;
+  gap: 10px;
+}
+
+.cert-btn-verify {
+  flex: 1;
+  background-color: var(--accent-color);
+  color: #0b0f14;
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.cert-btn-verify:hover {
+  opacity: 0.9;
 }
