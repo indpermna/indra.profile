@@ -129,12 +129,13 @@ body.light-theme .cyber-background {
 .dot.yellow { background-color: #ffbd2e; }
 .dot.green { background-color: #27c93f; }
 
-/* Language Switcher */
+/* Language Switcher - Diseragamkan Ukuran & Serasi */
 .lang-switcher {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 3px;
   background: var(--card-bg);
-  padding: 2px;
+  padding: 3px;
   border-radius: 6px;
   border: 1px solid var(--border-color);
 }
@@ -144,10 +145,15 @@ body.light-theme .cyber-background {
   border: none;
   color: var(--text-secondary);
   font-size: 0.7rem !important;
-  padding: 3px 6px;
+  width: 26px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-weight: 500 !important;
 }
 
 .lang-btn.active, .lang-btn:hover {
