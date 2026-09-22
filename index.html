@@ -8,7 +8,11 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Styling Custom Language Selector Responsif Tema */
+    /* Styling Custom Language Selector Responsif Tema & Jaga Konsistensi Font */
+    body, html, *, .profile-name, .profile-bio, .link-card, .section-title {
+      font-family: inherit; /* Mencegah font berubah-ubah saat google translate aktif */
+    }
+
     .header-controls {
       display: flex;
       align-items: center;
@@ -24,7 +28,6 @@
       gap: 2px;
     }
 
-    /* Penyesuaian background switcher saat dark mode */
     body.dark-theme .lang-switcher {
       background: rgba(17, 24, 39, 0.8);
     }
@@ -93,10 +96,10 @@
       </div>
       
       <div class="header-controls">
-        <!-- Custom Language Switcher -->
+        <!-- Custom Language Switcher (Urutan: EN, ID, JV) -->
         <div class="lang-switcher">
-          <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
           <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
           <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
         </div>
 
@@ -273,7 +276,7 @@
       }, 'google_translate_element');
     }
 
-    // Fungsi untuk memperbarui tampilan sorot tombol hijau
+    // Fungsi untuk memperbarui tampilan tombol aktif
     function updateActiveButton() {
       const currentLang = localStorage.getItem('user_lang') || 'id';
       document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -285,18 +288,21 @@
       });
     }
 
-    // Eksekusi pembaruan tombol saat halaman dimuat
     document.addEventListener('DOMContentLoaded', updateActiveButton);
 
     function changeLanguage(langCode) {
-      // Simpan pilihan bahasa ke localStorage
       localStorage.setItem('user_lang', langCode);
 
-      // Set cookie Google Translate
-      document.cookie = "googtrans=/id/" + langCode + "; path=/;";
-      document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
+      if (langCode === 'id') {
+        // Hapus cookie Google Translate agar kembali bersih ke bahasa asli (Indonesia)
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
+      } else {
+        // Set cookie baru untuk bahasa Inggris atau Jawa
+        document.cookie = "googtrans=/id/" + langCode + "; path=/;";
+        document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
+      }
       
-      // Reload halaman
       location.reload();
     }
   </script>
