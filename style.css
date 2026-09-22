@@ -42,7 +42,6 @@ body.light-theme {
 }
 
 /* === PENGAMAN FONT GOOGLE TRANSLATE === */
-/* Memaksa elemen/tag tambahan dari Google Translate agar tetap menggunakan font utama */
 .container *, 
 .container span, 
 .container font, 
@@ -50,7 +49,6 @@ body.light-theme {
   font-family: inherit !important;
 }
 
-/* Khusus elemen yang memang harus pakai font code/mono */
 .collaboration-badge,
 .section-title,
 .music-label,
@@ -322,13 +320,21 @@ body.light-theme .sun-icon { display: none; }
   color: var(--text-main);
 }
 
-/* Khusus Kartu Hobi (Non-clickable & Presisi Alignment) */
+/* Peningkatan Kartu Hobi dengan Efek Interaktif (Hover State) */
 .hobby-card {
   cursor: default;
 }
 
 .hobby-card:hover {
-  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, 0.4);
+  background-color: var(--card-hover);
+}
+
+.hobby-card:hover .card-icon {
+  color: var(--accent-color);
+  background: var(--accent-glow);
+  border-color: transparent;
 }
 
 .music-card {
@@ -339,7 +345,12 @@ body.light-theme .sun-icon { display: none; }
   border-radius: 12px;
   padding: 10px 14px;
   min-height: 58px;
-  gap: 12px; /* Memberikan jarak yang pas antara cover album dan teks */
+  gap: 12px;
+}
+
+.music-card:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  background-color: var(--card-hover);
 }
 
 .music-card .music-icon {
@@ -385,6 +396,7 @@ body.light-theme .sun-icon { display: none; }
   height: 100%;
   background-color: var(--accent-color);
   border-radius: 3px;
+  box-shadow: 0 0 6px var(--accent-color);
   animation: bounce 1.2s infinite ease-in-out;
 }
 
@@ -393,8 +405,8 @@ body.light-theme .sun-icon { display: none; }
 .sound-wave span:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes bounce {
-  0%, 100% { height: 3px; }
-  50% { height: 14px; }
+  0%, 100% { height: 3px; opacity: 0.5; }
+  50% { height: 14px; opacity: 1; }
 }
 
 .profile-footer {
