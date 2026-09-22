@@ -1,30 +1,42 @@
-// Inisialisasi Ikon Lucide
 document.addEventListener('DOMContentLoaded', () => {
-  lucide.createIcons();
+  // 1. Inisialisasi Ikon Lucide
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
 
-  // Logika Dark / Light Mode Switcher
+  // 2. Logika Toggle Tema (Dark / Light Mode)
   const themeToggleBtn = document.getElementById('theme-toggle');
-  const body = document.body;
+  const bodyElement = document.body;
 
-  // Cek preferensi tema sebelumnya dari local storage
-  const savedTheme = localStorage.getItem('theme');
-
+  // Cek preferensi tema yang tersimpan di localStorage sebelumnya
+  const savedTheme = localStorage.getItem('user_theme');
   if (savedTheme) {
-    body.className = savedTheme;
+    bodyElement.className = savedTheme;
   } else {
-    // Mode standar (Dark Theme untuk kesan Cyber Security)
-    body.classList.add('dark-theme');
+    // Default ke dark-theme jika belum ada
+    bodyElement.className = 'dark-theme';
   }
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      if (body.classList.contains('dark-theme')) {
-        body.classList.replace('dark-theme', 'light-theme');
-        localStorage.setItem('theme', 'light-theme');
+      if (bodyElement.classList.contains('dark-theme')) {
+        bodyElement.classList.remove('dark-theme');
+        bodyElement.classList.add('light-theme');
+        localStorage.setItem('user_theme', 'light-theme');
       } else {
-        body.classList.replace('light-theme', 'dark-theme');
-        localStorage.setItem('theme', 'dark-theme');
+        bodyElement.classList.remove('light-theme');
+        bodyElement.classList.add('dark-theme');
+        localStorage.setItem('user_theme', 'dark-theme');
+      }
+      
+      // Refresh ikon Lucide setelah pergantian tema jika diperlukan
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
       }
     });
   }
+
+  // 3. Efek Interaktif Tambahan (Opsional)
+  // Mencegah klik kanan pada kartu musik/profil jika ingin menjaga privasi aset, 
+  // atau membiarkannya standar. (Opsional, saat ini diatur via CSS user-select)
 });
