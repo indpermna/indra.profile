@@ -78,7 +78,6 @@
       height: 100%;
     }
 
-    /* Diperlebar menjadi 900px agar proporsional di layar laptop/desktop */
     .container {
       width: 100%;
       max-width: 900px;
@@ -269,34 +268,11 @@
       letter-spacing: -0.5px;
     }
 
-    .nickname {
-      color: var(--text-muted);
-      font-weight: 400;
-      font-size: 1.15rem;
-    }
-
-    /* Efek Mikro-interaksi Mengetik (Typing Effect) pada Bio */
     .profile-bio {
       font-size: 0.88rem;
       color: var(--text-muted);
       font-family: var(--font-code);
       margin-bottom: 12px;
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid var(--accent-color);
-      animation: typing 3.5s steps(36, end), blink-caret 0.75s step-end infinite;
-      max-width: 100%;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent; }
-      50% { border-color: var(--accent-color); }
     }
 
     .divider {
@@ -751,7 +727,8 @@
         <span class="status-indicator" title="System Online"></span>
       </div>
       
-      <h1 class="profile-name">Indra Permana <span class="nickname">(Inper)</span></h1>
+      <!-- Nama panggilan (Inper) sudah dihapus -->
+      <h1 class="profile-name">Indra Permana</h1>
 
       <p class="profile-bio">
         IT Security & Network Engineer <span class="divider">•</span> Cyber Security
