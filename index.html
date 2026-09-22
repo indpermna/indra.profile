@@ -1,4 +1,68 @@
-<!-- Certifications Section -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio & Links</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Hubungan File CSS (Pastikan nama file di folder sama, yaitu style.css) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Matrix Background Canvas -->
+  <div class="cyber-background">
+    <canvas id="matrix-canvas"></canvas>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container" id="mainContainer">
+    
+    <!-- Terminal Bar & Controls -->
+    <div class="terminal-bar">
+      <div class="terminal-dots" id="collapseBtn" title="Minimize">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="header-controls">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="id">ID</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="theme-btn" id="themeToggle" title="Toggle Theme">
+          <i data-lucide="sun" class="sun-icon" width="16" height="16"></i>
+          <i data-lucide="moon" class="moon-icon" width="16" height="16"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Profile Header -->
+    <header class="profile-header">
+      <div class="avatar-container">
+        <div class="avatar-radar-ring"></div>
+        <img src="https://github.com/github.png" alt="Avatar" class="avatar">
+        <div class="status-indicator"></div>
+      </div>
+      <h1 class="profile-name">Nama Anda <span class="nickname">(@username)</span></h1>
+      <p class="profile-bio">
+        <span>Security Enthusiast</span><span class="divider">/</span><span>Developer</span>
+      </p>
+      <div class="collaboration-badge">
+        <div class="pulse-dot"></div>
+        <span>Available for Collaboration</span>
+      </div>
+    </header>
+
+    <!-- Verified Certifications Section -->
     <section class="links-section">
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       <div class="grid-container">
@@ -70,3 +134,83 @@
 
       </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="profile-footer">
+      <p>&copy; 2026 Portfolio. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Secret Restore Button -->
+  <button id="secret-restore-btn">Restore Terminal</button>
+
+  <!-- HTML Modal Overlay -->
+  <div class="cert-modal-overlay" id="certModal">
+    <div class="cert-modal-box">
+      <div class="cert-modal-header">
+        <span class="cert-modal-tag">VERIFICATION DETAILS</span>
+        <button class="cert-modal-close" onclick="closeCertModal()">
+          <i data-lucide="x" width="18" height="18"></i>
+        </button>
+      </div>
+      <div class="cert-modal-body">
+        <h3 class="cert-modal-title" id="modalTitle">Certification Title</h3>
+        <p class="cert-modal-issuer" id="modalIssuer">Issuer Name</p>
+        <p class="cert-modal-desc" id="modalDesc">Description details go here...</p>
+        <div class="cert-modal-footer">
+          <a href="#" id="modalLink" target="_blank" rel="noopener noreferrer" class="cert-btn-verify">
+            <span>Verify Credential</span>
+            <i data-lucide="external-link" width="16" height="16"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Utama -->
+  <script>
+    // Inisialisasi Ikon Lucide
+    lucide.createIcons();
+
+    // Tema Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      document.body.classList.toggle('dark-theme');
+    });
+
+    // Modal Cert Logic
+    const modal = document.getElementById('certModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalIssuer = document.getElementById('modalIssuer');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalLink = document.getElementById('modalLink');
+
+    document.querySelectorAll('.cert-trigger').forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalTitle.textContent = card.getAttribute('data-title');
+        modalIssuer.textContent = card.getAttribute('data-issuer');
+        modalDesc.textContent = card.getAttribute('data-desc');
+        modalLink.href = card.getAttribute('data-link');
+        
+        modal.classList.add('active');
+        lucide.createIcons();
+      });
+    });
+
+    function closeCertModal() {
+      modal.classList.remove('active');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeCertModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCertModal();
+    });
+  </script>
+</body>
+</html>
