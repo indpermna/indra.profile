@@ -7,6 +7,43 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Styling khusus agar Widget Bahasa rapi & menyatu dengan tema Cyber */
+    .terminal-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #google_translate_element select {
+      background: #111827;
+      color: #00ff9d;
+      border: 1px solid #00ff9d33;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+    .goog-te-banner-frame, .skiptranslate iframe {
+      display: none !important;
+    }
+    body {
+      top: 0px !important;
+    }
+    .goog-te-gadget {
+      color: transparent !important;
+      font-size: 0px !important;
+    }
+    .goog-te-gadget span {
+      display: none !important;
+    }
+  </style>
 </head>
 <body class="dark-theme">
   
@@ -20,10 +57,15 @@
         <span class="dot yellow"></span>
         <span class="dot green"></span>
       </div>
-      <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
-        <i data-lucide="sun" class="sun-icon"></i>
-        <i data-lucide="moon" class="moon-icon"></i>
-      </button>
+      <div class="header-controls">
+        <!-- Widget Pilihan Bahasa (ID, EN, JV) -->
+        <div id="google_translate_element"></div>
+
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Header Profil -->
@@ -177,5 +219,17 @@
 
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
+
+  <!-- Script Google Translate (Indonesian, English, Javanese) -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'id',
+        includedLanguages: 'id,en,jw',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
