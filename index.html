@@ -33,7 +33,7 @@
       border: none;
       color: #6b7280;
       font-size: 11px;
-      font-family: monospace;
+      font-family: var(--font-code, monospace);
       font-weight: bold;
       padding: 4px 8px;
       border-radius: 4px;
@@ -54,18 +54,24 @@
     }
 
     .lang-btn.active {
-      background: rgba(0, 255, 157, 0.2);
-      color: #007a4d;
-      border: 1px solid rgba(0, 255, 157, 0.5);
+      background: rgba(0, 255, 157, 0.2) !important;
+      color: #007a4d !important;
+      border: 1px solid rgba(0, 255, 157, 0.5) !important;
     }
 
     body.dark-theme .lang-btn.active {
-      background: rgba(0, 255, 157, 0.15);
-      color: #00ff9d;
-      border: 1px solid rgba(0, 255, 157, 0.4);
+      background: rgba(0, 255, 157, 0.15) !important;
+      color: #00ff9d !important;
+      border: 1px solid rgba(0, 255, 157, 0.4) !important;
     }
 
-    /* Sembunyikan Bawaan Google Translate yang Berantakan */
+    /* Mencegah efek highlight kuning bawaan Google Translate */
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+
+    /* Sembunyikan Elemen Bawaan Google Translate yang Mengganggu */
     #google_translate_element,
     .goog-te-banner-frame,
     .skiptranslate,
@@ -272,11 +278,12 @@
       }, 'google_translate_element');
     }
 
-    // Fungsi untuk memperbarui tampilan tombol aktif
+    // Fungsi memastikan hanya tombol yang sesuai dengan localStorage yang aktif
     function updateActiveButton() {
       const currentLang = localStorage.getItem('user_lang') || 'id';
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        if (btn.getAttribute('data-lang') === currentLang) {
+        const btnLang = btn.getAttribute('data-lang');
+        if (btnLang === currentLang) {
           btn.classList.add('active');
         } else {
           btn.classList.remove('active');
@@ -290,11 +297,9 @@
       localStorage.setItem('user_lang', langCode);
 
       if (langCode === 'id') {
-        // Hapus cookie Google Translate agar kembali bersih ke bahasa asli (Indonesia)
         document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
       } else {
-        // Set cookie baru untuk bahasa Inggris atau Jawa
         document.cookie = "googtrans=/id/" + langCode + "; path=/;";
         document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
       }
