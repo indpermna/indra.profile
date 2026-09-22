@@ -132,7 +132,7 @@
       pointer-events: auto;
     }
 
-    .link-card, .music-card, .profile-header, .terminal-bar {
+    .link-card, .music-card, .profile-header, .terminal-bar, .system-status-bar {
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -182,7 +182,6 @@
       
       <h1 class="profile-name">Indra Permana <span class="nickname">(Inper)</span></h1>
 
-      <!-- Ubah teks di bawah ini -->
       <p class="profile-bio">
         IT Security & Network Engineer <span class="divider">•</span> Cyber Security
       </p>
@@ -312,6 +311,17 @@
         </div>
       </div>
     </section>
+
+    <!-- System Status Bar -->
+    <div class="system-status-bar">
+      <div class="status-indicator-live">
+        <span class="status-dot-green"></span>
+        <span>SYSTEM: <strong style="color: var(--text-main);">SECURE / ONLINE</strong></span>
+      </div>
+      <div class="status-ping">
+        PING: 14ms | SECURE CONN
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer class="profile-footer">
