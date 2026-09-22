@@ -6,6 +6,7 @@
   <title>Indra Permana</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
   
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -59,6 +60,7 @@
       position: relative;
       overflow-x: hidden;
       transition: background 0.3s ease, color 0.3s ease;
+      top: 0 !important;
     }
 
     .cyber-background {
@@ -197,7 +199,15 @@
       border: 1px solid var(--border-color) !important;
     }
 
-    #google_translate_element,
+    /* Google Translate element disembunyikan agar script tetap jalan tanpa merusak layout */
+    #google_translate_element {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
     .goog-te-banner-frame,
     .skiptranslate {
       display: none !important;
@@ -767,6 +777,7 @@
     <section class="links-section">
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       <div class="cert-grid">
+        <!-- Certificate 1 -->
         <div class="link-card" onclick="openCertModal('CompTIA Security+', 'CompTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security', 'Threat Analysis', 'Risk Management', 'Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <div class="card-icon"><i data-lucide="award"></i></div>
           <div class="card-text">
@@ -776,6 +787,7 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
+        <!-- Certificate 2 -->
         <div class="link-card" onclick="openCertModal('Fortinet Associate', 'Fortinet', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman mendalam infrastruktur keamanan perimeter.', ['Firewall Concepts', 'Network Perimeter', 'Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
           <div class="card-icon"><i data-lucide="shield-check"></i></div>
           <div class="card-text">
@@ -785,6 +797,7 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
+        <!-- Certificate 3 -->
         <div class="link-card" onclick="openCertModal('Forcepoint DLP Admin', 'Forcepoint', 'Keahlian dalam manajemen Data Loss Prevention (DLP), pengawasan perlindungan data sensitif perusahaan, serta pencegahan kebocoran informasi krusial.', ['Data Protection', 'DLP Policies', 'Compliance', 'Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
           <div class="card-icon"><i data-lucide="lock"></i></div>
           <div class="card-text">
@@ -794,6 +807,7 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
+        <!-- Certificate 4 -->
         <div class="link-card" onclick="openCertModal('Ransomware Defense', 'SOC Radar', 'Pemahaman taktik mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem darurat dari ancaman enkripsi berbahaya.', ['Incident Response', 'Malware Analysis', 'Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
           <div class="card-icon"><i data-lucide="file-warning"></i></div>
           <div class="card-text">
@@ -803,6 +817,7 @@
           <i data-lucide="info" class="arrow-icon"></i>
         </div>
 
+        <!-- Certificate 5 -->
         <div class="link-card" onclick="openCertModal('GenAI for SOC Analysts', 'SOC Radar', 'Pemanfaatan teknologi Generative AI untuk mengoptimalkan operasional Security Operations Center (SOC), otomatisasi analisis log, dan deteksi ancaman cepat.', ['Generative AI', 'SOC Automation', 'Log Analysis', 'Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
           <div class="card-icon"><i data-lucide="cpu"></i></div>
           <div class="card-text">
@@ -859,6 +874,7 @@
     </footer>
   </main>
 
+  <!-- Certificate Detail Modal Popup -->
   <div class="modal-overlay" id="cert-modal" onclick="closeCertModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -870,7 +886,8 @@
       
       <div class="modal-skills-title">KEY SKILLS & COMPETENCIES</div>
       <div class="modal-skills-list" id="modal-skills-container">
-        </div>
+        <!-- Dynamically injected skills tags -->
+      </div>
 
       <div class="modal-actions">
         <a href="#" id="modal-verify-link" target="_blank" rel="noopener noreferrer" class="modal-btn-verify">
@@ -882,9 +899,11 @@
 
   <button id="secret-restore-btn" onclick="toggleSecretWindow()">&gt; exit_shell</button>
 
+  <!-- Script Eksternal -->
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
 
+  <!-- Skrip Matrix Background -->
   <script>
     const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
@@ -968,17 +987,22 @@
     }
   </script>
 
+  <!-- Skrip Google Translate & UI Control -->
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'id',
-        includedLanguages: 'id,en,jw',
+        includedLanguages: 'id,en,jv',
         autoDisplay: false
       }, 'google_translate_element');
     }
 
     function updateActiveButton() {
-      const currentLang = localStorage.getItem('user_lang') || 'id';
+      const match = document.cookie.match(/googtrans=\/id\/([a-z]+)/);
+      const currentLang = match ? match[1] : 'id';
+      
       document.querySelectorAll('.lang-btn').forEach(btn => {
         if (btn.getAttribute('data-lang') === currentLang) {
           btn.classList.add('active');
@@ -993,7 +1017,9 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', updateActiveButton);
+    window.addEventListener('load', () => {
+      setTimeout(updateActiveButton, 800);
+    });
 
     function toggleTheme() {
       document.body.classList.toggle('light-theme');
@@ -1002,15 +1028,21 @@
     }
 
     function changeLanguage(langCode) {
-      localStorage.setItem('user_lang', langCode);
-      if (langCode === 'id') {
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
+      const selectField = document.querySelector('.goog-te-combo');
+      if (selectField) {
+        selectField.value = langCode;
+        selectField.dispatchEvent(new Event('change'));
+        setTimeout(() => {
+          location.reload();
+        }, 500);
       } else {
-        document.cookie = "googtrans=/id/" + langCode + "; path=/;";
-        document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
+        if (langCode === 'id') {
+          document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        } else {
+          document.cookie = `googtrans=/id/${langCode}; path=/;`;
+        }
+        location.reload();
       }
-      location.reload();
     }
 
     function toggleSecretWindow() {
