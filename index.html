@@ -1,427 +1,306 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Indra Permana</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    .header-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .lang-switcher {
-      display: flex;
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 255, 157, 0.2);
-      border-radius: 6px;
-      padding: 2px;
-      gap: 2px;
-    }
-
-    body.dark-theme .lang-switcher {
-      background: rgba(17, 24, 39, 0.8);
-    }
-
-    .lang-btn {
-      background: transparent;
-      border: none;
-      color: #6b7280;
-      font-size: 11px;
-      font-family: var(--font-code, monospace);
-      font-weight: bold;
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    body.dark-theme .lang-btn {
-      color: #9ca3af;
-    }
-
-    .lang-btn:hover {
-      color: #00875a;
-    }
-
-    body.dark-theme .lang-btn:hover {
-      color: #00ff9d;
-    }
-
-    .lang-btn.active {
-      background: rgba(0, 255, 157, 0.2) !important;
-      color: #007a4d !important;
-      border: 1px solid rgba(0, 255, 157, 0.5) !important;
-    }
-
-    body.dark-theme .lang-btn.active {
-      background: rgba(0, 255, 157, 0.15) !important;
-      color: #00ff9d !important;
-      border: 1px solid rgba(0, 255, 157, 0.4) !important;
-    }
-
-    .goog-text-highlight {
-      background-color: transparent !important;
-      box-shadow: none !important;
-    }
-
-    #google_translate_element,
-    .goog-te-banner-frame,
-    .skiptranslate,
-    .goog-te-spinner-pos {
-      display: none !important;
-    }
-
-    body {
-      top: 0px !important;
-    }
-
-    .terminal-dots {
-      cursor: pointer;
-      display: flex;
-      gap: 6px;
-      padding: 4px 6px;
-      border-radius: 6px;
-      transition: background 0.2s ease;
-      width: fit-content;
-    }
-    .terminal-dots:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-    .terminal-dots .dot {
-      pointer-events: none;
-    }
-
-    .container {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .container.is-hidden {
-      opacity: 0;
-      transform: scale(0.95);
-      pointer-events: none;
-    }
-
-    #secret-restore-btn {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(30px);
-      background: var(--container-bg, #111827);
-      border: 1px solid rgba(0, 255, 157, 0.4);
-      color: #00ff9d;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-family: var(--font-code, monospace);
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    #secret-restore-btn.reveal {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .link-card, .music-card, .profile-header, .terminal-bar {
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indra Permana</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="dark-theme">
-  
-  <!-- Latar Belakang Matrix Code Rain Dinamis -->
-  <div class="cyber-background">
-    <canvas id="matrix-canvas"></canvas>
-  </div>
 
-  <main class="container">
-    <!-- Header Window -->
-    <div class="terminal-bar">
-      <div class="terminal-dots" onclick="toggleSecretWindow()" title="???">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-      </div>
-      
-      <div class="header-controls">
-        <div class="lang-switcher">
-          <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
-          <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
-          <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
-        </div>
+  <!-- Matrix Background Rain -->
+  <div class="cyber-background">
+    <canvas id="matrix-canvas"></canvas>
+  </div>
 
-        <div id="google_translate_element"></div>
+  <main class="container">
+    <!-- Terminal Bar -->
+    <div class="terminal-bar">
+      <div class="terminal-dots" onclick="toggleSecretWindow()" title="???">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      
+      <div class="header-controls">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="id" onclick="changeLanguage('id')">ID</button>
+          <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
+        </div>
 
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
-          <i data-lucide="sun" class="sun-icon"></i>
-          <i data-lucide="moon" class="moon-icon"></i>
-        </button>
-      </div>
-    </div>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+      </div>
+    </div>
 
-    <!-- Header Profil -->
-    <header class="profile-header">
-      <div class="avatar-container">
-        <div class="avatar-radar-ring"></div>
-        <img src="avatar.jpg" alt="Indra Permana" class="avatar" />
-        <span class="status-indicator" title="System Online"></span>
-      </div>
-      
-      <h1 class="profile-name">Indra Permana <span class="nickname">(Inper)</span></h1>
+    <!-- Profile Header -->
+    <header class="profile-header">
+      <div class="avatar-container">
+        <div class="avatar-radar-ring"></div>
+        <img src="avatar.jpg" alt="Indra Permana" class="avatar" />
+        <span class="status-indicator" title="System Online"></span>
+      </div>
+      
+      <h1 class="profile-name">Indra Permana <span class="nickname">(Inper)</span></h1>
 
-      <!-- Ubah teks di bawah ini -->
-      <p class="profile-bio">
-        IT Security & Network Engineer <span class="divider">•</span> Cyber Security
-      </p>
+      <p class="profile-bio">
+        IT Security & Network Engineer <span class="divider">•</span> Cyber Security
+      </p>
 
-      <div class="collaboration-badge">
-        <span class="pulse-dot"></span> Open for Tech Collaboration
-      </div>
-    </header>
+      <div class="collaboration-badge">
+        <span class="pulse-dot"></span> Open for Tech Collaboration
+      </div>
+    </header>
 
-    <!-- Socials Section -->
-    <section class="links-section">
-      <h2 class="section-title">NETWORKS & SOCIALS</h2>
-      <div class="grid-container">
-        <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-          </div>
-          <div class="card-text">
-            <span class="card-title">LinkedIn</span>
-            <span class="card-sub">linkedin.com/in/indpermana</span>
-          </div>
-          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
-        </a>
+    <!-- Networks & Socials -->
+    <section class="links-section">
+      <h2 class="section-title">NETWORKS & SOCIALS</h2>
+      <div class="grid-container">
+        <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">LinkedIn</span>
+            <span class="card-sub">linkedin.com/in/indpermana</span>
+          </div>
+          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
+        </a>
 
-        <a href="https://www.instagram.com/indpermna" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </div>
-          <div class="card-text">
-            <span class="card-title">Instagram</span>
-            <span class="card-sub">@indpermna</span>
-          </div>
-          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
-        </a>
-      </div>
-    </section>
+        <a href="https://www.instagram.com/indpermna" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Instagram</span>
+            <span class="card-sub">@indpermna</span>
+          </div>
+          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
+        </a>
+      </div>
+    </section>
 
-    <!-- Certifications Section -->
-    <section class="links-section">
-      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
-      <div class="grid-container">
-        <a href="https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="award"></i></div>
-          <div class="card-text">
-            <span class="card-title">CompTIA Security+</span>
-            <span class="card-sub">CompTIA</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+    <!-- Verified Certifications (Dengan Modal Trigger) -->
+    <section class="links-section">
+      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
+      <div class="grid-container">
+        
+        <div class="link-card" onclick="openCertModal('CompTIA Security+', 'CompTIA', 'Global certification validating baseline skills necessary to perform core security functions and pursue an IT security career.', 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
+          <div class="card-icon"><i data-lucide="award"></i></div>
+          <div class="card-text">
+            <span class="card-title">CompTIA Security+</span>
+            <span class="card-sub">CompTIA</span>
+          </div>
+          <i data-lucide="maximize-2" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="shield-check"></i></div>
-          <div class="card-text">
-            <span class="card-title">Fortinet Associate</span>
-            <span class="card-sub">Fortinet</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+        <div class="link-card" onclick="openCertModal('Fortinet Associate', 'Fortinet', 'Validates ability to work with foundational network security concepts and Fortinet firewall technologies.', 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
+          <div class="card-icon"><i data-lucide="shield-check"></i></div>
+          <div class="card-text">
+            <span class="card-title">Fortinet Associate</span>
+            <span class="card-sub">Fortinet</span>
+          </div>
+          <i data-lucide="maximize-2" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://education.forcepoint.com/achievements/certificate/242288211" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="lock"></i></div>
-          <div class="card-text">
-            <span class="card-title">Forcepoint DLP Admin</span>
-            <span class="card-sub">Forcepoint</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+        <div class="link-card" onclick="openCertModal('Forcepoint DLP Admin', 'Forcepoint', 'Expertise in deploying, managing, and maintaining Forcepoint Data Loss Prevention architectures.', 'https://education.forcepoint.com/achievements/certificate/242288211')">
+          <div class="card-icon"><i data-lucide="lock"></i></div>
+          <div class="card-text">
+            <span class="card-title">Forcepoint DLP Admin</span>
+            <span class="card-sub">Forcepoint</span>
+          </div>
+          <i data-lucide="maximize-2" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="file-warning"></i></div>
-          <div class="card-text">
-            <span class="card-title">Ransomware Defense</span>
-            <span class="card-sub">SOC Radar</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+        <div class="link-card" onclick="openCertModal('Ransomware Defense', 'SOC Radar', 'Specialized tactical knowledge in detecting, mitigating, and building defensive loops against modern ransomware campaigns.', 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
+          <div class="card-icon"><i data-lucide="file-warning"></i></div>
+          <div class="card-text">
+            <span class="card-title">Ransomware Defense</span>
+            <span class="card-sub">SOC Radar</span>
+          </div>
+          <i data-lucide="maximize-2" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="cpu"></i></div>
-          <div class="card-text">
-            <span class="card-title">GenAI for SOC Analysts</span>
-            <span class="card-sub">SOC Radar</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
-      </div>
-    </section>
+        <div class="link-card" onclick="openCertModal('GenAI for SOC Analysts', 'SOC Radar', 'Understanding the integration of Generative AI capabilities to streamline threat hunting, log analysis, and incident response workflows.', 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
+          <div class="card-icon"><i data-lucide="cpu"></i></div>
+          <div class="card-text">
+            <span class="card-title">GenAI for SOC Analysts</span>
+            <span class="card-sub">SOC Radar</span>
+          </div>
+          <i data-lucide="maximize-2" class="arrow-icon"></i>
+        </div>
 
-    <!-- Hobbies Section -->
-    <section class="links-section">
-      <h2 class="section-title">HOBBIES</h2>
-      <div class="grid-container">
-        <div class="link-card hobby-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-          </div>
-          <div class="card-text">
-            <span class="card-title">Street Photography</span>
-          </div>
-        </div>
+      </div>
+    </section>
 
-        <div class="link-card hobby-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 1 0 10 10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v3"/></svg>
-          </div>
-          <div class="card-text">
-            <span class="card-title">Billiard</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Hobbies -->
+    <section class="links-section">
+      <h2 class="section-title">HOBBIES</h2>
+      <div class="grid-container">
+        <div class="link-card hobby-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Street Photography</span>
+          </div>
+        </div>
 
-    <!-- Current Vibe Section -->
-    <section class="links-section">
-      <h2 class="section-title">CURRENT VIBE</h2>
-      <div class="music-card">
-        <div class="music-album-art">
-          <img src="album.jpg" alt="Making Love Out of Nothing At All Album Cover" />
-        </div>
-        <div class="music-info">
-          <span class="music-label">FAVORITE TRACK</span>
-          <span class="music-title">Making Love Out of Nothing At All</span>
-          <span class="music-artist">Air Supply</span>
-        </div>
-        <div class="sound-wave">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-    </section>
+        <div class="link-card hobby-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 1 0 10 10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v3"/></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Billiard</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="profile-footer">
-      <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
-    </footer>
-  </main>
+    <!-- Current Vibe -->
+    <section class="links-section">
+      <h2 class="section-title">CURRENT VIBE</h2>
+      <div class="music-card">
+        <div class="music-album-art">
+          <img src="album.jpg" alt="Album Cover" />
+        </div>
+        <div class="music-info">
+          <span class="music-label">FAVORITE TRACK</span>
+          <span class="music-title">Making Love Out of Nothing At All</span>
+          <span class="music-artist">Air Supply</span>
+        </div>
+        <div class="sound-wave">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
 
-  <button id="secret-restore-btn" onclick="toggleSecretWindow()">[ Restore Terminal Session ]</button>
+    <!-- Footer -->
+    <footer class="profile-footer">
+      <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
+    </footer>
+  </main>
 
-  <script src="script.js"></script>
-  <script>lucide.createIcons();</script>
+  <!-- CERTIFICATION MODAL POPUP -->
+  <div id="certModal" class="cert-modal-overlay" onclick="closeCertModal(event)">
+    <div class="cert-modal-box">
+      <div class="cert-modal-header">
+        <span class="cert-modal-tag">// CERTIFICATION_DETAILS</span>
+        <button class="cert-modal-close" onclick="closeCertModalDirect()">
+          <i data-lucide="x" width="18" height="18"></i>
+        </button>
+      </div>
+      <div class="cert-modal-body">
+        <h3 id="modalTitle" class="cert-modal-title">Title</h3>
+        <p id="modalIssuer" class="cert-modal-issuer">Issuer</p>
+        <p id="modalDesc" class="cert-modal-desc">Description</p>
+      </div>
+      <div class="cert-modal-footer">
+        <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer" class="cert-btn-verify">
+          Verify Credential <i data-lucide="external-link" width="16" height="16"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 
-  <!-- Script Matrix Code Rain Animasi -->
-  <script>
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
+  <button id="secret-restore-btn" onclick="toggleSecretWindow()">[ Restore Terminal Session ]</button>
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+  <script src="script.js"></script>
+  <script>lucide.createIcons();</script>
 
-    const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>//:;{}[]+-*\\';
-    const fontSize = 14;
-    let columns = Math.floor(canvas.width / fontSize);
-    let drops = [];
+  <!-- Matrix Code Rain Script -->
+  <script>
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
 
-    for (let i = 0; i < columns; i++) {
-      drops[i] = 1;
-    }
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    function drawMatrix() {
-      ctx.fillStyle = 'rgba(11, 15, 20, 0.12)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>//:;{}[]+-*\\';
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = [];
 
-      ctx.font = fontSize + 'px monospace';
+    for (let i = 0; i < columns; i++) {
+      drops[i] = 1;
+    }
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = characters.charAt(Math.floor(Math.random() * characters.length));
-        
-        if (Math.random() > 0.9) {
-          ctx.fillStyle = '#ffffff';
-        } else {
-          ctx.fillStyle = '#059669';
-        }
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(11, 15, 20, 0.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      ctx.font = fontSize + 'px monospace';
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        if (Math.random() > 0.9) {
+          ctx.fillStyle = '#ffffff';
+        } else {
+          ctx.fillStyle = '#059669';
+        }
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    setInterval(drawMatrix, 45);
-  </script>
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
 
-  <!-- Script Google Translate & State Selector Controller -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'id',
-        includedLanguages: 'id,en,jw',
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
+    setInterval(drawMatrix, 45);
+  </script>
 
-    function updateActiveButton() {
-      const currentLang = localStorage.getItem('user_lang') || 'id';
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        const btnLang = btn.getAttribute('data-lang');
-        if (btnLang === currentLang) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-    }
+  <!-- Interactive Script -->
+  <script type="text/javascript">
+    function openCertModal(title, issuer, desc, link) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalIssuer').innerText = issuer;
+      document.getElementById('modalDesc').innerText = desc;
+      document.getElementById('modalLink').href = link;
+      
+      document.getElementById('certModal').classList.add('active');
+    }
 
-    document.addEventListener('DOMContentLoaded', updateActiveButton);
+    function closeCertModal(event) {
+      if (event.target.id === 'certModal') {
+        document.getElementById('certModal').classList.remove('active');
+      }
+    }
 
-    function changeLanguage(langCode) {
-      localStorage.setItem('user_lang', langCode);
+    function closeCertModalDirect() {
+      document.getElementById('certModal').classList.remove('active');
+    }
 
-      if (langCode === 'id') {
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
-      } else {
-        document.cookie = "googtrans=/id/" + langCode + "; path=/;";
-        document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
-      }
-      
-      location.reload();
-    }
+    function toggleSecretWindow() {
+      const container = document.querySelector('.container');
+      const secretBtn = document.getElementById('secret-restore-btn');
+      
+      container.classList.toggle('is-hidden');
+      if (container.classList.contains('is-hidden')) {
+        secretBtn.classList.add('reveal');
+      } else {
+        secretBtn.classList.remove('reveal');
+      }
+    }
 
-    function toggleSecretWindow() {
-      const container = document.querySelector('.container');
-      const secretBtn = document.getElementById('secret-restore-btn');
-      
-      container.classList.toggle('is-hidden');
-      if (container.classList.contains('is-hidden')) {
-        secretBtn.classList.add('reveal');
-      } else {
-        secretBtn.classList.remove('reveal');
-      }
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    function changeLanguage(langCode) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if(btn.getAttribute('data-lang') === langCode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+  </script>
 </body>
 </html>
