@@ -8,40 +8,55 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Styling khusus agar Widget Bahasa rapi & menyatu dengan tema Cyber */
-    .terminal-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    /* Styling Custom Language Selector agar Menyatu dengan Tema Cyber */
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
-    #google_translate_element select {
-      background: #111827;
-      color: #00ff9d;
-      border: 1px solid #00ff9d33;
-      padding: 4px 8px;
+    
+    .lang-switcher {
+      display: flex;
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid rgba(0, 255, 157, 0.2);
       border-radius: 6px;
-      font-size: 12px;
-      font-family: inherit;
-      outline: none;
-      cursor: pointer;
+      padding: 2px;
+      gap: 2px;
     }
-    .goog-te-banner-frame, .skiptranslate iframe {
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      font-size: 11px;
+      font-family: monospace;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn:hover {
+      color: #00ff9d;
+    }
+
+    .lang-btn.active {
+      background: rgba(0, 255, 157, 0.15);
+      color: #00ff9d;
+      border: 1px solid rgba(0, 255, 157, 0.4);
+    }
+
+    /* Sembunyikan Bawaan Google Translate yang Berantakan */
+    #google_translate_element,
+    .goog-te-banner-frame,
+    .skiptranslate,
+    .goog-te-spinner-pos {
       display: none !important;
     }
+
     body {
       top: 0px !important;
-    }
-    .goog-te-gadget {
-      color: transparent !important;
-      font-size: 0px !important;
-    }
-    .goog-te-gadget span {
-      display: none !important;
     }
   </style>
 </head>
@@ -57,10 +72,19 @@
         <span class="dot yellow"></span>
         <span class="dot green"></span>
       </div>
+      
       <div class="header-controls">
-        <!-- Widget Pilihan Bahasa (ID, EN, JV) -->
+        <!-- Custom Language Switcher -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" onclick="changeLanguage('id', this)">ID</button>
+          <button class="lang-btn" onclick="changeLanguage('en', this)">EN</button>
+          <button class="lang-btn" onclick="changeLanguage('jw', this)">JV</button>
+        </div>
+
+        <!-- Hidden Google Translate Element -->
         <div id="google_translate_element"></div>
 
+        <!-- Theme Toggle Button -->
         <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
           <i data-lucide="sun" class="sun-icon"></i>
           <i data-lucide="moon" class="moon-icon"></i>
@@ -220,14 +244,25 @@
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
 
-  <!-- Script Google Translate (Indonesian, English, Javanese) -->
+  <!-- Script Google Translate Controller -->
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'id',
         includedLanguages: 'id,en,jw',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        autoDisplay: false
       }, 'google_translate_element');
+    }
+
+    function changeLanguage(langCode, btn) {
+      // Toggle tombol aktif
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Set cookie Google Translate dan reload halus
+      document.cookie = "googtrans=/id/" + langCode + "; path=/;";
+      document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
+      location.reload();
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
