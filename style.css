@@ -339,6 +339,7 @@ body.light-theme .sun-icon { display: none; }
   border-radius: 12px;
   padding: 10px 14px;
   min-height: 58px;
+  gap: 12px;
 }
 
 .music-card .music-icon {
@@ -420,4 +421,20 @@ body.light-theme .sun-icon { display: none; }
   .links-section:nth-of-type(2) .grid-container .link-card:last-child {
     grid-column: span 1;
   }
+}
+
+/* Styling untuk Cover Album pada Current Vibe */
+.music-album-art {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+}
+
+.music-album-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
