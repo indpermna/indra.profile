@@ -41,6 +41,24 @@ body.light-theme {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* === PENGAMAN FONT GOOGLE TRANSLATE === */
+/* Memaksa elemen/tag tambahan dari Google Translate agar tetap menggunakan font utama */
+.container *, 
+.container span, 
+.container font, 
+.container a {
+  font-family: inherit !important;
+}
+
+/* Khusus elemen yang memang harus pakai font code/mono */
+.collaboration-badge,
+.section-title,
+.music-label,
+.profile-footer {
+  font-family: var(--font-code) !important;
+}
+/* ===================================== */
+
 body {
   min-height: 100vh;
   background-color: var(--bg-color);
