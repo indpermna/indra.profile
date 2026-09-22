@@ -76,9 +76,9 @@
       <div class="header-controls">
         <!-- Custom Language Switcher -->
         <div class="lang-switcher">
-          <button class="lang-btn active" onclick="changeLanguage('id', this)">ID</button>
-          <button class="lang-btn" onclick="changeLanguage('en', this)">EN</button>
-          <button class="lang-btn" onclick="changeLanguage('jw', this)">JV</button>
+          <button class="lang-btn" onclick="changeLanguage('id')">ID</button>
+          <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+          <button class="lang-btn" onclick="changeLanguage('jw')">JV</button>
         </div>
 
         <!-- Hidden Google Translate Element -->
@@ -254,12 +254,28 @@
       }, 'google_translate_element');
     }
 
-    function changeLanguage(langCode, btn) {
-      // Toggle tombol aktif
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    // Fungsi membaca cookie bahasa yang sedang aktif
+    function getLangCookie() {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; googtrans=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift().split('/').pop();
+      }
+      return 'id';
+    }
 
-      // Set cookie Google Translate dan reload halus
+    // Set tombol aktif sesuai cookie saat halaman selesai dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+      const activeLang = getLangCookie();
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('onclick').includes(`'${activeLang}'`)) {
+          btn.classList.add('active');
+        }
+      });
+    });
+
+    function changeLanguage(langCode) {
       document.cookie = "googtrans=/id/" + langCode + "; path=/;";
       document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
       location.reload();
