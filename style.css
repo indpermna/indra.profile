@@ -230,8 +230,7 @@ body {
   gap: 12px;
 }
 
-/* Memastikan card ganjil/terakhir otomatis memenuhi lebar penuh 2 kolom */
-.grid-container > *:last-child:nth-child(odd),
+/* Memastikan card ganjil/terakhir otomatis memenuhi lebar penuh 2 kolom khusus jika diinginkan */
 .cert-last {
   grid-column: span 2;
 }
@@ -365,11 +364,12 @@ body {
   text-overflow: ellipsis;
 }
 
+/* Perbaikan Sound Wave agar garis batangnya tampil sempurna */
 .sound-wave {
   display: flex;
   align-items: flex-end;
   gap: 3px;
-  height: 14px;
+  height: 16px;
   flex-shrink: 0;
   margin-left: auto;
   padding-left: 10px;
@@ -377,10 +377,15 @@ body {
 
 .sound-wave span {
   width: 3px;
+  height: 100%;
   background-color: var(--accent-color);
   border-radius: 2px;
   box-shadow: 0 0 6px var(--accent-color);
 }
+
+.sound-wave span:nth-child(1) { height: 60%; }
+.sound-wave span:nth-child(2) { height: 100%; }
+.sound-wave span:nth-child(3) { height: 40%; }
 
 .profile-footer {
   padding: 16px 20px;
@@ -393,7 +398,6 @@ body {
 
 @media (max-width: 540px) {
   .grid-container { grid-template-columns: 1fr; }
-  .grid-container > *:last-child:nth-child(odd),
-  .music-card,
-  .cert-last { grid-column: span 1; }
+  .cert-last,
+  .music-card { grid-column: span 1; }
 }
