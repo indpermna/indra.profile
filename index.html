@@ -60,7 +60,6 @@
       position: relative;
       overflow-x: hidden;
       transition: background 0.3s ease, color 0.3s ease;
-      top: 0 !important;
     }
 
     .cyber-background {
@@ -199,15 +198,7 @@
       border: 1px solid var(--border-color) !important;
     }
 
-    /* Google Translate element disembunyikan agar script tetap jalan tanpa merusak layout */
-    #google_translate_element {
-      position: absolute;
-      left: -9999px;
-      top: -9999px;
-      visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-    }
+    #google_translate_element,
     .goog-te-banner-frame,
     .skiptranslate {
       display: none !important;
@@ -899,11 +890,9 @@
 
   <button id="secret-restore-btn" onclick="toggleSecretWindow()">&gt; exit_shell</button>
 
-  <!-- Script Eksternal -->
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
 
-  <!-- Skrip Matrix Background -->
   <script>
     const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
@@ -987,22 +976,17 @@
     }
   </script>
 
-  <!-- Skrip Google Translate & UI Control -->
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'id',
-        includedLanguages: 'id,en,jv',
+        includedLanguages: 'id,en,jw',
         autoDisplay: false
       }, 'google_translate_element');
     }
 
     function updateActiveButton() {
-      const match = document.cookie.match(/googtrans=\/id\/([a-z]+)/);
-      const currentLang = match ? match[1] : 'id';
-      
+      const currentLang = localStorage.getItem('user_lang') || 'id';
       document.querySelectorAll('.lang-btn').forEach(btn => {
         if (btn.getAttribute('data-lang') === currentLang) {
           btn.classList.add('active');
@@ -1017,9 +1001,7 @@
       }
     }
 
-    window.addEventListener('load', () => {
-      setTimeout(updateActiveButton, 800);
-    });
+    document.addEventListener('DOMContentLoaded', updateActiveButton);
 
     function toggleTheme() {
       document.body.classList.toggle('light-theme');
@@ -1028,21 +1010,15 @@
     }
 
     function changeLanguage(langCode) {
-      const selectField = document.querySelector('.goog-te-combo');
-      if (selectField) {
-        selectField.value = langCode;
-        selectField.dispatchEvent(new Event('change'));
-        setTimeout(() => {
-          location.reload();
-        }, 500);
+      localStorage.setItem('user_lang', langCode);
+      if (langCode === 'id') {
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
       } else {
-        if (langCode === 'id') {
-          document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        } else {
-          document.cookie = `googtrans=/id/${langCode}; path=/;`;
-        }
-        location.reload();
+        document.cookie = "googtrans=/id/" + langCode + "; path=/;";
+        document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
       }
+      location.reload();
     }
 
     function toggleSecretWindow() {
@@ -1057,5 +1033,6 @@
       }
     }
   </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
