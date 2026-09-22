@@ -1,216 +1,427 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio & Links</title>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Hubungan File CSS (Pastikan nama file di folder sama, yaitu style.css) -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indra Permana</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .lang-switcher {
+      display: flex;
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 255, 157, 0.2);
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    body.dark-theme .lang-switcher {
+      background: rgba(17, 24, 39, 0.8);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #6b7280;
+      font-size: 11px;
+      font-family: var(--font-code, monospace);
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    body.dark-theme .lang-btn {
+      color: #9ca3af;
+    }
+
+    .lang-btn:hover {
+      color: #00875a;
+    }
+
+    body.dark-theme .lang-btn:hover {
+      color: #00ff9d;
+    }
+
+    .lang-btn.active {
+      background: rgba(0, 255, 157, 0.2) !important;
+      color: #007a4d !important;
+      border: 1px solid rgba(0, 255, 157, 0.5) !important;
+    }
+
+    body.dark-theme .lang-btn.active {
+      background: rgba(0, 255, 157, 0.15) !important;
+      color: #00ff9d !important;
+      border: 1px solid rgba(0, 255, 157, 0.4) !important;
+    }
+
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+
+    #google_translate_element,
+    .goog-te-banner-frame,
+    .skiptranslate,
+    .goog-te-spinner-pos {
+      display: none !important;
+    }
+
+    body {
+      top: 0px !important;
+    }
+
+    .terminal-dots {
+      cursor: pointer;
+      display: flex;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+      width: fit-content;
+    }
+    .terminal-dots:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .terminal-dots .dot {
+      pointer-events: none;
+    }
+
+    .container {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .container.is-hidden {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+    }
+
+    #secret-restore-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: var(--container-bg, #111827);
+      border: 1px solid rgba(0, 255, 157, 0.4);
+      color: #00ff9d;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: var(--font-code, monospace);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    #secret-restore-btn.reveal {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .link-card, .music-card, .profile-header, .terminal-bar {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+  </style>
 </head>
 <body class="dark-theme">
+  
+  <!-- Latar Belakang Matrix Code Rain Dinamis -->
+  <div class="cyber-background">
+    <canvas id="matrix-canvas"></canvas>
+  </div>
 
-  <!-- Matrix Background Canvas -->
-  <div class="cyber-background">
-    <canvas id="matrix-canvas"></canvas>
-  </div>
+  <main class="container">
+    <!-- Header Window -->
+    <div class="terminal-bar">
+      <div class="terminal-dots" onclick="toggleSecretWindow()" title="???">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      
+      <div class="header-controls">
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
+          <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
+        </div>
 
-  <!-- Main Container -->
-  <div class="container" id="mainContainer">
-    
-    <!-- Terminal Bar & Controls -->
-    <div class="terminal-bar">
-      <div class="terminal-dots" id="collapseBtn" title="Minimize">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-      </div>
-      <div class="header-controls">
-        <div class="lang-switcher">
-          <button class="lang-btn active" data-lang="id">ID</button>
-          <button class="lang-btn" data-lang="en">EN</button>
-        </div>
-        <button class="theme-btn" id="themeToggle" title="Toggle Theme">
-          <i data-lucide="sun" class="sun-icon" width="16" height="16"></i>
-          <i data-lucide="moon" class="moon-icon" width="16" height="16"></i>
-        </button>
-      </div>
-    </div>
+        <div id="google_translate_element"></div>
 
-    <!-- Profile Header -->
-    <header class="profile-header">
-      <div class="avatar-container">
-        <div class="avatar-radar-ring"></div>
-        <img src="https://github.com/github.png" alt="Avatar" class="avatar">
-        <div class="status-indicator"></div>
-      </div>
-      <h1 class="profile-name">Nama Anda <span class="nickname">(@username)</span></h1>
-      <p class="profile-bio">
-        <span>Security Enthusiast</span><span class="divider">/</span><span>Developer</span>
-      </p>
-      <div class="collaboration-badge">
-        <div class="pulse-dot"></div>
-        <span>Available for Collaboration</span>
-      </div>
-    </header>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+      </div>
+    </div>
 
-    <!-- Verified Certifications Section -->
-    <section class="links-section">
-      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
-      <div class="grid-container">
-        
-        <div class="link-card cert-trigger" 
-             data-title="CompTIA Security+" 
-             data-issuer="CompTIA" 
-             data-desc="Core security functions, risk management, threat intelligence, and enterprise network hardening validation." 
-             data-link="https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438">
-          <div class="card-icon"><i data-lucide="award"></i></div>
-          <div class="card-text">
-            <span class="card-title">CompTIA Security+</span>
-            <span class="card-sub">CompTIA</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </div>
+    <!-- Header Profil -->
+    <header class="profile-header">
+      <div class="avatar-container">
+        <div class="avatar-radar-ring"></div>
+        <img src="avatar.jpg" alt="Indra Permana" class="avatar" />
+        <span class="status-indicator" title="System Online"></span>
+      </div>
+      
+      <h1 class="profile-name">Indra Permana <span class="nickname">(Inper)</span></h1>
 
-        <div class="link-card cert-trigger" 
-             data-title="Fortinet Associate" 
-             data-issuer="Fortinet" 
-             data-desc="Foundational knowledge of network security concepts, firewall operations, and enterprise security infrastructure." 
-             data-link="https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565">
-          <div class="card-icon"><i data-lucide="shield-check"></i></div>
-          <div class="card-text">
-            <span class="card-title">Fortinet Associate</span>
-            <span class="card-sub">Fortinet</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </div>
+      <!-- Ubah teks di bawah ini -->
+      <p class="profile-bio">
+        IT Security & Network Engineer <span class="divider">•</span> Cyber Security
+      </p>
 
-        <div class="link-card cert-trigger" 
-             data-title="Forcepoint DLP Admin" 
-             data-issuer="Forcepoint" 
-             data-desc="Expertise in Data Loss Prevention strategies, policy enforcement, incident management, and data asset protection." 
-             data-link="https://education.forcepoint.com/achievements/certificate/242288211">
-          <div class="card-icon"><i data-lucide="lock"></i></div>
-          <div class="card-text">
-            <span class="card-title">Forcepoint DLP Admin</span>
-            <span class="card-sub">Forcepoint</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </div>
+      <div class="collaboration-badge">
+        <span class="pulse-dot"></span> Open for Tech Collaboration
+      </div>
+    </header>
 
-        <div class="link-card cert-trigger" 
-             data-title="Ransomware Defense" 
-             data-issuer="SOC Radar" 
-             data-desc="Tactics, techniques, and procedures for preventing, detecting, and mitigating ransomware attack vectors in modern networks." 
-             data-link="https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9">
-          <div class="card-icon"><i data-lucide="file-warning"></i></div>
-          <div class="card-text">
-            <span class="card-title">Ransomware Defense</span>
-            <span class="card-sub">SOC Radar</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </div>
+    <!-- Socials Section -->
+    <section class="links-section">
+      <h2 class="section-title">NETWORKS & SOCIALS</h2>
+      <div class="grid-container">
+        <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">LinkedIn</span>
+            <span class="card-sub">linkedin.com/in/indpermana</span>
+          </div>
+          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
+        </a>
 
-        <div class="link-card cert-trigger" 
-             data-title="GenAI for SOC Analysts" 
-             data-issuer="SOC Radar" 
-             data-desc="Leveraging Generative AI models and automation for threat analysis, log investigation, and optimizing Security Operations Center workflows." 
-             data-link="https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1">
-          <div class="card-icon"><i data-lucide="cpu"></i></div>
-          <div class="card-text">
-            <span class="card-title">GenAI for SOC Analysts</span>
-            <span class="card-sub">SOC Radar</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </div>
+        <a href="https://www.instagram.com/indpermna" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Instagram</span>
+            <span class="card-sub">@indpermna</span>
+          </div>
+          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
+        </a>
+      </div>
+    </section>
 
-      </div>
-    </section>
+    <!-- Certifications Section -->
+    <section class="links-section">
+      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
+      <div class="grid-container">
+        <a href="https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon"><i data-lucide="award"></i></div>
+          <div class="card-text">
+            <span class="card-title">CompTIA Security+</span>
+            <span class="card-sub">CompTIA</span>
+          </div>
+          <i data-lucide="external-link" class="arrow-icon"></i>
+        </a>
 
-    <!-- Footer -->
-    <footer class="profile-footer">
-      <p>&copy; 2026 Portfolio. All rights reserved.</p>
-    </footer>
+        <a href="https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon"><i data-lucide="shield-check"></i></div>
+          <div class="card-text">
+            <span class="card-title">Fortinet Associate</span>
+            <span class="card-sub">Fortinet</span>
+          </div>
+          <i data-lucide="external-link" class="arrow-icon"></i>
+        </a>
 
-  </div>
+        <a href="https://education.forcepoint.com/achievements/certificate/242288211" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon"><i data-lucide="lock"></i></div>
+          <div class="card-text">
+            <span class="card-title">Forcepoint DLP Admin</span>
+            <span class="card-sub">Forcepoint</span>
+          </div>
+          <i data-lucide="external-link" class="arrow-icon"></i>
+        </a>
 
-  <!-- Secret Restore Button -->
-  <button id="secret-restore-btn">Restore Terminal</button>
+        <a href="https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon"><i data-lucide="file-warning"></i></div>
+          <div class="card-text">
+            <span class="card-title">Ransomware Defense</span>
+            <span class="card-sub">SOC Radar</span>
+          </div>
+          <i data-lucide="external-link" class="arrow-icon"></i>
+        </a>
 
-  <!-- HTML Modal Overlay -->
-  <div class="cert-modal-overlay" id="certModal">
-    <div class="cert-modal-box">
-      <div class="cert-modal-header">
-        <span class="cert-modal-tag">VERIFICATION DETAILS</span>
-        <button class="cert-modal-close" onclick="closeCertModal()">
-          <i data-lucide="x" width="18" height="18"></i>
-        </button>
-      </div>
-      <div class="cert-modal-body">
-        <h3 class="cert-modal-title" id="modalTitle">Certification Title</h3>
-        <p class="cert-modal-issuer" id="modalIssuer">Issuer Name</p>
-        <p class="cert-modal-desc" id="modalDesc">Description details go here...</p>
-        <div class="cert-modal-footer">
-          <a href="#" id="modalLink" target="_blank" rel="noopener noreferrer" class="cert-btn-verify">
-            <span>Verify Credential</span>
-            <i data-lucide="external-link" width="16" height="16"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+        <a href="https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="card-icon"><i data-lucide="cpu"></i></div>
+          <div class="card-text">
+            <span class="card-title">GenAI for SOC Analysts</span>
+            <span class="card-sub">SOC Radar</span>
+          </div>
+          <i data-lucide="external-link" class="arrow-icon"></i>
+        </a>
+      </div>
+    </section>
 
-  <!-- JavaScript Utama -->
-  <script>
-    // Inisialisasi Ikon Lucide
-    lucide.createIcons();
+    <!-- Hobbies Section -->
+    <section class="links-section">
+      <h2 class="section-title">HOBBIES</h2>
+      <div class="grid-container">
+        <div class="link-card hobby-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Street Photography</span>
+          </div>
+        </div>
 
-    // Tema Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-theme');
-      document.body.classList.toggle('dark-theme');
-    });
+        <div class="link-card hobby-card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 1 0 10 10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v3"/></svg>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Billiard</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    // Modal Cert Logic
-    const modal = document.getElementById('certModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalIssuer = document.getElementById('modalIssuer');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalLink = document.getElementById('modalLink');
+    <!-- Current Vibe Section -->
+    <section class="links-section">
+      <h2 class="section-title">CURRENT VIBE</h2>
+      <div class="music-card">
+        <div class="music-album-art">
+          <img src="album.jpg" alt="Making Love Out of Nothing At All Album Cover" />
+        </div>
+        <div class="music-info">
+          <span class="music-label">FAVORITE TRACK</span>
+          <span class="music-title">Making Love Out of Nothing At All</span>
+          <span class="music-artist">Air Supply</span>
+        </div>
+        <div class="sound-wave">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
 
-    document.querySelectorAll('.cert-trigger').forEach(card => {
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        modalTitle.textContent = card.getAttribute('data-title');
-        modalIssuer.textContent = card.getAttribute('data-issuer');
-        modalDesc.textContent = card.getAttribute('data-desc');
-        modalLink.href = card.getAttribute('data-link');
-        
-        modal.classList.add('active');
-        lucide.createIcons();
-      });
-    });
+    <!-- Footer -->
+    <footer class="profile-footer">
+      <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
+    </footer>
+  </main>
 
-    function closeCertModal() {
-      modal.classList.remove('active');
-    }
+  <button id="secret-restore-btn" onclick="toggleSecretWindow()">[ Restore Terminal Session ]</button>
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeCertModal();
-    });
+  <script src="script.js"></script>
+  <script>lucide.createIcons();</script>
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeCertModal();
-    });
-  </script>
+  <!-- Script Matrix Code Rain Animasi -->
+  <script>
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>//:;{}[]+-*\\';
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = [];
+
+    for (let i = 0; i < columns; i++) {
+      drops[i] = 1;
+    }
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(11, 15, 20, 0.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        
+        if (Math.random() > 0.9) {
+          ctx.fillStyle = '#ffffff';
+        } else {
+          ctx.fillStyle = '#059669';
+        }
+
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 45);
+  </script>
+
+  <!-- Script Google Translate & State Selector Controller -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'id',
+        includedLanguages: 'id,en,jw',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+    function updateActiveButton() {
+      const currentLang = localStorage.getItem('user_lang') || 'id';
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang');
+        if (btnLang === currentLang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', updateActiveButton);
+
+    function changeLanguage(langCode) {
+      localStorage.setItem('user_lang', langCode);
+
+      if (langCode === 'id') {
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
+      } else {
+        document.cookie = "googtrans=/id/" + langCode + "; path=/;";
+        document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
+      }
+      
+      location.reload();
+    }
+
+    function toggleSecretWindow() {
+      const container = document.querySelector('.container');
+      const secretBtn = document.getElementById('secret-restore-btn');
+      
+      container.classList.toggle('is-hidden');
+      if (container.classList.contains('is-hidden')) {
+        secretBtn.classList.add('reveal');
+      } else {
+        secretBtn.classList.remove('reveal');
+      }
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
