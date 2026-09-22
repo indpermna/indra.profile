@@ -31,7 +31,7 @@
           <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
         </div>
 
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+        <button id="theme-toggle" class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
           <i data-lucide="sun" class="sun-icon"></i>
           <i data-lucide="moon" class="moon-icon"></i>
         </button>
@@ -53,13 +53,13 @@
       </p>
 
       <div class="collaboration-badge">
-        <span class="pulse-dot"></span> Open for Tech Collaboration
+        <span class="pulse-dot"></span> <span data-i18n="collab">Open for Tech Collaboration</span>
       </div>
     </header>
 
     <!-- Networks & Socials -->
     <section class="links-section">
-      <h2 class="section-title">NETWORKS & SOCIALS</h2>
+      <h2 class="section-title" data-i18n="sec_socials">NETWORKS & SOCIALS</h2>
       <div class="grid-container">
         <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="card-icon">
@@ -85,9 +85,9 @@
       </div>
     </section>
 
-    <!-- Verified Certifications (Dengan Modal Trigger) -->
+    <!-- Verified Certifications -->
     <section class="links-section">
-      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
+      <h2 class="section-title" data-i18n="sec_certs">VERIFIED CERTIFICATIONS</h2>
       <div class="grid-container">
         
         <div class="link-card" onclick="openCertModal('CompTIA Security+', 'CompTIA', 'Global certification validating baseline skills necessary to perform core security functions and pursue an IT security career.', 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
@@ -140,7 +140,7 @@
 
     <!-- Hobbies -->
     <section class="links-section">
-      <h2 class="section-title">HOBBIES</h2>
+      <h2 class="section-title" data-i18n="sec_hobbies">HOBBIES</h2>
       <div class="grid-container">
         <div class="link-card hobby-card">
           <div class="card-icon">
@@ -164,13 +164,13 @@
 
     <!-- Current Vibe -->
     <section class="links-section">
-      <h2 class="section-title">CURRENT VIBE</h2>
+      <h2 class="section-title" data-i18n="sec_vibe">CURRENT VIBE</h2>
       <div class="music-card">
         <div class="music-album-art">
           <img src="album.jpg" alt="Album Cover" />
         </div>
         <div class="music-info">
-          <span class="music-label">FAVORITE TRACK</span>
+          <span class="music-label" data-i18n="fav_track">FAVORITE TRACK</span>
           <span class="music-title">Making Love Out of Nothing At All</span>
           <span class="music-artist">Air Supply</span>
         </div>
@@ -182,7 +182,7 @@
 
     <!-- Footer -->
     <footer class="profile-footer">
-      <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
+      <p data-i18n="footer_text">&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
     </footer>
   </main>
 
@@ -190,7 +190,7 @@
   <div id="certModal" class="cert-modal-overlay" onclick="closeCertModal(event)">
     <div class="cert-modal-box">
       <div class="cert-modal-header">
-        <span class="cert-modal-tag">// CERTIFICATION_DETAILS</span>
+        <span class="cert-modal-tag" data-i18n="modal_tag">// CERTIFICATION_DETAILS</span>
         <button class="cert-modal-close" onclick="closeCertModalDirect()">
           <i data-lucide="x" width="18" height="18"></i>
         </button>
@@ -202,13 +202,13 @@
       </div>
       <div class="cert-modal-footer">
         <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer" class="cert-btn-verify">
-          Verify Credential <i data-lucide="external-link" width="16" height="16"></i>
+          <span data-i18n="verify_btn">Verify Credential</span> <i data-lucide="external-link" width="16" height="16"></i>
         </a>
       </div>
     </div>
   </div>
 
-  <button id="secret-restore-btn" onclick="toggleSecretWindow()">[ Restore Terminal Session ]</button>
+  <button id="secret-restore-btn" onclick="toggleSecretWindow()" data-i18n="restore_btn">[ Restore Terminal Session ]</button>
 
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
@@ -259,14 +259,78 @@
     setInterval(drawMatrix, 45);
   </script>
 
-  <!-- Interactive Script -->
+  <!-- Interactive & Multi-language Script -->
   <script type="text/javascript">
+    const translations = {
+      id: {
+        collab: "Open for Tech Collaboration",
+        sec_socials: "NETWORKS & SOCIALS",
+        sec_certs: "VERIFIED CERTIFICATIONS",
+        sec_hobbies: "HOBBIES",
+        sec_vibe: "CURRENT VIBE",
+        fav_track: "FAVORITE TRACK",
+        footer_text: "&copy; 2026 Indra Permana. Secured & Designed with Precision.",
+        modal_tag: "// DETAIL_SERTIFIKASI",
+        verify_btn: "Verifikasi Kredensial",
+        restore_btn: "[ Pulihkan Sesi Terminal ]"
+      },
+      en: {
+        collab: "Open for Tech Collaboration",
+        sec_socials: "NETWORKS & SOCIALS",
+        sec_certs: "VERIFIED CERTIFICATIONS",
+        sec_hobbies: "HOBBIES",
+        sec_vibe: "CURRENT VIBE",
+        fav_track: "FAVORITE TRACK",
+        footer_text: "&copy; 2026 Indra Permana. Secured & Designed with Precision.",
+        modal_tag: "// CERTIFICATION_DETAILS",
+        verify_btn: "Verify Credential",
+        restore_btn: "[ Restore Terminal Session ]"
+      },
+      jw: {
+        collab: "Buka Kolaborasi Teknologi",
+        sec_socials: "JARINGAN & SOSMED",
+        sec_certs: "SERTIFIKASI TERVERIFIKASI",
+        sec_hobbies: "HOBI",
+        sec_vibe: "VIBE SAIKI",
+        fav_track: "LAGU FAVORIT",
+        footer_text: "&copy; 2026 Indra Permana. Aman & Dirancang Presisi.",
+        modal_tag: "// DETAIL_SERTIFIKAT",
+        verify_btn: "Priksa Sertifikat",
+        restore_btn: "[ Pulihaken Sesi Terminal ]"
+      }
+    };
+
+    function changeLanguage(langCode) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if(btn.getAttribute('data-lang') === langCode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const langData = translations[langCode];
+      if (!langData) return;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (langData[key]) {
+          el.innerHTML = langData[key];
+        }
+      });
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle('light-theme');
+      body.classList.toggle('dark-theme');
+    }
+
     function openCertModal(title, issuer, desc, link) {
       document.getElementById('modalTitle').innerText = title;
       document.getElementById('modalIssuer').innerText = issuer;
       document.getElementById('modalDesc').innerText = desc;
       document.getElementById('modalLink').href = link;
-      
       document.getElementById('certModal').classList.add('active');
     }
 
@@ -290,16 +354,6 @@
       } else {
         secretBtn.classList.remove('reveal');
       }
-    }
-
-    function changeLanguage(langCode) {
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        if(btn.getAttribute('data-lang') === langCode) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
     }
   </script>
 </body>
