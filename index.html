@@ -82,6 +82,61 @@
     body {
       top: 0px !important;
     }
+
+    /* Styling Easter Egg untuk Area Titik Terminal */
+    .terminal-dots {
+      cursor: pointer;
+      display: flex;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+      width: fit-content;
+    }
+    .terminal-dots:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .terminal-dots .dot {
+      pointer-events: none;
+    }
+
+    /* Animasi Container saat disembunyikan secara rahasia */
+    .container {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .container.is-hidden {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+    }
+
+    /* Tombol Rahasia (Restore Button) */
+    #secret-restore-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: var(--container-bg, #111827);
+      border: 1px solid rgba(0, 255, 157, 0.4);
+      color: #00ff9d;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: var(--font-code, monospace);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    #secret-restore-btn.reveal {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body class="dark-theme">
@@ -91,7 +146,8 @@
   <main class="container">
     <!-- Header Window -->
     <div class="terminal-bar">
-      <div class="terminal-dots">
+      <!-- Area Titik Terminal dengan Fitur Easter Egg -->
+      <div class="terminal-dots" onclick="toggleSecretWindow()" title="???">
         <span class="dot red"></span>
         <span class="dot yellow"></span>
         <span class="dot green"></span>
@@ -265,6 +321,9 @@
     </footer>
   </main>
 
+  <!-- Tombol Easter Egg untuk Restore Terminal -->
+  <button id="secret-restore-btn" onclick="toggleSecretWindow()">[ Restore Terminal Session ]</button>
+
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
 
@@ -305,6 +364,19 @@
       }
       
       location.reload();
+    }
+
+    // Fungsi Pengendali Easter Egg Terminal Dots
+    function toggleSecretWindow() {
+      const container = document.querySelector('.container');
+      const secretBtn = document.getElementById('secret-restore-btn');
+      
+      container.classList.toggle('is-hidden');
+      if (container.classList.contains('is-hidden')) {
+        secretBtn.classList.add('reveal');
+      } else {
+        secretBtn.classList.remove('reveal');
+      }
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
