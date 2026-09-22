@@ -418,65 +418,6 @@
       color: var(--accent-color);
     }
 
-    /* Styling untuk Kucing Kicau Mania Update Section */
-    .update-soon-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .update-soon-card:hover {
-      border-color: var(--accent-color);
-      box-shadow: 0 4px 20px rgba(0, 255, 157, 0.15);
-    }
-
-    .update-media-container {
-      width: 100%;
-      max-height: 180px;
-      border-radius: 6px;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border-color);
-      margin-bottom: 10px;
-    }
-
-    .update-media-container video {
-      height: 160px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    .update-badge-container {
-      margin-top: 4px;
-    }
-
-    .update-badge-text {
-      font-family: var(--font-code);
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--accent-color);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      animation: textGlow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes textGlow {
-      0% { text-shadow: 0 0 5px rgba(0, 255, 157, 0.4); opacity: 0.8; }
-      100% { text-shadow: 0 0 15px rgba(0, 255, 157, 0.9), 0 0 20px rgba(0, 255, 157, 0.4); opacity: 1; }
-    }
-
     .music-card {
       display: flex;
       align-items: center;
@@ -719,15 +660,45 @@
       box-shadow: 0 4px 12px rgba(0, 255, 157, 0.3);
     }
 
+    /* Secret Cat Shell Overlay (Transparan & Menempel di Matrix) */
+    #secret-cat-overlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #secret-cat-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .secret-cat-video {
+      width: 220px;
+      height: auto;
+      object-fit: contain;
+      mix-blend-mode: screen; /* Menghilangkan latar belakang hijau */
+      filter: contrast(120%) brightness(110%);
+    }
+
     #secret-restore-btn {
       position: fixed;
-      bottom: 20px;
+      bottom: 25px;
       left: 50%;
       transform: translateX(-50%) translateY(30px);
       background: var(--container-bg);
       border: 1px solid var(--border-color);
       color: var(--accent-color);
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 20px;
       font-family: var(--font-code);
       font-size: 0.75rem;
@@ -735,7 +706,7 @@
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
       backdrop-filter: blur(10px);
-      z-index: 999;
+      z-index: 1000;
       opacity: 0;
       pointer-events: none;
       transition: all 0.3s ease;
@@ -747,6 +718,7 @@
     }
     #secret-restore-btn:hover {
       background: var(--card-hover);
+      border-color: var(--accent-color);
     }
   </style>
 </head>
@@ -756,9 +728,15 @@
     <canvas id="matrix-canvas"></canvas>
   </div>
 
+  <div id="secret-cat-overlay">
+    <video class="secret-cat-video" autoplay muted loop playsinline>
+      <source src="kucing_kicau_mania.mp4.mp4" type="video/mp4">
+    </video>
+  </div>
+
   <main class="container">
     <div class="terminal-bar">
-      <div class="terminal-dots" onclick="toggleSecretWindow()" title="Click to clear screen">
+      <div class="terminal-dots" onclick="toggleSecretWindow()" title="Click to open secret shell">
         <span class="dot red"></span>
         <span class="dot yellow"></span>
         <span class="dot green"></span>
@@ -874,21 +852,6 @@
     </section>
 
     <section class="links-section">
-      <h2 class="section-title">FEATURED PROJECT</h2>
-      <div class="update-soon-card">
-        <div class="update-media-container">
-          <video autoplay muted loop playsinline>
-            <source src="kucing_kicau_mania.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="update-badge-container">
-          <span class="update-badge-text">UPDATE SOON</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="links-section">
       <h2 class="section-title">HOBBIES</h2>
       <div class="grid-container">
         <div class="link-card">
@@ -943,8 +906,7 @@
       <p class="modal-desc" id="modal-desc-text">Description goes here...</p>
       
       <div class="modal-skills-title">KEY SKILLS & COMPETENCIES</div>
-      <div class="modal-skills-list" id="modal-skills-container">
-        </div>
+      <div class="modal-skills-list" id="modal-skills-container"></div>
 
       <div class="modal-actions">
         <a href="#" id="modal-verify-link" target="_blank" rel="noopener noreferrer" class="modal-btn-verify">
@@ -954,7 +916,7 @@
     </div>
   </div>
 
-  <button id="secret-restore-btn" onclick="toggleSecretWindow()">&gt; exit_shell</button>
+  <button id="secret-restore-btn" onclick="toggleSecretWindow()">&gt; restore_profile</button>
 
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
@@ -1089,9 +1051,12 @@
 
     function toggleSecretWindow() {
       const container = document.querySelector('.container');
+      const secretCat = document.getElementById('secret-cat-overlay');
       const secretBtn = document.getElementById('secret-restore-btn');
       
       container.classList.toggle('is-hidden');
+      secretCat.classList.toggle('active');
+      
       if (container.classList.contains('is-hidden')) {
         secretBtn.classList.add('reveal');
       } else {
