@@ -8,6 +8,14 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    /* Mengunci font agar tidak berubah saat diterjemahkan oleh Google Translate */
+    .goog-text-highlight, 
+    body font, 
+    body span[style*="font-family"], 
+    body div[style*="font-family"] {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+
     .header-controls {
       display: flex;
       align-items: center;
@@ -62,11 +70,6 @@
       background: rgba(0, 255, 157, 0.15) !important;
       color: #00ff9d !important;
       border: 1px solid rgba(0, 255, 157, 0.4) !important;
-    }
-
-    .goog-text-highlight {
-      background-color: transparent !important;
-      box-shadow: none !important;
     }
 
     #google_translate_element,
