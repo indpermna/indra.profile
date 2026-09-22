@@ -12,19 +12,19 @@
 }
 
 /* ==========================================
-   THEME: DARK THEME (DEFAULT)
+   THEME: DARK THEME (DEFAULT) - LEBIH GELAP
    ========================================== */
 body.dark-theme {
-  --bg-color: #0b0f14;
-  --container-bg: rgba(17, 24, 39, 0.75);
+  --bg-color: #040609;
+  --container-bg: rgba(9, 13, 19, 0.85);
   --border-color: rgba(0, 255, 157, 0.2);
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --accent-color: #00ff9d;
-  --card-bg: rgba(31, 41, 55, 0.6);
+  --card-bg: rgba(18, 24, 34, 0.75);
   --card-hover: rgba(0, 255, 157, 0.08);
   --card-border: rgba(0, 255, 157, 0.15);
-  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-color: rgba(0, 0, 0, 0.8);
   --dot-red: #ff5f56;
   --dot-yellow: #ffbd2e;
   --dot-green: #27c93f;
@@ -35,7 +35,6 @@ body.dark-theme {
    ========================================== */
 body.light-theme {
   --bg-color: #f0f2f5;
-  --container-bg: rgba(255, 255, 157, 0.85); /* fallback */
   --container-bg: rgba(255, 255, 255, 0.85);
   --border-color: rgba(0, 135, 90, 0.25);
   --text-main: #1f2937;
@@ -222,9 +221,11 @@ body.light-theme .moon-icon { display: inline-block; width: 16px; height: 16px; 
   letter-spacing: -0.5px;
 }
 
+/* Mengubah warna (Inper) sama seperti tulisan IT Security (text-muted) */
 .nickname {
-  color: var(--accent-color);
-  font-weight: 500;
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 1.3rem;
 }
 
 .profile-bio {
@@ -299,6 +300,18 @@ body.light-theme .moon-icon { display: inline-block; width: 16px; height: 16px; 
   gap: 10px;
 }
 
+/* Konfigurasi Grid 2 Kolom untuk Sertifikasi (Card terakhir memenuhi baris tengah) */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.cert-grid .cert-single {
+  grid-column: 1 / -1;
+  max-width: 100%;
+}
+
 .link-card {
   display: flex;
   align-items: center;
@@ -317,7 +330,7 @@ body.light-theme .moon-icon { display: inline-block; width: 16px; height: 16px; 
   background: var(--card-hover);
   border-color: var(--accent-color);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .card-icon {
@@ -357,6 +370,8 @@ body.light-theme .moon-icon { display: inline-block; width: 16px; height: 16px; 
   height: 16px;
   color: var(--text-muted);
   transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
 }
 
 .link-card:hover .arrow-icon {
@@ -420,7 +435,7 @@ body.light-theme .moon-icon { display: inline-block; width: 16px; height: 16px; 
   color: var(--text-muted);
 }
 
-/* Sound Wave Animation */
+/* Sound Wave Animation dengan Efek Cahaya (Glow) */
 .sound-wave {
   display: flex;
   align-items: flex-end;
@@ -429,11 +444,12 @@ body.light-theme .moon-icon { display: inline-block; width: 16px; height: 16px; 
   padding: 0 4px;
 }
 
-.sound-wave span {
+.glow-sound-wave span {
   width: 3px;
   background-color: var(--accent-color);
   border-radius: 2px;
   animation: bounceWave 1.2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--accent-color), 0 0 12px var(--accent-color);
 }
 
 .sound-wave span:nth-child(1) { animation-delay: 0s; height: 60%; }
@@ -460,20 +476,4 @@ body.light-theme .moon-icon { display: inline-block; width: 16px; height: 16px; 
   font-size: 0.75rem;
   color: var(--text-muted);
   font-family: var(--font-code);
-}
-
-
-/* ==========================================
-   PAKSA KONTAINER MUNCUL (ANTI-HIDE OVERRIDE)
-   ========================================== */
-main.container {
-  opacity: 1 !important;
-  transform: scale(1) !important;
-  pointer-events: auto !important;
-  z-index: 10 !important;
-  position: relative !important;
-}
-
-#secret-restore-btn {
-  display: none !important;
 }
