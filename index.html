@@ -56,7 +56,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 16px;
+      padding: 24px 16px;
       position: relative;
       overflow-x: hidden;
       transition: background 0.3s ease, color 0.3s ease;
@@ -78,16 +78,17 @@
       height: 100%;
     }
 
+    /* Diperlebar menjadi 900px agar proporsional di layar laptop/desktop */
     .container {
       width: 100%;
-      max-width: 720px;
+      max-width: 900px;
       background: var(--container-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border-color);
       border-radius: 14px;
       box-shadow: 0 20px 40px var(--shadow-color);
-      padding: 24px;
+      padding: 36px;
       z-index: 10;
       position: relative;
       margin: auto;
@@ -104,8 +105,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border-color);
     }
 
@@ -128,6 +129,10 @@
       border-radius: 50%;
       display: inline-block;
       pointer-events: none;
+      transition: transform 0.2s ease;
+    }
+    .terminal-dots:hover .dot {
+      transform: scale(1.15);
     }
     .dot.red { background-color: #ff5f56; }
     .dot.yellow { background-color: #ffbd2e; }
@@ -150,11 +155,12 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
     .theme-toggle-btn:hover {
       background: var(--card-hover);
       border-color: var(--accent-color);
+      transform: rotate(15deg) scale(1.05);
     }
     .theme-toggle-btn svg {
       width: 15px;
@@ -201,14 +207,18 @@
 
     .profile-header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .avatar-container {
       position: relative;
-      width: 90px;
-      height: 90px;
+      width: 95px;
+      height: 95px;
       margin: 0 auto 14px auto;
+      transition: transform 0.3s ease;
+    }
+    .avatar-container:hover {
+      transform: scale(1.03);
     }
 
     .avatar {
@@ -252,7 +262,7 @@
     }
 
     .profile-name {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       margin-bottom: 4px;
       color: var(--text-main);
@@ -262,14 +272,31 @@
     .nickname {
       color: var(--text-muted);
       font-weight: 400;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
 
+    /* Efek Mikro-interaksi Mengetik (Typing Effect) pada Bio */
     .profile-bio {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       font-family: var(--font-code);
       margin-bottom: 12px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid var(--accent-color);
+      animation: typing 3.5s steps(36, end), blink-caret 0.75s step-end infinite;
+      max-width: 100%;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--accent-color); }
     }
 
     .divider {
@@ -283,11 +310,16 @@
       gap: 8px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-family: var(--font-code);
       color: var(--accent-color);
+      transition: all 0.25s ease;
+    }
+    .collaboration-badge:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
     }
 
     .pulse-dot {
@@ -305,7 +337,7 @@
     }
 
     .links-section {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .section-title {
@@ -317,13 +349,7 @@
       text-transform: uppercase;
     }
 
-    .grid-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .cert-grid {
+    .grid-container, .cert-grid {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -334,11 +360,11 @@
       align-items: center;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-radius: 8px;
       text-decoration: none;
       color: var(--text-main);
-      transition: all 0.25s ease;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
       cursor: pointer;
@@ -351,7 +377,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.05), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.08), transparent);
       transition: 0.5s;
     }
 
@@ -362,19 +388,23 @@
     .link-card:hover {
       background: var(--card-hover);
       border-color: var(--accent-color);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 255, 157, 0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 255, 157, 0.18);
     }
 
     .card-icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       color: var(--accent-color);
-      margin-right: 12px;
+      margin-right: 14px;
       flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .link-card:hover .card-icon {
+      transform: scale(1.1);
     }
     .card-icon svg { stroke: var(--accent-color); }
 
@@ -386,7 +416,7 @@
     }
 
     .card-title {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
@@ -394,22 +424,22 @@
     }
 
     .card-sub {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-family: var(--font-code);
     }
 
     .arrow-icon {
-      width: 15px;
-      height: 15px;
+      width: 16px;
+      height: 16px;
       color: var(--text-muted);
-      transition: transform 0.2s ease, color 0.2s ease;
+      transition: transform 0.25s ease, color 0.25s ease;
       flex-shrink: 0;
       margin-left: 8px;
     }
 
     .link-card:hover .arrow-icon {
-      transform: translate(2px, -2px);
+      transform: translate(3px, -3px);
       color: var(--accent-color);
     }
 
@@ -418,14 +448,19 @@
       align-items: center;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      padding: 11px 14px;
+      padding: 12px 16px;
       border-radius: 8px;
-      gap: 12px;
+      gap: 14px;
+      transition: all 0.25s ease;
+    }
+    .music-card:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 4px 16px rgba(0, 255, 157, 0.1);
     }
 
     .music-album-art {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 6px;
       overflow: hidden;
       flex-shrink: 0;
@@ -453,7 +488,7 @@
     }
 
     .music-title {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
@@ -461,7 +496,7 @@
     }
 
     .music-artist {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
@@ -492,13 +527,13 @@
 
     .profile-footer {
       text-align: center;
-      margin-top: 16px;
-      padding-top: 12px;
+      margin-top: 18px;
+      padding-top: 14px;
       border-top: 1px solid var(--border-color);
     }
 
     .profile-footer p {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-family: var(--font-code);
     }
@@ -572,10 +607,11 @@
       justify-content: center;
       padding: 4px;
       border-radius: 4px;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
     }
     .modal-close-btn:hover {
       color: var(--accent-color);
+      transform: scale(1.1);
     }
 
     .modal-title {
@@ -615,6 +651,10 @@
       font-size: 0.72rem;
       font-family: var(--font-code);
       color: var(--accent-color);
+      transition: transform 0.2s ease;
+    }
+    .skill-tag:hover {
+      transform: translateY(-2px);
     }
 
     .modal-actions {
@@ -634,14 +674,15 @@
       padding: 8px 16px;
       border-radius: 6px;
       text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     body.light-theme .modal-btn-verify {
       color: #ffffff;
     }
     .modal-btn-verify:hover {
       opacity: 0.9;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 157, 0.3);
     }
 
     #secret-restore-btn {
