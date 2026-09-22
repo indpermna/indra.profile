@@ -4,7 +4,6 @@
   --font-main: 'Plus Jakarta Sans', sans-serif;
   --font-code: 'JetBrains Mono', monospace;
   
-  /* Light Theme Variables */
   --bg-color: #f3f4f6;
   --container-bg: #ffffff;
   --text-primary: #111827;
@@ -18,32 +17,36 @@
 }
 
 body.dark-theme {
-  /* Dark Theme Variables (Cyber Security Vibe - Warna Neon Asli Dipulihkan) */
-  --bg-color: #0b0f14;
-  --container-bg: #111827;
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
+  --bg-color: #080c10;
+  --container-bg: #0d131a;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
   --accent-color: #00ff9d;
-  --accent-glow: rgba(0, 255, 157, 0.35);
+  --accent-glow: rgba(0, 255, 157, 0.25);
   --border-color: rgba(255, 255, 255, 0.08);
-  --card-bg: #1f2937;
-  --card-hover-bg: #374151;
-  --terminal-bar-bg: #0f172a;
+  --card-bg: #161b22;
+  --card-hover-bg: #1f6feb22;
+  --terminal-bar-bg: #090d12;
 }
 
-/* Mengunci font secara agresif agar tidak berubah saat Google Translate aktif */
-body *, 
-body font, 
-body span, 
-body p, 
-body h1, 
-body h2, 
-body a, 
-.goog-text-highlight,
-[style*="font-family"] {
+/* ==========================================================
+   PENGUNCIAN FONT MUTLAK (Mencegah perubahan saat ganti bahasa)
+   ================================================---------- */
+body, body *, body font, body span, body p, body h1, body h2, body a, 
+.goog-text-highlight, [style*="font-family"] {
   font-family: var(--font-main) !important;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
+/* Kunci ukuran elemen utama agar tidak berubah akibat terjemahan */
+.profile-name { font-size: 1.35rem !important; font-weight: 700 !important; }
+.nickname { font-size: 1rem !important; font-weight: 400 !important; }
+.card-title { font-size: 0.85rem !important; font-weight: 600 !important; }
+.music-title { font-size: 0.85rem !important; font-weight: 600 !important; }
+.music-artist { font-size: 0.75rem !important; font-weight: 400 !important; }
+
+/* Elemen dengan font code */
 .profile-bio, 
 .card-sub, 
 .section-title, 
@@ -60,7 +63,6 @@ body a,
 }
 
 body {
-  font-family: var(--font-main);
   background-color: var(--bg-color);
   color: var(--text-primary);
   min-height: 100vh;
@@ -73,7 +75,7 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Background Matrix Code Rain Canvas */
+/* Background Matrix */
 .cyber-background {
   position: fixed;
   top: 0;
@@ -89,14 +91,14 @@ body.light-theme .cyber-background {
   opacity: 0.1;
 }
 
-/* Container Utama ala Jendela Terminal */
+/* Container */
 .container {
   width: 100%;
   max-width: 600px;
   background-color: var(--container-bg);
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -125,11 +127,37 @@ body.light-theme .cyber-background {
   border-radius: 50%;
 }
 
-.dot.red { background-color: #ef4444; }
-.dot.yellow { background-color: #f59e0b; }
-.dot.green { background-color: #10b981; }
+.dot.red { background-color: #ff5f56; }
+.dot.yellow { background-color: #ffbd2e; }
+.dot.green { background-color: #27c93f; }
 
-/* Tombol Ganti Tema */
+/* Language Switcher */
+.lang-switcher {
+  display: flex;
+  gap: 4px;
+  background: var(--card-bg);
+  padding: 2px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.7rem !important;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active, .lang-btn:hover {
+  background-color: var(--accent-color) !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
 .theme-btn {
   background: transparent;
   border: none;
@@ -189,7 +217,7 @@ body.light-theme .moon-icon { display: block; }
   border: 2px dashed var(--accent-color);
   border-radius: 50%;
   animation: radarSpin 12s linear infinite;
-  opacity: 0.6;
+  opacity: 0.5;
   z-index: 1;
 }
 
@@ -198,7 +226,6 @@ body.light-theme .moon-icon { display: block; }
   100% { transform: rotate(360deg); }
 }
 
-/* Status Indicator dengan Cahaya Terang */
 .status-indicator {
   position: absolute;
   bottom: 4px;
@@ -209,26 +236,20 @@ body.light-theme .moon-icon { display: block; }
   border: 2px solid var(--container-bg);
   border-radius: 50%;
   z-index: 3;
-  box-shadow: 0 0 12px var(--accent-color), 0 0 6px var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
 }
 
 .profile-name {
-  font-size: 1.35rem;
-  font-weight: 700;
   margin-bottom: 6px;
-  letter-spacing: -0.01em;
 }
 
 .nickname {
   color: var(--text-secondary);
-  font-weight: 400;
-  font-size: 1rem;
 }
 
 .profile-bio {
-  font-size: 0.85rem;
+  font-size: 0.85rem !important;
   color: var(--text-secondary);
-  font-family: var(--font-code);
   margin-bottom: 16px;
 }
 
@@ -246,10 +267,8 @@ body.light-theme .moon-icon { display: block; }
   border: 1px solid var(--accent-color);
   color: var(--accent-color);
   border-radius: 20px;
-  font-size: 0.75rem;
-  font-family: var(--font-code);
+  font-size: 0.75rem !important;
   font-weight: 500;
-  box-shadow: 0 0 10px rgba(0, 255, 157, 0.1);
 }
 
 .pulse-dot {
@@ -257,24 +276,23 @@ body.light-theme .moon-icon { display: block; }
   height: 6px;
   background-color: var(--accent-color);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-color);
+  box-shadow: 0 0 8px var(--accent-color);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 157, 0); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 157, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
 }
 
-/* Section Links & Cards */
+/* Links & Grid */
 .links-section {
   padding: 0 24px 24px 24px;
 }
 
 .section-title {
-  font-size: 0.7rem;
-  font-family: var(--font-code);
+  font-size: 0.7rem !important;
   color: var(--text-secondary);
   letter-spacing: 0.08em;
   margin-bottom: 12px;
@@ -287,11 +305,6 @@ body.light-theme .moon-icon { display: block; }
   gap: 12px;
 }
 
-/* Sertifikasi ke-5 (ganjil terakhir) memenuhi lebar penuh tanpa celah kosong */
-.grid-container > *:last-child:nth-child(odd) {
-  grid-column: span 2;
-}
-
 .link-card {
   display: flex;
   align-items: center;
@@ -302,16 +315,14 @@ body.light-theme .moon-icon { display: block; }
   border-radius: 10px;
   text-decoration: none;
   color: var(--text-primary);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s ease;
 }
 
 .link-card:hover {
   background-color: var(--card-hover-bg);
   border-color: var(--accent-color);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 10px var(--accent-glow);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px var(--accent-glow);
 }
 
 .card-icon {
@@ -334,17 +345,14 @@ body.light-theme .moon-icon { display: block; }
 }
 
 .card-title {
-  font-size: 0.85rem;
-  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .card-sub {
-  font-size: 0.7rem;
+  font-size: 0.7rem !important;
   color: var(--text-secondary);
-  font-family: var(--font-code);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -371,7 +379,7 @@ body.light-theme .moon-icon { display: block; }
   box-shadow: none;
 }
 
-/* Music Card Section */
+/* Music Card */
 .music-card {
   display: flex;
   align-items: center;
@@ -380,11 +388,6 @@ body.light-theme .moon-icon { display: block; }
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  transition: border-color 0.3s ease;
-}
-
-.music-card:hover {
-  border-color: rgba(0, 255, 157, 0.4);
 }
 
 .music-album-art {
@@ -409,26 +412,21 @@ body.light-theme .moon-icon { display: block; }
 }
 
 .music-label {
-  font-size: 0.65rem;
-  font-family: var(--font-code);
+  font-size: 0.65rem !important;
   color: var(--accent-color);
   letter-spacing: 0.05em;
 }
 
 .music-title {
-  font-size: 0.85rem;
-  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .music-artist {
-  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
-/* Gelombang Musik Cepat & Bercahaya (Glow Neon) */
 .sound-wave {
   display: flex;
   align-items: flex-end;
@@ -440,7 +438,7 @@ body.light-theme .moon-icon { display: block; }
   width: 3px;
   background-color: var(--accent-color);
   border-radius: 2px;
-  box-shadow: 0 0 8px var(--accent-color);
+  box-shadow: 0 0 6px var(--accent-color);
   animation: soundWaveAnim 0.5s ease-in-out infinite alternate;
 }
 
@@ -453,26 +451,20 @@ body.light-theme .moon-icon { display: block; }
   100% { transform: scaleY(1); }
 }
 
-/* Footer */
 .profile-footer {
   padding: 16px 20px;
   text-align: center;
   border-top: 1px solid var(--border-color);
-  font-size: 0.72rem;
+  font-size: 0.72rem !important;
   color: var(--text-secondary);
-  font-family: var(--font-code);
   background-color: var(--terminal-bar-bg);
 }
 
-/* Responsif untuk Layar Ponsel Kecil */
 @media (max-width: 540px) {
   body {
     padding: 12px;
   }
   .grid-container {
     grid-template-columns: 1fr;
-  }
-  .grid-container > *:last-child:nth-child(odd) {
-    grid-column: span 1;
   }
 }
