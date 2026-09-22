@@ -339,7 +339,7 @@ body.light-theme .sun-icon { display: none; }
   border-radius: 12px;
   padding: 10px 14px;
   min-height: 58px;
-  gap: 12px;
+  gap: 12px; /* Memberikan jarak yang pas antara cover album dan teks */
 }
 
 .music-card .music-icon {
