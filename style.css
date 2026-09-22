@@ -18,20 +18,20 @@
 }
 
 body.dark-theme {
-  /* Dark Theme Variables (Cyber Security Vibe) */
+  /* Dark Theme Variables (Cyber Security Vibe - Warna Neon Asli Dipulihkan) */
   --bg-color: #0b0f14;
   --container-bg: #111827;
   --text-primary: #f3f4f6;
   --text-secondary: #9ca3af;
   --accent-color: #00ff9d;
-  --accent-glow: rgba(0, 255, 157, 0.25);
+  --accent-glow: rgba(0, 255, 157, 0.35);
   --border-color: rgba(255, 255, 255, 0.08);
   --card-bg: #1f2937;
   --card-hover-bg: #374151;
   --terminal-bar-bg: #0f172a;
 }
 
-/* Poin 2: Mengunci font secara agresif agar tidak berubah saat Google Translate aktif */
+/* Mengunci font secara agresif agar tidak berubah saat Google Translate aktif */
 body *, 
 body font, 
 body span, 
@@ -177,6 +177,7 @@ body.light-theme .moon-icon { display: block; }
   border: 2px solid var(--accent-color);
   position: relative;
   z-index: 2;
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
 .avatar-radar-ring {
@@ -197,7 +198,7 @@ body.light-theme .moon-icon { display: block; }
   100% { transform: rotate(360deg); }
 }
 
-/* Poin 3: Mengembalikan efek cahaya (glow) pada status indicator hijau */
+/* Status Indicator dengan Cahaya Terang */
 .status-indicator {
   position: absolute;
   bottom: 4px;
@@ -208,7 +209,7 @@ body.light-theme .moon-icon { display: block; }
   border: 2px solid var(--container-bg);
   border-radius: 50%;
   z-index: 3;
-  box-shadow: 0 0 10px var(--accent-color), 0 0 5px var(--accent-color);
+  box-shadow: 0 0 12px var(--accent-color), 0 0 6px var(--accent-color);
 }
 
 .profile-name {
@@ -248,6 +249,7 @@ body.light-theme .moon-icon { display: block; }
   font-size: 0.75rem;
   font-family: var(--font-code);
   font-weight: 500;
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.1);
 }
 
 .pulse-dot {
@@ -255,13 +257,13 @@ body.light-theme .moon-icon { display: block; }
   height: 6px;
   background-color: var(--accent-color);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 157, 0); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 157, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
 }
 
@@ -285,7 +287,7 @@ body.light-theme .moon-icon { display: block; }
   gap: 12px;
 }
 
-/* Poin 1: Mengatur kartu sertifikasi ke-5 (ganjil terakhir) agar memenuhi lebar penuh tanpa celah kosong */
+/* Sertifikasi ke-5 (ganjil terakhir) memenuhi lebar penuh tanpa celah kosong */
 .grid-container > *:last-child:nth-child(odd) {
   grid-column: span 2;
 }
@@ -309,7 +311,7 @@ body.light-theme .moon-icon { display: block; }
   background-color: var(--card-hover-bg);
   border-color: var(--accent-color);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 10px var(--accent-glow);
 }
 
 .card-icon {
@@ -378,6 +380,11 @@ body.light-theme .moon-icon { display: block; }
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.music-card:hover {
+  border-color: rgba(0, 255, 157, 0.4);
 }
 
 .music-album-art {
@@ -421,7 +428,7 @@ body.light-theme .moon-icon { display: block; }
   color: var(--text-secondary);
 }
 
-/* Poin 4: Mempercepat animasi gelombang musik dan menambahkan efek cahaya (glow) */
+/* Gelombang Musik Cepat & Bercahaya (Glow Neon) */
 .sound-wave {
   display: flex;
   align-items: flex-end;
@@ -433,7 +440,7 @@ body.light-theme .moon-icon { display: block; }
   width: 3px;
   background-color: var(--accent-color);
   border-radius: 2px;
-  box-shadow: 0 0 6px var(--accent-color);
+  box-shadow: 0 0 8px var(--accent-color);
   animation: soundWaveAnim 0.5s ease-in-out infinite alternate;
 }
 
