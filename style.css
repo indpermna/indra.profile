@@ -31,7 +31,6 @@ body, body *, html, font, span, p, a, h1, h2, h3, h4, h5, h6,
 .music-title { font-size: 0.85rem !important; font-weight: 600 !important; }
 .music-artist { font-size: 0.75rem !important; font-weight: 400 !important; }
 
-/* Elemen khusus dengan font code/mono */
 .profile-bio, 
 .card-sub, 
 .section-title, 
@@ -73,7 +72,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Terminal Bar */
+/* Terminal Bar - Diperbaiki agar kontrol di kanan rapi sejajar */
 .terminal-bar {
   display: flex;
   justify-content: space-between;
@@ -102,7 +101,7 @@ body {
 .controls-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .lang-switcher {
@@ -137,15 +136,22 @@ body {
 }
 
 .theme-btn {
-  background: transparent;
-  border: none;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   cursor: pointer;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  width: 32px;
+  height: 28px;
   border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.theme-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--text-primary);
 }
 
 /* Profil Header */
@@ -230,7 +236,6 @@ body {
   gap: 12px;
 }
 
-/* Memastikan card ganjil/terakhir otomatis memenuhi lebar penuh 2 kolom khusus jika diinginkan */
 .cert-last {
   grid-column: span 2;
 }
@@ -255,16 +260,18 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px var(--accent-glow);
 }
 
+/* Perbaikan ukuran & tampilan Ikon FontAwesome di dalam Card */
 .card-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   background-color: var(--border-color);
   border-radius: 8px;
   color: var(--accent-color);
   flex-shrink: 0;
+  font-size: 0.95rem;
 }
 
 .card-text {
@@ -364,7 +371,6 @@ body {
   text-overflow: ellipsis;
 }
 
-/* Perbaikan Sound Wave agar garis batangnya tampil sempurna */
 .sound-wave {
   display: flex;
   align-items: flex-end;
@@ -394,6 +400,18 @@ body {
   font-size: 0.72rem !important;
   color: var(--text-secondary);
   background-color: var(--terminal-bar-bg);
+}
+
+/* Light Theme Styling */
+body.light-theme {
+  --bg-color: #f0f2f5;
+  --container-bg: #ffffff;
+  --text-primary: #1f2328;
+  --text-secondary: #57606a;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --card-bg: #f6f8fa;
+  --card-hover-bg: #0969da15;
+  --terminal-bar-bg: #eaeef2;
 }
 
 @media (max-width: 540px) {
