@@ -29,7 +29,6 @@
       --shadow-color: rgba(0, 0, 0, 0.6);
     }
 
-    /* Light Theme Variables */
     body.light-theme {
       --bg-color: #f1f5f9;
       --container-bg: rgba(255, 255, 255, 0.9);
@@ -185,11 +184,9 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-
     .lang-btn:hover {
       color: var(--accent-color);
     }
-
     .lang-btn.active {
       background: var(--card-hover) !important;
       color: var(--accent-color) !important;
@@ -254,7 +251,6 @@
       z-index: 3;
     }
 
-    /* Peningkatan ukuran & hierarki nama utama */
     .profile-name {
       font-size: 1.5rem;
       font-weight: 700;
@@ -333,16 +329,6 @@
       gap: 10px;
     }
 
-    @media (min-width: 640px) {
-      .cert-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .cert-single {
-        grid-column: 1 / -1;
-      }
-    }
-
     .link-card {
       display: flex;
       align-items: center;
@@ -355,6 +341,7 @@
       transition: all 0.25s ease;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .link-card::before {
@@ -516,6 +503,147 @@
       font-family: var(--font-code);
     }
 
+    /* Modal / Popup Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(5, 8, 15, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: var(--container-bg);
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 157, 0.15);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .modal-issuer {
+      font-size: 0.75rem;
+      font-family: var(--font-code);
+      color: var(--accent-color);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+    .modal-close-btn:hover {
+      color: var(--accent-color);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .modal-skills-title {
+      font-size: 0.75rem;
+      font-family: var(--font-code);
+      color: var(--text-main);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .modal-skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .skill-tag {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: var(--font-code);
+      color: var(--accent-color);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .modal-btn-verify {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-color);
+      color: #0b0f19;
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    body.light-theme .modal-btn-verify {
+      color: #ffffff;
+    }
+    .modal-btn-verify:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
     #secret-restore-btn {
       position: fixed;
       bottom: 20px;
@@ -623,50 +751,55 @@
     <section class="links-section">
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       <div class="cert-grid">
-        <a href="https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438" target="_blank" rel="noopener noreferrer" class="link-card">
+        <!-- Certificate 1 -->
+        <div class="link-card" onclick="openCertModal('CompTIA Security+', 'CompTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security', 'Threat Analysis', 'Risk Management', 'Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <div class="card-icon"><i data-lucide="award"></i></div>
           <div class="card-text">
             <span class="card-title">CompTIA Security+</span>
             <span class="card-sub">CompTIA</span>
           </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+          <i data-lucide="info" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565" target="_blank" rel="noopener noreferrer" class="link-card">
+        <!-- Certificate 2 -->
+        <div class="link-card" onclick="openCertModal('Fortinet Associate', 'Fortinet', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman mendalam infrastruktur keamanan perimeter.', ['Firewall Concepts', 'Network Perimeter', 'Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
           <div class="card-icon"><i data-lucide="shield-check"></i></div>
           <div class="card-text">
             <span class="card-title">Fortinet Associate</span>
             <span class="card-sub">Fortinet</span>
           </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+          <i data-lucide="info" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://education.forcepoint.com/achievements/certificate/242288211" target="_blank" rel="noopener noreferrer" class="link-card">
+        <!-- Certificate 3 -->
+        <div class="link-card" onclick="openCertModal('Forcepoint DLP Admin', 'Forcepoint', 'Keahlian dalam manajemen Data Loss Prevention (DLP), pengawasan perlindungan data sensitif perusahaan, serta pencegahan kebocoran informasi krusial.', ['Data Protection', 'DLP Policies', 'Compliance', 'Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
           <div class="card-icon"><i data-lucide="lock"></i></div>
           <div class="card-text">
             <span class="card-title">Forcepoint DLP Admin</span>
             <span class="card-sub">Forcepoint</span>
           </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+          <i data-lucide="info" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9" target="_blank" rel="noopener noreferrer" class="link-card">
+        <!-- Certificate 4 -->
+        <div class="link-card" onclick="openCertModal('Ransomware Defense', 'SOC Radar', 'Pemahaman taktik mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem darurat dari ancaman enkripsi berbahaya.', ['Incident Response', 'Malware Analysis', 'Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
           <div class="card-icon"><i data-lucide="file-warning"></i></div>
           <div class="card-text">
             <span class="card-title">Ransomware Defense</span>
             <span class="card-sub">SOC Radar</span>
           </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+          <i data-lucide="info" class="arrow-icon"></i>
+        </div>
 
-        <a href="https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1" target="_blank" rel="noopener noreferrer" class="link-card cert-single">
+        <!-- Certificate 5 -->
+        <div class="link-card" onclick="openCertModal('GenAI for SOC Analysts', 'SOC Radar', 'Pemanfaatan teknologi Generative AI untuk mengoptimalkan operasional Security Operations Center (SOC), otomatisasi analisis log, dan deteksi ancaman cepat.', ['Generative AI', 'SOC Automation', 'Log Analysis', 'Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
           <div class="card-icon"><i data-lucide="cpu"></i></div>
           <div class="card-text">
             <span class="card-title">GenAI for SOC Analysts</span>
             <span class="card-sub">SOC Radar</span>
           </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
-        </a>
+          <i data-lucide="info" class="arrow-icon"></i>
+        </div>
       </div>
     </section>
 
@@ -714,6 +847,29 @@
       <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
     </footer>
   </main>
+
+  <!-- Certificate Detail Modal Popup -->
+  <div class="modal-overlay" id="cert-modal" onclick="closeCertModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-issuer" id="modal-issuer-text">ISSUER</span>
+        <button class="modal-close-btn" onclick="closeCertModalDirect()"><i data-lucide="x" size="18"></i></button>
+      </div>
+      <h3 class="modal-title" id="modal-title-text">Certificate Title</h3>
+      <p class="modal-desc" id="modal-desc-text">Description goes here...</p>
+      
+      <div class="modal-skills-title">KEY SKILLS & COMPETENCIES</div>
+      <div class="modal-skills-list" id="modal-skills-container">
+        <!-- Dynamically injected skills tags -->
+      </div>
+
+      <div class="modal-actions">
+        <a href="#" id="modal-verify-link" target="_blank" rel="noopener noreferrer" class="modal-btn-verify">
+          Verify Credential <i data-lucide="external-link" size="14"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <button id="secret-restore-btn" onclick="toggleSecretWindow()">&gt; exit_shell</button>
 
@@ -774,6 +930,33 @@
         matrixInterval = setInterval(drawMatrix, 45);
       }
     });
+
+    // Modal Control Functions
+    function openCertModal(title, issuer, description, skills, link) {
+      document.getElementById('modal-title-text').innerText = title;
+      document.getElementById('modal-issuer-text').innerText = issuer;
+      document.getElementById('modal-desc-text').innerText = description;
+      document.getElementById('modal-verify-link').href = link;
+
+      const skillsContainer = document.getElementById('modal-skills-container');
+      skillsContainer.innerHTML = '';
+      skills.forEach(skill => {
+        const tag = document.createElement('span');
+        tag.className = 'skill-tag';
+        tag.innerText = skill;
+        skillsContainer.appendChild(tag);
+      });
+
+      document.getElementById('cert-modal').classList.add('active');
+    }
+
+    function closeCertModal(event) {
+      document.getElementById('cert-modal').classList.remove('active');
+    }
+
+    function closeCertModalDirect() {
+      document.getElementById('cert-modal').classList.remove('active');
+    }
   </script>
 
   <script type="text/javascript">
