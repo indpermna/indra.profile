@@ -68,7 +68,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Background Matrix Canvas Dinamis */
 .cyber-background {
   position: fixed;
   top: 0; 
@@ -401,19 +400,24 @@ body.light-theme .sun-icon { display: none; }
   50% { height: 14px; opacity: 1; }
 }
 
-/* System Status Bar Styling */
+/* System Status Bar Styling yang Lebih Rapi & Proporsional */
 .system-status-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--card-bg);
+  background-color: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 8px 14px;
-  margin-top: 18px;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 14px;
+  margin-bottom: 12px;
   font-family: var(--font-code);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--text-sub);
+}
+
+body.dark-theme .system-status-bar {
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .status-indicator-live {
@@ -434,11 +438,12 @@ body.light-theme .sun-icon { display: none; }
 .status-ping {
   color: var(--accent-color);
   font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .profile-footer {
   text-align: center;
-  margin-top: 16px;
+  margin-top: 12px;
   font-size: 0.65rem;
   font-family: var(--font-code);
   color: var(--text-muted);
