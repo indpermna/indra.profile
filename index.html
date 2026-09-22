@@ -3,440 +3,539 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indra Permana</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>Indra Permana - Profile</title>
   <style>
-    /* Mengunci font secara agresif pada semua elemen terjemahan Google Translate */
-    body *, 
-    body font, 
-    body span, 
-    body p, 
-    body h1, 
-    body h2, 
-    body a, 
-    .goog-text-highlight,
-    [style*="font-family"] {
-      font-family: 'Plus Jakarta Sans', sans-serif !important;
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+      
+      --bg-color: #080c10;
+      --container-bg: #0d131a;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --accent-color: #00ff9d;
+      --accent-glow: rgba(0, 255, 157, 0.25);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --card-bg: #161b22;
+      --card-hover-bg: #1f6feb22;
+      --terminal-bar-bg: #090d12;
     }
 
-    /* Khusus untuk teks dengan font code/mono */
+    /* ==========================================================
+       PENGUNCIAN FONT MUTLAK (Anti berubah saat ganti bahasa)
+       ================================================---------- */
+    *, *::before, *::after, 
+    body, body *, html, font, span, p, a, h1, h2, h3, h4, h5, h6, 
+    .goog-text-highlight, [style*="font-family"], font {
+      font-family: var(--font-main) !important;
+    }
+
+    .profile-name { font-size: 1.35rem !important; font-weight: 700 !important; }
+    .nickname { font-size: 1rem !important; font-weight: 400 !important; }
+    .card-title { font-size: 0.85rem !important; font-weight: 600 !important; }
+    .music-title { font-size: 0.85rem !important; font-weight: 600 !important; }
+    .music-artist { font-size: 0.75rem !important; font-weight: 400 !important; }
+
+    /* Elemen khusus dengan font code/mono */
     .profile-bio, 
     .card-sub, 
     .section-title, 
     .music-label, 
     .profile-footer,
     .lang-btn {
-      font-family: 'JetBrains Mono', monospace !important;
+      font-family: var(--font-code) !important;
     }
 
-    .header-controls {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background-color: var(--container-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Terminal Bar */
+    .terminal-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: var(--terminal-bar-bg);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot.red { background-color: #ff5f56; }
+    .dot.yellow { background-color: #ffbd2e; }
+    .dot.green { background-color: #27c93f; }
+
+    /* Language & Theme Controls */
+    .controls-wrapper {
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-    
-    .lang-switcher {
-      display: flex;
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 255, 157, 0.2);
-      border-radius: 6px;
-      padding: 2px;
-      gap: 2px;
+      gap: 8px;
     }
 
-    body.dark-theme .lang-switcher {
-      background: rgba(17, 24, 39, 0.8);
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: var(--card-bg);
+      padding: 3px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
     }
 
     .lang-btn {
       background: transparent;
       border: none;
-      color: #6b7280;
-      font-size: 11px;
-      font-weight: bold;
-      padding: 4px 8px;
+      color: var(--text-secondary);
+      font-size: 0.7rem !important;
+      width: 26px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 4px;
       cursor: pointer;
+      font-weight: 500 !important;
+    }
+
+    .lang-btn.active, .lang-btn:hover {
+      background-color: var(--accent-color) !important;
+      color: #000 !important;
+      font-weight: 600 !important;
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    /* Profil Header */
+    .profile-header {
+      padding: 32px 20px 24px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-color);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .status-indicator {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 14px;
+      height: 14px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      z-index: 3;
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .profile-name { margin-bottom: 6px; }
+    .nickname { color: var(--text-secondary); }
+    .profile-bio { font-size: 0.85rem !important; color: var(--text-secondary); margin-bottom: 16px; }
+
+    .collaboration-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background-color: var(--accent-glow);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      border-radius: 20px;
+      font-size: 0.75rem !important;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-color);
+    }
+
+    /* Links & Grid */
+    .links-section {
+      padding: 0 24px 24px 24px;
+    }
+
+    .section-title {
+      font-size: 0.7rem !important;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    /* Memastikan card ganjil/terakhir otomatis memenuhi lebar penuh 2 kolom */
+    .grid-container > *:last-child:nth-child(odd),
+    .cert-last {
+      grid-column: span 2;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
       transition: all 0.2s ease;
     }
 
-    body.dark-theme .lang-btn {
-      color: #9ca3af;
+    .link-card:hover {
+      background-color: var(--card-hover-bg);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px var(--accent-glow);
     }
 
-    .lang-btn:hover {
-      color: #00875a;
-    }
-
-    body.dark-theme .lang-btn:hover {
-      color: #00ff9d;
-    }
-
-    .lang-btn.active {
-      background: rgba(0, 255, 157, 0.2) !important;
-      color: #007a4d !important;
-      border: 1px solid rgba(0, 255, 157, 0.5) !important;
-    }
-
-    body.dark-theme .lang-btn.active {
-      background: rgba(0, 255, 157, 0.15) !important;
-      color: #00ff9d !important;
-      border: 1px solid rgba(0, 255, 157, 0.4) !important;
-    }
-
-    #google_translate_element,
-    .goog-te-banner-frame,
-    .skiptranslate,
-    .goog-te-spinner-pos {
-      display: none !important;
-    }
-
-    body {
-      top: 0px !important;
-    }
-
-    .terminal-dots {
-      cursor: pointer;
+    .card-icon {
       display: flex;
-      gap: 6px;
-      padding: 4px 6px;
-      border-radius: 6px;
-      transition: background 0.2s ease;
-      width: fit-content;
-    }
-    .terminal-dots:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-    .terminal-dots .dot {
-      pointer-events: none;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background-color: var(--border-color);
+      border-radius: 8px;
+      color: var(--accent-color);
+      flex-shrink: 0;
     }
 
-    .container {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .container.is-hidden {
-      opacity: 0;
-      transform: scale(0.95);
-      pointer-events: none;
+    .card-text {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-grow: 1;
     }
 
-    #secret-restore-btn {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(30px);
-      background: var(--container-bg, #111827);
-      border: 1px solid rgba(0, 255, 157, 0.4);
-      color: #00ff9d;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    #secret-restore-btn.reveal {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-      pointer-events: auto;
+    .card-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .link-card, .music-card, .profile-header, .terminal-bar {
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
+    .card-sub {
+      font-size: 0.7rem !important;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .arrow-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .hobby-card { cursor: default; }
+    .hobby-card:hover { transform: translateY(0); box-shadow: none; }
+
+    /* Music Card (Current Vibe) */
+    .music-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      position: relative;
+      grid-column: span 2;
+      transition: all 0.2s ease;
+    }
+
+    .music-card:hover {
+      background-color: var(--card-hover-bg);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px var(--accent-glow);
+    }
+
+    .music-album-art {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .music-album-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .music-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+      overflow: hidden;
+      gap: 1px;
+    }
+
+    .music-label {
+      font-size: 0.65rem !important;
+      color: var(--accent-color);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .music-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .music-artist {
+      font-size: 0.7rem !important;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sound-wave {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+      flex-shrink: 0;
+      margin-left: auto;
+      padding-left: 10px;
+    }
+
+    .sound-wave span {
+      width: 3px;
+      background-color: var(--accent-color);
+      border-radius: 2px;
+      box-shadow: 0 0 6px var(--accent-color);
+    }
+
+    .profile-footer {
+      padding: 16px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.72rem !important;
+      color: var(--text-secondary);
+      background-color: var(--terminal-bar-bg);
+    }
+
+    @media (max-width: 540px) {
+      .grid-container { grid-template-columns: 1fr; }
+      .grid-container > *:last-child:nth-child(odd),
+      .music-card,
+      .cert-last { grid-column: span 1; }
     }
   </style>
 </head>
-<body class="dark-theme">
+<body>
 
-  <!-- Latar Belakang Matrix Code Rain Dinamis -->
-  <div class="cyber-background">
-    <canvas id="matrix-canvas"></canvas>
-  </div>
-
-  <main class="container">
-    <!-- Header Window -->
+  <div class="container">
+    <!-- Terminal Bar -->
     <div class="terminal-bar">
-      <div class="terminal-dots" onclick="toggleSecretWindow()" title="???">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
+      <div class="terminal-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
       </div>
-      
-      <div class="header-controls">
+      <div class="controls-wrapper">
         <div class="lang-switcher">
-          <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
-          <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
-          <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">ID</button>
+          <button class="lang-btn">JP</button>
         </div>
-
-        <div id="google_translate_element"></div>
-
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
-          <i data-lucide="sun" class="sun-icon"></i>
-          <i data-lucide="moon" class="moon-icon"></i>
-        </button>
+        <button class="theme-btn">☀️</button>
       </div>
     </div>
 
-    <!-- Header Profil -->
-    <header class="profile-header">
+    <!-- Profile Header -->
+    <div class="profile-header">
       <div class="avatar-container">
-        <div class="avatar-radar-ring"></div>
         <img src="avatar.jpg" alt="Indra Permana" class="avatar">
-        <span class="status-indicator" title="System Online"></span>
+        <div class="status-indicator"></div>
       </div>
-      
       <h1 class="profile-name">Indra Permana <span class="nickname">(Inper)</span></h1>
-
-      <p class="profile-bio">
-        IT Security & Network Engineer <span class="divider">•</span> Cyber Security
-      </p>
-
+      <p class="profile-bio">Security & Network Engineer &bull; Cyber Security</p>
       <div class="collaboration-badge">
-        <span class="pulse-dot"></span> Open for Tech Collaboration
+        <div class="pulse-dot"></div>
+        <span>Open for Tech Collaboration</span>
       </div>
-    </header>
+    </div>
 
-    <!-- Socials Section -->
-    <section class="links-section">
-      <h2 class="section-title">NETWORKS & SOCIALS</h2>
+    <!-- Networks & Socials -->
+    <div class="links-section">
+      <div class="section-title">Networks & Socials</div>
       <div class="grid-container">
-        <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-          </div>
+        <a href="https://linkedin.com/in/indpermana" target="_blank" class="link-card">
+          <div class="card-icon">in</div>
           <div class="card-text">
             <span class="card-title">LinkedIn</span>
             <span class="card-sub">linkedin.com/in/indpermana</span>
           </div>
-          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
-
-        <a href="https://www.instagram.com/indpermna" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </div>
+        <a href="https://instagram.com/indpermana" target="_blank" class="link-card">
+          <div class="card-icon">ig</div>
           <div class="card-text">
             <span class="card-title">Instagram</span>
-            <span class="card-sub">@indpermna</span>
+            <span class="card-sub">@indpermana</span>
           </div>
-          <i data-lucide="arrow-up-right" class="arrow-icon"></i>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
       </div>
-    </section>
+    </div>
 
-    <!-- Certifications Section -->
-    <section class="links-section">
-      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
+    <!-- Verified Certifications -->
+    <div class="links-section">
+      <div class="section-title">Verified Certifications</div>
       <div class="grid-container">
-        <a href="https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="award"></i></div>
-          <div class="card-text">
-            <span class="card-title">CompTIA Security+</span>
-            <span class="card-sub">CompTIA</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
+        <a href="#" class="link-card">
+          <div class="card-icon">📜</div>
+          <div class="card-text"><span class="card-title">CompTIA Security+</span><span class="card-sub">CompTIA</span></div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
-
-        <a href="https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="shield-check"></i></div>
-          <div class="card-text">
-            <span class="card-title">Fortinet Associate</span>
-            <span class="card-sub">Fortinet</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
+        <a href="#" class="link-card">
+          <div class="card-icon">🛡️</div>
+          <div class="card-text"><span class="card-title">Fortinet Associate</span><span class="card-sub">Fortinet</span></div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
-
-        <a href="https://education.forcepoint.com/achievements/certificate/242288211" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="lock"></i></div>
-          <div class="card-text">
-            <span class="card-title">Forcepoint DLP Admin</span>
-            <span class="card-sub">Forcepoint</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
+        <a href="#" class="link-card">
+          <div class="card-icon">🔒</div>
+          <div class="card-text"><span class="card-title">Forcepoint DLP Admin</span><span class="card-sub">Forcepoint</span></div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
-
-        <a href="https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="file-warning"></i></div>
-          <div class="card-text">
-            <span class="card-title">Ransomware Defense</span>
-            <span class="card-sub">SOC Radar</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
+        <a href="#" class="link-card">
+          <div class="card-icon">🛡️</div>
+          <div class="card-text"><span class="card-title">Ransomware Defense</span><span class="card-sub">SOC Radar</span></div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
-
-        <a href="https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1" target="_blank" rel="noopener noreferrer" class="link-card">
-          <div class="card-icon"><i data-lucide="cpu"></i></div>
-          <div class="card-text">
-            <span class="card-title">GenAI for SOC Analysts</span>
-            <span class="card-sub">SOC Radar</span>
-          </div>
-          <i data-lucide="external-link" class="arrow-icon"></i>
+        <!-- Card ganjil terakhir menggunakan class cert-last agar otomatis full 2 kolom -->
+        <a href="#" class="link-card cert-last">
+          <div class="card-icon">🤖</div>
+          <div class="card-text"><span class="card-title">GenAI for SOC Analysts</span><span class="card-sub">SOC Radar</span></div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
       </div>
-    </section>
+    </div>
 
-    <!-- Hobbies Section -->
-    <section class="links-section">
-      <h2 class="section-title">HOBBIES</h2>
+    <!-- Hobbies -->
+    <div class="links-section">
+      <div class="section-title">Hobbies</div>
       <div class="grid-container">
         <div class="link-card hobby-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-          </div>
-          <div class="card-text">
-            <span class="card-title">Street Photography</span>
-          </div>
+          <div class="card-icon">📸</div>
+          <div class="card-text"><span class="card-title">Street Photography</span></div>
         </div>
-
         <div class="link-card hobby-card">
-          <div class="card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 1 0 10 10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v3"/></svg>
-          </div>
-          <div class="card-text">
-            <span class="card-title">Billiard</span>
-          </div>
+          <div class="card-icon">🎱</div>
+          <div class="card-text"><span class="card-title">Billiard</span></div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Current Vibe Section -->
-    <section class="links-section">
-      <h2 class="section-title">CURRENT VIBE</h2>
-      <div class="music-card">
-        <div class="music-album-art">
-          <img src="album.jpg" alt="Making Love Out of Nothing At All Album Cover">
-        </div>
-        <div class="music-info">
-          <span class="music-label">FAVORITE TRACK</span>
-          <span class="music-title">Making Love Out of Nothing At All</span>
-          <span class="music-artist">Air Supply</span>
-        </div>
-        <div class="sound-wave">
-          <span></span><span></span><span></span>
+    <!-- Current Vibe (Music) -->
+    <div class="links-section">
+      <div class="section-title">Current Vibe</div>
+      <div class="grid-container">
+        <div class="music-card">
+          <div class="music-album-art">
+            <img src="album.jpg" alt="Album Art">
+          </div>
+          <div class="music-info">
+            <span class="music-label">Favorite Track</span>
+            <span class="music-title">Making Love Out of Nothing At All</span>
+            <span class="music-artist">Air Supply</span>
+          </div>
+          <div class="sound-wave">
+            <span></span><span></span><span></span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="profile-footer">
-      <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
-    </footer>
-  </main>
+    <div class="profile-footer">
+      &copy; 2026 Indra Permana. Secured & Designed with Precision.
+    </div>
+  </div>
 
-  <button id="secret-restore-btn" onclick="toggleSecretWindow()">[ Restore Terminal Session ]</button>
-
-  <script src="script.js"></script>
-  <script>lucide.createIcons();</script>
-
-  <!-- Script Matrix Code Rain Animasi -->
-  <script>
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>//:;{}[]+-*\\';
-    const fontSize = 14;
-    let columns = Math.floor(canvas.width / fontSize);
-    let drops = [];
-
-    for (let i = 0; i < columns; i++) {
-      drops[i] = 1;
-    }
-
-    function drawMatrix() {
-      ctx.fillStyle = 'rgba(11, 15, 20, 0.12)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = characters.charAt(Math.floor(Math.random() * characters.length));
-        
-        if (Math.random() > 0.9) {
-          ctx.fillStyle = '#ffffff';
-        } else {
-          ctx.fillStyle = '#059669';
-        }
-
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    setInterval(drawMatrix, 45);
-  </script>
-
-  <!-- Script Google Translate & State Selector Controller -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'id',
-        includedLanguages: 'id,en,jw',
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-
-    function updateActiveButton() {
-      const currentLang = localStorage.getItem('user_lang') || 'id';
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        const btnLang = btn.getAttribute('data-lang');
-        if (btnLang === currentLang) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', updateActiveButton);
-
-    function changeLanguage(langCode) {
-      localStorage.setItem('user_lang', langCode);
-
-      if (langCode === 'id') {
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
-      } else {
-        document.cookie = "googtrans=/id/" + langCode + "; path=/;";
-        document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
-      }
-      
-      location.reload();
-    }
-
-    function toggleSecretWindow() {
-      const container = document.querySelector('.container');
-      const secretBtn = document.getElementById('secret-restore-btn');
-      
-      container.classList.toggle('is-hidden');
-      if (container.classList.contains('is-hidden')) {
-        secretBtn.classList.add('reveal');
-      } else {
-        secretBtn.classList.remove('reveal');
-      }
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
