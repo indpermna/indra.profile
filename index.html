@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Styling Custom Language Selector agar Menyatu dengan Tema Cyber */
+    /* Styling Custom Language Selector Responsif Tema */
     .header-controls {
       display: flex;
       align-items: center;
@@ -17,17 +17,22 @@
     
     .lang-switcher {
       display: flex;
-      background: rgba(17, 24, 39, 0.8);
+      background: rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(0, 255, 157, 0.2);
       border-radius: 6px;
       padding: 2px;
       gap: 2px;
     }
 
+    /* Penyesuaian background switcher saat dark mode */
+    body.dark-theme .lang-switcher {
+      background: rgba(17, 24, 39, 0.8);
+    }
+
     .lang-btn {
       background: transparent;
       border: none;
-      color: #9ca3af;
+      color: #6b7280;
       font-size: 11px;
       font-family: monospace;
       font-weight: bold;
@@ -37,11 +42,25 @@
       transition: all 0.2s ease;
     }
 
+    body.dark-theme .lang-btn {
+      color: #9ca3af;
+    }
+
     .lang-btn:hover {
+      color: #00875a;
+    }
+
+    body.dark-theme .lang-btn:hover {
       color: #00ff9d;
     }
 
     .lang-btn.active {
+      background: rgba(0, 255, 157, 0.2);
+      color: #007a4d;
+      border: 1px solid rgba(0, 255, 157, 0.5);
+    }
+
+    body.dark-theme .lang-btn.active {
       background: rgba(0, 255, 157, 0.15);
       color: #00ff9d;
       border: 1px solid rgba(0, 255, 157, 0.4);
@@ -76,9 +95,9 @@
       <div class="header-controls">
         <!-- Custom Language Switcher -->
         <div class="lang-switcher">
-          <button class="lang-btn" onclick="changeLanguage('id')">ID</button>
-          <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
-          <button class="lang-btn" onclick="changeLanguage('jw')">JV</button>
+          <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
+          <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
         </div>
 
         <!-- Hidden Google Translate Element -->
@@ -244,7 +263,7 @@
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
 
-  <!-- Script Google Translate Controller -->
+  <!-- Script Google Translate & State Selector Controller -->
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -254,30 +273,30 @@
       }, 'google_translate_element');
     }
 
-    // Fungsi membaca cookie bahasa yang sedang aktif
-    function getLangCookie() {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; googtrans=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift().split('/').pop();
-      }
-      return 'id';
-    }
-
-    // Set tombol aktif sesuai cookie saat halaman selesai dimuat
-    document.addEventListener('DOMContentLoaded', () => {
-      const activeLang = getLangCookie();
+    // Fungsi untuk memperbarui tampilan sorot tombol hijau
+    function updateActiveButton() {
+      const currentLang = localStorage.getItem('user_lang') || 'id';
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('onclick').includes(`'${activeLang}'`)) {
+        if (btn.getAttribute('data-lang') === currentLang) {
           btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
         }
       });
-    });
+    }
+
+    // Eksekusi pembaruan tombol saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', updateActiveButton);
 
     function changeLanguage(langCode) {
+      // Simpan pilihan bahasa ke localStorage
+      localStorage.setItem('user_lang', langCode);
+
+      // Set cookie Google Translate
       document.cookie = "googtrans=/id/" + langCode + "; path=/;";
       document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
+      
+      // Reload halaman
       location.reload();
     }
   </script>
