@@ -5,11 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Indra Permana</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
     :root {
-      --font-code: 'Courier New', Courier, monospace;
+      --font-main: 'Inter', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
       --bg-color: #0b0f19;
       --container-bg: rgba(15, 23, 42, 0.85);
       --border-color: rgba(0, 255, 157, 0.2);
@@ -45,7 +52,7 @@
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-main);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -72,10 +79,9 @@
       height: 100%;
     }
 
-    /* Poin 1: Lebar kontainer disesuaikan agar lebih proporsional di layar besar (Desktop) */
     .container {
       width: 100%;
-      max-width: 700px;
+      max-width: 720px;
       background: var(--container-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -173,7 +179,7 @@
       color: var(--text-muted);
       font-size: 11px;
       font-family: var(--font-code);
-      font-weight: bold;
+      font-weight: 600;
       padding: 4px 7px;
       border-radius: 4px;
       cursor: pointer;
@@ -248,8 +254,9 @@
       z-index: 3;
     }
 
+    /* Peningkatan ukuran & hierarki nama utama */
     .profile-name {
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: 4px;
       color: var(--text-main);
@@ -259,7 +266,7 @@
     .nickname {
       color: var(--text-muted);
       font-weight: 400;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
     }
 
     .profile-bio {
@@ -282,7 +289,7 @@
       border: 1px solid var(--card-border);
       padding: 5px 12px;
       border-radius: 20px;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-family: var(--font-code);
       color: var(--accent-color);
     }
@@ -306,7 +313,7 @@
     }
 
     .section-title {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-family: var(--font-code);
       color: var(--text-muted);
       letter-spacing: 1px;
@@ -336,7 +343,6 @@
       }
     }
 
-    /* Poin 2: Efek mikro-interaksi neon glow pada kartu saat hover */
     .link-card {
       display: flex;
       align-items: center;
@@ -393,7 +399,7 @@
     }
 
     .card-title {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
@@ -401,7 +407,7 @@
     }
 
     .card-sub {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       font-family: var(--font-code);
     }
@@ -453,14 +459,14 @@
     }
 
     .music-label {
-      font-size: 0.6rem;
+      font-size: 0.65rem;
       font-family: var(--font-code);
       color: var(--accent-color);
       letter-spacing: 0.5px;
     }
 
     .music-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
@@ -468,7 +474,7 @@
     }
 
     .music-artist {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
     }
 
@@ -505,7 +511,7 @@
     }
 
     .profile-footer p {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       font-family: var(--font-code);
     }
@@ -759,7 +765,6 @@
       }
     }
 
-    // Poin 4: Optimalisasi performa menggunakan Page Visibility API
     let matrixInterval = setInterval(drawMatrix, 45);
 
     document.addEventListener("visibilitychange", () => {
