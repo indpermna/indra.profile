@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.1">
+  <link rel="stylesheet" href="style.css?v=3.0">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,7 +27,6 @@
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
           <i data-lucide="sun" id="theme-icon"></i>
         </button>
-        <!-- kelas 'notranslate' dan 'translate="no"' dikunci agar tombol EN/ID/JV tidak diterjemahkan -->
         <div class="lang-switcher notranslate" translate="no">
           <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
           <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
@@ -91,8 +90,8 @@
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       
       <div class="cert-grid" id="cert-grid-main">
-        <!-- 2 Utama -->
-        <div class="cert-card" onclick="openCertModal('CompTIA Security+', 'COMPTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security','Threat Analysis','Risk Management','Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
+        <!-- 1. Sertifikasi Utama (Memanjang Penuh 2 Kolom) -->
+        <div class="cert-card featured-cert" onclick="openCertModal('CompTIA Security+', 'COMPTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security','Threat Analysis','Risk Management','Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <i data-lucide="award" class="cert-icon"></i>
           <div class="cert-info">
             <span class="cert-name notranslate" translate="no">CompTIA Security+</span>
@@ -101,7 +100,8 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
-        <div class="cert-card" onclick="openCertModal('Fortinet Associate', 'FORTINET', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.', ['Firewall Concepts','Network Perimeter','Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
+        <!-- 2. Fortinet Associate (Masuk Show More) -->
+        <div class="cert-card extra-cert" onclick="openCertModal('Fortinet Associate', 'FORTINET', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.', ['Firewall Concepts','Network Perimeter','Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
           <i data-lucide="shield-check" class="cert-icon"></i>
           <div class="cert-info">
             <span class="cert-name notranslate" translate="no">Fortinet Associate</span>
@@ -110,7 +110,7 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
-        <!-- 3 Extra -->
+        <!-- 3. Forcepoint DLP Admin (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Forcepoint DLP Admin', 'FORCEPOINT', 'Keahlian dalam manajemen Data Loss Prevention (DLP), perlindungan data sensitif, serta pencegahan kebocoran informasi.', ['Data Protection','DLP Policies','Compliance','Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
           <i data-lucide="lock" class="cert-icon"></i>
           <div class="cert-info">
@@ -120,6 +120,7 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
+        <!-- 4. Ransomware Defense (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Ransomware Defense', 'SOC RADAR', 'Pemahaman mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem dari ancaman enkripsi berbahaya.', ['Incident Response','Malware Analysis','Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
           <i data-lucide="shield-alert" class="cert-icon"></i>
           <div class="cert-info">
@@ -129,6 +130,7 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
+        <!-- 5. GenAI for SOC Analysts (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('GenAI for SOC Analysts', 'SOC RADAR', 'Pemanfaatan Generative AI untuk mengoptimalkan operasional SOC, otomatisasi analisis log, dan deteksi ancaman.', ['Generative AI','SOC Automation','Log Analysis','Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
           <i data-lucide="cpu" class="cert-icon"></i>
           <div class="cert-info">
@@ -139,9 +141,9 @@
         </div>
       </div>
 
-      <!-- Button Toggle -->
+      <!-- Tombol Show More (+4) -->
       <button class="toggle-certs-btn" id="toggle-certs-btn" onclick="toggleCerts()">
-        <span id="toggle-certs-text">Show More (+3)</span>
+        <span id="toggle-certs-text">Show More (+4)</span>
         <i data-lucide="chevron-down" id="toggle-certs-icon"></i>
       </button>
     </section>
@@ -197,7 +199,7 @@
   </div>
 
   <!-- JavaScript Files -->
-  <script src="script.js?v=2.1"></script>
+  <script src="script.js?v=3.0"></script>
   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
