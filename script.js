@@ -38,7 +38,6 @@ function googleTranslateElementInit() {
 
 // Terjemahan Bahasa Berbasis Cookie & Trigger Elemen
 function changeLanguage(langCode) {
-  // Update UI tombol aktif
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === langCode);
   });
@@ -46,12 +45,10 @@ function changeLanguage(langCode) {
   const targetLang = langCode === 'jw' ? 'jw' : langCode;
 
   if (langCode === 'id') {
-    // 1. Hapus cookie Google Translate
     setCookie('googtrans', '', -1);
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
 
-    // 2. Jika ada iframe Google Translate restoration, picu pemulihan
     const iframe = document.querySelector('iframe.goog-te-banner-frame');
     if (iframe) {
       const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -62,14 +59,12 @@ function changeLanguage(langCode) {
       }
     }
 
-    // 3. Fallback reload halus untuk mengembalikan teks asli Bahasa Indonesia
     setTimeout(() => {
       window.location.reload();
     }, 150);
     return;
   }
 
-  // Jika memilih EN atau JV:
   setCookie('googtrans', `/id/${targetLang}`, 1);
 
   const selectElem = document.querySelector('.goog-te-combo');
@@ -131,7 +126,7 @@ function toggleCerts() {
   }
 }
 
-// Modal Detail Sertifikasi
+// Modal Detail Sertifikasi (Dengam Auto-Translate Dinamis)
 function openCertModal(title, issuer, desc, skills, link) {
   document.getElementById('modal-title-text').innerText = title;
   document.getElementById('modal-issuer-text').innerText = issuer;
@@ -149,7 +144,19 @@ function openCertModal(title, issuer, desc, skills, link) {
     skillsContainer.appendChild(tag);
   });
 
-  document.getElementById('cert-modal').classList.add('active');
+  const modal = document.getElementById('cert-modal');
+  modal.classList.add('active');
+
+  // Pemicu Google Translate saat modal dibuka jika dalam mode EN/JV
+  const currentCookie = getCookie('googtrans');
+  if (currentCookie && !currentCookie.includes('/id')) {
+    const selectElem = document.querySelector('.goog-te-combo');
+    if (selectElem) {
+      setTimeout(() => {
+        selectElem.dispatchEvent(new Event('change'));
+      }, 50);
+    }
+  }
 }
 
 function closeCertModal(event) {
