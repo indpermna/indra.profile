@@ -5,19 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Indra Permana — IT Security & Network Engineer" />
   <title>Indra Permana | Portfolio Links</title>
+  
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="dark-theme">
+
   <main class="main-container">
-    <!-- Header Controls -->
+    
+    <!-- Top Bar Controls (Ditengah) -->
     <div class="top-bar">
-      <div class="status-badge">
-        <span class="status-dot"></span> Open for Tech Collaboration
-      </div>
       <div class="header-actions">
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
           <i data-lucide="sun" id="theme-icon"></i>
@@ -42,7 +47,7 @@
 
     <!-- Socials & Networks -->
     <section class="section-block">
-      <h2 class="section-title">Networks & Socials</h2>
+      <h2 class="section-title">NETWORKS & SOCIALS</h2>
       <div class="social-grid">
         <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="social-card">
           <div class="card-left">
@@ -68,11 +73,12 @@
       </div>
     </section>
 
-    <!-- Verified Certifications (Grid 2 Kolom + Show More) -->
+    <!-- Verified Certifications -->
     <section class="section-block">
-      <h2 class="section-title">Verified Certifications</h2>
+      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
+      
+      <!-- 2 Sertifikasi Utama -->
       <div class="cert-grid">
-        <!-- 2 Sertifikasi Utama -->
         <div class="cert-card" onclick="openCertModal('CompTIA Security+', 'COMPTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security','Threat Analysis','Risk Management','Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <i data-lucide="award" class="cert-icon"></i>
           <div class="cert-info">
@@ -124,25 +130,25 @@
         </div>
       </div>
 
-      <!-- Tombol Show More / Show Less -->
+      <!-- Tombol Show More Minimalis (Tanpa Border / Bingkai) -->
       <button class="toggle-certs-btn" id="toggle-certs-btn" onclick="toggleCerts()">
         <span id="toggle-certs-text">Show More (+3)</span>
         <i data-lucide="chevron-down" id="toggle-certs-icon"></i>
       </button>
     </section>
 
-    <!-- Hobbies & Current Vibe -->
+    <!-- Hobbies & Current Vibe (Simetris Sejajar) -->
     <div class="bottom-widgets-grid">
-      <section class="section-block">
-        <h2 class="section-title">Hobbies</h2>
+      <section class="section-block widget-col">
+        <h2 class="section-title">HOBBIES</h2>
         <div class="hobby-list">
-          <div class="hobby-chip"><i data-lucide="camera"></i> Street Photography</div>
-          <div class="hobby-chip"><i data-lucide="circle-dot"></i> Billiard</div>
+          <div class="hobby-chip"><i data-lucide="camera"></i> <span>Street Photography</span></div>
+          <div class="hobby-chip"><i data-lucide="circle-dot"></i> <span>Billiard</span></div>
         </div>
       </section>
 
-      <section class="section-block">
-        <h2 class="section-title">Current Vibe</h2>
+      <section class="section-block widget-col">
+        <h2 class="section-title">CURRENT VIBE</h2>
         <div class="music-widget">
           <img src="album.jpg" alt="Album Art" class="music-cover">
           <div class="music-details">
@@ -154,6 +160,7 @@
       </section>
     </div>
 
+    <!-- Footer -->
     <footer class="site-footer">
       <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
     </footer>
@@ -180,7 +187,8 @@
     </div>
   </div>
 
+  <!-- JavaScript Files -->
   <script src="script.js"></script>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
