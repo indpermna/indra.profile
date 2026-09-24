@@ -1,7 +1,7 @@
 // Inisialisasi Lucide Icons
 lucide.createIcons();
 
-// Data Kamus Terjemahan Modal
+// Data Kamus Terjemahan Modal Native
 const certTranslations = {
   'CompTIA Security+': {
     en: 'Global industry standard certification validating core competencies in cybersecurity, threat management, risk mitigation, and network security architecture.',
@@ -32,13 +32,13 @@ const certTranslations = {
 
 let currentCertData = null;
 
-// Ambil Bahasa Aktif
+// Ambil Bahasa Aktif saat ini
 function getActiveLanguage() {
   const activeBtn = document.querySelector('.lang-btn.active');
   return activeBtn ? activeBtn.getAttribute('data-lang') : 'id';
 }
 
-// Inisialisasi Google Translate Dummy (Agar Tidak Error)
+// Inisialisasi Google Translate Widget
 function googleTranslateElementInit() {
   new google.translate.TranslateElement(
     { pageLanguage: 'id', includedLanguages: 'en,id,jw', autoDisplay: false },
@@ -52,7 +52,6 @@ function changeLanguage(langCode) {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === langCode);
   });
 
-  // Set Cookie untuk Google Translate Teks Halaman
   const targetLang = langCode === 'jw' ? 'jw' : langCode;
   
   if (langCode === 'id') {
@@ -73,7 +72,7 @@ function changeLanguage(langCode) {
     window.location.reload();
   }
 
-  // Jika modal sedang terbuka, perbarui teks deskripsinya secara eksplisit
+  // Jika modal sedang terbuka, update teks deskripsinya secara eksplisit
   if (currentCertData && document.getElementById('cert-modal').classList.contains('active')) {
     const lang = getActiveLanguage();
     const descText = certTranslations[currentCertData.title]?.[lang] || currentCertData.desc;
@@ -81,7 +80,7 @@ function changeLanguage(langCode) {
   }
 }
 
-// Set Active Class saat Load
+// Set Active Class saat Load Pertama
 window.addEventListener('DOMContentLoaded', () => {
   const cookies = document.cookie.split(';');
   let activeLang = 'id';
@@ -126,11 +125,11 @@ function toggleCerts() {
   if (certGrid.classList.contains('expanded')) {
     btnText.innerText = 'Show Less';
   } else {
-    btnText.innerText = 'Show More (+3)';
+    btnText.innerText = 'Show More (+4)';
   }
 }
 
-// Open Modal dengan Terjemahan Native Presisi
+// Modal Detail Sertifikasi dengan Terjemahan Kamus Native
 function openCertModal(title, issuer, defaultDesc, skills, link) {
   currentCertData = { title, issuer, desc: defaultDesc, skills, link };
   
