@@ -1,4 +1,4 @@
-// Inisialisasi Lucide Icons
+// Inisialisasi Ikon Lucide
 lucide.createIcons();
 
 // Inisialisasi Google Translate Widget
@@ -14,14 +14,12 @@ function googleTranslateElementInit() {
   );
 }
 
-// Fungsi Mengubah Bahasa
+// Fungsi Pengubah Bahasa
 function changeLanguage(langCode) {
-  // Update tampilan status tombol bahasa yang aktif
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === langCode);
   });
 
-  // Trigger Google Translate jika elemen combo sudah dimuat
   const gtCombo = document.querySelector('.goog-te-combo');
   if (gtCombo) {
     gtCombo.value = langCode === 'jw' ? 'jw' : langCode;
@@ -29,18 +27,21 @@ function changeLanguage(langCode) {
   }
 }
 
-// Setel Bahasa Default saat Halaman Dimuat
+// Set Bahasa Default ke EN (English)
 document.addEventListener('DOMContentLoaded', () => {
-  // Tandai tombol EN sebagai aktif
   const enBtn = document.querySelector('.lang-btn[data-lang="en"]');
   if (enBtn) {
     enBtn.classList.add('active');
   }
 
-  // Picu otomatis Bahasa Inggris setelah Google Translate siap
-  setTimeout(() => {
-    changeLanguage('en');
-  }, 800);
+  // Pemicu otomatis terjemahan tanpa memunculkan bar atas
+  const checkComboInterval = setInterval(() => {
+    const gtCombo = document.querySelector('.goog-te-combo');
+    if (gtCombo) {
+      changeLanguage('en');
+      clearInterval(checkComboInterval);
+    }
+  }, 300);
 });
 
 // Fungsi Toggle Theme (Dark / Light)
@@ -57,11 +58,10 @@ function toggleTheme() {
     themeIcon.setAttribute('data-lucide', 'sun');
   }
   
-  // Refresh ikon Lucide setelah berganti tema
   lucide.createIcons();
 }
 
-// Fungsi Expand / Collapse Sertifikasi (+3 Show More)
+// Fungsi Expand / Collapse Sertifikasi
 function toggleCerts() {
   const moreCerts = document.getElementById('more-certs');
   const btn = document.getElementById('toggle-certs-btn');
@@ -97,14 +97,12 @@ function openCertModal(title, issuer, desc, skills, link) {
   document.getElementById('cert-modal').classList.add('active');
 }
 
-// Tutup Modal ketika Klik Backdrop Outer
 function closeCertModal(event) {
   if (event.target.id === 'cert-modal') {
     document.getElementById('cert-modal').classList.remove('active');
   }
 }
 
-// Tutup Modal via Tombol Close (X)
 function closeCertModalDirect() {
   document.getElementById('cert-modal').classList.remove('active');
 }
