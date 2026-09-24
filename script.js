@@ -1,4 +1,4 @@
-// Inisialisasi Lucide
+// Inisialisasi Lucide Icons
 lucide.createIcons();
 
 // Helper Cookie untuk Google Translate
@@ -9,7 +9,18 @@ function setCookie(name, value, days) {
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toUTCString();
   }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  document.cookie = name + "=" + (value || "") + "; path=/";
+}
+
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
 }
 
 // Inisialisasi Google Translate Widget
@@ -32,19 +43,46 @@ function changeLanguage(langCode) {
 
   const targetLang = langCode === 'jw' ? 'jw' : langCode;
 
+  if (langCode === 'id') {
+    // Hapus cookie translate jika memilih Bahasa Indonesia (kembali ke teks asli)
+    setCookie('googtrans', '', -1);
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
+    const selectElem = document.querySelector('.goog-te-combo');
+    if (selectElem) {
+      selectElem.value = 'id';
+      selectElem.dispatchEvent(new Event('change'));
+    }
+    window.location.reload();
+    return;
+  }
+
   // Set cookie bawaan Google Translate
   setCookie('googtrans', `/id/${targetLang}`, 1);
 
-  // Trigger combo box jika siap
   const selectElem = document.querySelector('.goog-te-combo');
   if (selectElem) {
     selectElem.value = targetLang;
     selectElem.dispatchEvent(new Event('change'));
   } else {
-    // Reload halaman jika cookie baru pertama diset
     window.location.reload();
   }
 }
+
+// Deteksi Bahasa Aktif Saat Load
+window.addEventListener('DOMContentLoaded', () => {
+  const currentCookie = getCookie('googtrans');
+  let activeLang = 'id';
+
+  if (currentCookie) {
+    if (currentCookie.includes('/en')) activeLang = 'en';
+    else if (currentCookie.includes('/jw')) activeLang = 'jw';
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === activeLang);
+  });
+});
 
 // Toggle Dark / Light Theme
 function toggleTheme() {
@@ -63,7 +101,7 @@ function toggleTheme() {
   lucide.createIcons();
 }
 
-// Expand / Collapse Sertifikasi (Langsung dalam 1 grid)
+// Expand / Collapse Sertifikasi
 function toggleCerts() {
   const certGrid = document.getElementById('cert-grid-main');
   const btn = document.getElementById('toggle-certs-btn');
@@ -91,7 +129,8 @@ function openCertModal(title, issuer, desc, skills, link) {
   
   skills.forEach(skill => {
     const tag = document.createElement('span');
-    tag.className = 'skill-tag';
+    tag.className = 'skill-tag notranslate';
+    tag.setAttribute('translate', 'no');
     tag.innerText = skill;
     skillsContainer.appendChild(tag);
   });
