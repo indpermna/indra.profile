@@ -232,11 +232,11 @@ body {
   color: var(--text-secondary);
 }
 
-/* Certifications Grid (GRID PRESISI RIGID 10PX) */
+/* Certifications Grid */
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px; /* Tepat 10px sejajar */
+  gap: 10px;
 }
 
 .cert-card {
@@ -255,6 +255,21 @@ body {
 .cert-card:hover {
   background: var(--card-hover);
   border-color: var(--accent-color);
+}
+
+/* Sertifikasi Pertama (CompTIA) Otomatis Memanjang Penuh 2 Kolom */
+.cert-card.featured-cert {
+  grid-column: span 2;
+}
+
+/* Sembunyikan Sertifikasi Tambahan (2, 3, 4, 5) secara Default */
+.cert-card.extra-cert {
+  display: none;
+}
+
+/* Tampilkan Saat State Expanded Aktif */
+.cert-grid.expanded .cert-card.extra-cert {
+  display: flex;
 }
 
 .cert-icon {
@@ -282,21 +297,6 @@ body {
 .cert-issuer {
   font-size: 0.7rem;
   color: var(--text-secondary);
-}
-
-/* Sembunyikan kartutambahan secara default */
-.cert-card.extra-cert {
-  display: none;
-}
-
-/* Ketika Grid Aktif Expanded: Tampilkan Kartu Tambahan */
-.cert-grid.expanded .cert-card.extra-cert {
-  display: flex;
-}
-
-/* Kartu ganjil terakhir otomatis melebar 2 kolom penuh */
-.cert-grid.expanded .cert-card.extra-cert:last-child {
-  grid-column: span 2;
 }
 
 /* Show More Button */
@@ -554,7 +554,7 @@ body {
     grid-template-columns: 1fr;
   }
   
-  .cert-grid.expanded .cert-card.extra-cert:last-child {
+  .cert-card.featured-cert {
     grid-column: span 1;
   }
 }
