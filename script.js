@@ -1,92 +1,96 @@
 // Inisialisasi Lucide Icons
 lucide.createIcons();
 
-// Helper Cookie untuk Google Translate
-function setCookie(name, value, days) {
-  let expires = "";
-  if (days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    expires = "; expires=" + date.toUTCString();
+// Data Kamus Terjemahan Modal
+const certTranslations = {
+  'CompTIA Security+': {
+    en: 'Global industry standard certification validating core competencies in cybersecurity, threat management, risk mitigation, and network security architecture.',
+    id: 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.',
+    jw: 'Sertifikasi standar industri global sing ngesahake kompetensi inti ing keamanan siber, manajemen ancaman, mitigasi risiko, lan arsitektur keamanan jaringan.'
+  },
+  'Fortinet Associate': {
+    en: 'Foundational certification covering network security concepts, advanced firewall operation, and perimeter security infrastructure.',
+    id: 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.',
+    jw: 'Sertifikasi foundational babagan konsep keamanan jaringan, operasi firewall tingkat lanjut, lan pangerten infrastruktur keamanan perimeter.'
+  },
+  'Forcepoint DLP Admin': {
+    en: 'Expertise in Data Loss Prevention (DLP) management, sensitive data protection, and prevention of information leakage.',
+    id: 'Keahlian dalam manajemen Data Loss Prevention (DLP), perlindungan data sensitif, serta pencegahan kebocoran informasi.',
+    jw: 'Keahlian ing manajemen Data Loss Prevention (DLP), perlindungan data sensitif, lan pencegahan kebocoran informasi.'
+  },
+  'Ransomware Defense': {
+    en: 'Understanding mitigation, ransomware attack vector analysis, and system recovery procedures from malicious encryption threats.',
+    id: 'Pemahaman mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem dari ancaman enkripsi berbahaya.',
+    jw: 'Pangerten mitigasi, analisis vektor serangan ransomware, lan prosedur pemulihan sistem saka ancaman enkripsi mbebayani.'
+  },
+  'GenAI for SOC Analysts': {
+    en: 'Leveraging Generative AI to optimize SOC operations, automated log analysis, and threat detection.',
+    id: 'Pemanfaatan Generative AI untuk mengoptimalkan operasional SOC, otomatisasi analisis log, dan deteksi ancaman.',
+    jw: 'Pemanfaatan Generative AI kanggo ngoptimalake operasional SOC, otomatisasi analisis log, lan deteksi ancaman.'
   }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/; domain=" + window.location.hostname;
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+};
+
+let currentCertData = null;
+
+// Ambil Bahasa Aktif
+function getActiveLanguage() {
+  const activeBtn = document.querySelector('.lang-btn.active');
+  return activeBtn ? activeBtn.getAttribute('data-lang') : 'id';
 }
 
-function getCookie(name) {
-  const nameEQ = name + "=";
-  const ca = document.cookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-  }
-  return null;
-}
-
-// Inisialisasi Google Translate Widget
+// Inisialisasi Google Translate Dummy (Agar Tidak Error)
 function googleTranslateElementInit() {
   new google.translate.TranslateElement(
-    {
-      pageLanguage: 'id',
-      includedLanguages: 'en,id,jw',
-      autoDisplay: false
-    },
+    { pageLanguage: 'id', includedLanguages: 'en,id,jw', autoDisplay: false },
     'google_translate_element'
   );
 }
 
-// Terjemahan Bahasa Berbasis Cookie & Trigger Elemen
+// Switcher Bahasa Utama
 function changeLanguage(langCode) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === langCode);
   });
 
+  // Set Cookie untuk Google Translate Teks Halaman
   const targetLang = langCode === 'jw' ? 'jw' : langCode;
-
+  
   if (langCode === 'id') {
-    setCookie('googtrans', '', -1);
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
-
-    const iframe = document.querySelector('iframe.goog-te-banner-frame');
-    if (iframe) {
-      const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-      const restoreBtn = innerDoc.getElementById(':1.restore') || innerDoc.querySelector('button');
-      if (restoreBtn) {
-        restoreBtn.click();
-        return;
-      }
-    }
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 150);
+    window.location.reload();
     return;
   }
 
-  setCookie('googtrans', `/id/${targetLang}`, 1);
+  document.cookie = `googtrans=/id/${targetLang}; path=/;`;
+  document.cookie = `googtrans=/id/${targetLang}; path=/; domain=` + window.location.hostname;
 
   const selectElem = document.querySelector('.goog-te-combo');
   if (selectElem) {
     selectElem.value = targetLang;
     selectElem.dispatchEvent(new Event('change'));
   } else {
-    setTimeout(() => {
-      window.location.reload();
-    }, 150);
+    window.location.reload();
+  }
+
+  // Jika modal sedang terbuka, perbarui teks deskripsinya secara eksplisit
+  if (currentCertData && document.getElementById('cert-modal').classList.contains('active')) {
+    const lang = getActiveLanguage();
+    const descText = certTranslations[currentCertData.title]?.[lang] || currentCertData.desc;
+    document.getElementById('modal-desc-text').innerText = descText;
   }
 }
 
-// Deteksi Bahasa Aktif Saat Pertama Halaman Dimuat
+// Set Active Class saat Load
 window.addEventListener('DOMContentLoaded', () => {
-  const currentCookie = getCookie('googtrans');
+  const cookies = document.cookie.split(';');
   let activeLang = 'id';
-
-  if (currentCookie) {
-    if (currentCookie.includes('/en')) activeLang = 'en';
-    else if (currentCookie.includes('/jw')) activeLang = 'jw';
-  }
+  cookies.forEach(c => {
+    if (c.trim().startsWith('googtrans=')) {
+      if (c.includes('/en')) activeLang = 'en';
+      else if (c.includes('/jw')) activeLang = 'jw';
+    }
+  });
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === activeLang);
@@ -126,11 +130,16 @@ function toggleCerts() {
   }
 }
 
-// Modal Detail Sertifikasi (Dengam Auto-Translate Dinamis)
-function openCertModal(title, issuer, desc, skills, link) {
+// Open Modal dengan Terjemahan Native Presisi
+function openCertModal(title, issuer, defaultDesc, skills, link) {
+  currentCertData = { title, issuer, desc: defaultDesc, skills, link };
+  
+  const currentLang = getActiveLanguage();
+  const descText = certTranslations[title]?.[currentLang] || defaultDesc;
+
   document.getElementById('modal-title-text').innerText = title;
   document.getElementById('modal-issuer-text').innerText = issuer;
-  document.getElementById('modal-desc-text').innerText = desc;
+  document.getElementById('modal-desc-text').innerText = descText;
   document.getElementById('modal-verify-link').href = link;
 
   const skillsContainer = document.getElementById('modal-skills-container');
@@ -144,19 +153,7 @@ function openCertModal(title, issuer, desc, skills, link) {
     skillsContainer.appendChild(tag);
   });
 
-  const modal = document.getElementById('cert-modal');
-  modal.classList.add('active');
-
-  // Pemicu Google Translate saat modal dibuka jika dalam mode EN/JV
-  const currentCookie = getCookie('googtrans');
-  if (currentCookie && !currentCookie.includes('/id')) {
-    const selectElem = document.querySelector('.goog-te-combo');
-    if (selectElem) {
-      setTimeout(() => {
-        selectElem.dispatchEvent(new Event('change'));
-      }, 50);
-    }
-  }
+  document.getElementById('cert-modal').classList.add('active');
 }
 
 function closeCertModal(event) {
