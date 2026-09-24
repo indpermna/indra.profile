@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="stylesheet" href="style.css?v=3.1">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -161,7 +161,15 @@
       <section class="section-block widget-col">
         <h2 class="section-title">CURRENT VIBE</h2>
         <div class="music-widget">
-          <img src="album.jpg" alt="Album Art" class="music-cover">
+          <!-- Album Cover Wrapper dengan Animated Equalizer -->
+          <div class="music-cover-wrapper">
+            <img src="album.jpg" alt="Album Art" class="music-cover">
+            <div class="music-equalizer" title="Playing">
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+            </div>
+          </div>
           <div class="music-details">
             <span class="music-tag">FAVORITE TRACK</span>
             <span class="music-title notranslate" translate="no">Making Love Out of Nothing At All</span>
@@ -199,7 +207,7 @@
   </div>
 
   <!-- JavaScript Files -->
-  <script src="script.js?v=3.0"></script>
+  <script src="script.js?v=3.1"></script>
   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
