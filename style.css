@@ -372,7 +372,7 @@ body {
   flex-shrink: 0;
 }
 
-/* Music Widget & Animated Equalizer */
+/* Music Widget & Equalizer Layout */
 .music-widget {
   display: flex;
   align-items: center;
@@ -384,54 +384,12 @@ body {
   height: 100%;
 }
 
-.music-cover-wrapper {
-  position: relative;
+.music-cover {
   width: 48px;
   height: 48px;
-  flex-shrink: 0;
   border-radius: 8px;
-  overflow: hidden;
-}
-
-.music-cover {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  display: block;
-}
-
-.music-equalizer {
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  width: 18px;
-  height: 18px;
-  background: rgba(9, 13, 22, 0.75);
-  backdrop-filter: blur(2px);
-  border-radius: 50%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 2px;
-  padding: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.eq-bar {
-  width: 2px;
-  background-color: var(--accent-color);
-  border-radius: 1px;
-  animation: eqBounce 1.2s ease-in-out infinite alternate;
-}
-
-.eq-bar:nth-child(1) { height: 40%; animation-delay: 0s; }
-.eq-bar:nth-child(2) { height: 80%; animation-delay: 0.3s; }
-.eq-bar:nth-child(3) { height: 50%; animation-delay: 0.15s; }
-
-@keyframes eqBounce {
-  0% { height: 25%; }
-  50% { height: 90%; }
-  100% { height: 35%; }
+  flex-shrink: 0;
 }
 
 .music-details {
@@ -442,11 +400,41 @@ body {
   gap: 2px;
 }
 
+.music-tag-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .music-tag {
   font-size: 0.625rem;
   font-weight: 700;
   color: var(--accent-color);
   letter-spacing: 0.05em;
+}
+
+.music-equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+
+.eq-bar {
+  width: 2px;
+  background-color: var(--accent-color);
+  border-radius: 1px;
+  animation: eqBounce 1.2s ease-in-out infinite alternate;
+}
+
+.eq-bar:nth-child(1) { height: 30%; animation-delay: 0s; }
+.eq-bar:nth-child(2) { height: 90%; animation-delay: 0.3s; }
+.eq-bar:nth-child(3) { height: 60%; animation-delay: 0.15s; }
+
+@keyframes eqBounce {
+  0% { height: 20%; }
+  50% { height: 100%; }
+  100% { height: 35%; }
 }
 
 .music-title {
