@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.0">
+  <link rel="stylesheet" href="style.css?v=2.1">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,12 +27,12 @@
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
           <i data-lucide="sun" id="theme-icon"></i>
         </button>
-        <div class="lang-switcher">
+        <!-- kelas 'notranslate' dan 'translate="no"' dikunci agar tombol EN/ID/JV tidak diterjemahkan -->
+        <div class="lang-switcher notranslate" translate="no">
           <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
           <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
           <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
         </div>
-        <!-- Element Google Translate (Hidden secara Aman) -->
         <div id="google_translate_element"></div>
       </div>
     </div>
@@ -42,8 +42,12 @@
       <div class="avatar-wrapper">
         <img src="avatar.jpg" alt="Indra Permana" class="avatar-img">
       </div>
-      <h1 class="profile-name">Indra Permana</h1>
-      <p class="profile-role">IT Security & Network Engineer <span class="dot-sep">•</span> Cyber Security</p>
+      <h1 class="profile-name notranslate" translate="no">Indra Permana</h1>
+      <p class="profile-role">
+        <span class="notranslate" translate="no">IT Security & Network Engineer</span> 
+        <span class="dot-sep">•</span> 
+        <span class="notranslate" translate="no">Cyber Security</span>
+      </p>
     </header>
 
     <!-- Socials & Networks -->
@@ -58,8 +62,8 @@
               <circle cx="4" cy="4" r="2"></circle>
             </svg>
             <div class="card-info">
-              <span class="card-title">LinkedIn</span>
-              <span class="card-sub">linkedin.com/in/indpermana</span>
+              <span class="card-title notranslate" translate="no">LinkedIn</span>
+              <span class="card-sub notranslate" translate="no">linkedin.com/in/indpermana</span>
             </div>
           </div>
           <i data-lucide="arrow-up-right" class="action-icon"></i>
@@ -73,8 +77,8 @@
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
             <div class="card-info">
-              <span class="card-title">Instagram</span>
-              <span class="card-sub">@indpermna</span>
+              <span class="card-title notranslate" translate="no">Instagram</span>
+              <span class="card-sub notranslate" translate="no">@indpermna</span>
             </div>
           </div>
           <i data-lucide="arrow-up-right" class="action-icon"></i>
@@ -82,7 +86,7 @@
       </div>
     </section>
 
-    <!-- Verified Certifications (DISATUKAN DALAM 1 GRID UNTUK DISTANSI RIGID) -->
+    <!-- Verified Certifications -->
     <section class="section-block">
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       
@@ -91,8 +95,8 @@
         <div class="cert-card" onclick="openCertModal('CompTIA Security+', 'COMPTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security','Threat Analysis','Risk Management','Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <i data-lucide="award" class="cert-icon"></i>
           <div class="cert-info">
-            <span class="cert-name">CompTIA Security+</span>
-            <span class="cert-issuer">CompTIA</span>
+            <span class="cert-name notranslate" translate="no">CompTIA Security+</span>
+            <span class="cert-issuer notranslate" translate="no">CompTIA</span>
           </div>
           <i data-lucide="info" class="action-icon"></i>
         </div>
@@ -100,18 +104,18 @@
         <div class="cert-card" onclick="openCertModal('Fortinet Associate', 'FORTINET', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.', ['Firewall Concepts','Network Perimeter','Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
           <i data-lucide="shield-check" class="cert-icon"></i>
           <div class="cert-info">
-            <span class="cert-name">Fortinet Associate</span>
-            <span class="cert-issuer">Fortinet</span>
+            <span class="cert-name notranslate" translate="no">Fortinet Associate</span>
+            <span class="cert-issuer notranslate" translate="no">Fortinet</span>
           </div>
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
-        <!-- 3 Tambahan (Extra) -->
+        <!-- 3 Extra -->
         <div class="cert-card extra-cert" onclick="openCertModal('Forcepoint DLP Admin', 'FORCEPOINT', 'Keahlian dalam manajemen Data Loss Prevention (DLP), perlindungan data sensitif, serta pencegahan kebocoran informasi.', ['Data Protection','DLP Policies','Compliance','Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
           <i data-lucide="lock" class="cert-icon"></i>
           <div class="cert-info">
-            <span class="cert-name">Forcepoint DLP Admin</span>
-            <span class="cert-issuer">Forcepoint</span>
+            <span class="cert-name notranslate" translate="no">Forcepoint DLP Admin</span>
+            <span class="cert-issuer notranslate" translate="no">Forcepoint</span>
           </div>
           <i data-lucide="info" class="action-icon"></i>
         </div>
@@ -119,8 +123,8 @@
         <div class="cert-card extra-cert" onclick="openCertModal('Ransomware Defense', 'SOC RADAR', 'Pemahaman mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem dari ancaman enkripsi berbahaya.', ['Incident Response','Malware Analysis','Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
           <i data-lucide="shield-alert" class="cert-icon"></i>
           <div class="cert-info">
-            <span class="cert-name">Ransomware Defense</span>
-            <span class="cert-issuer">SOC Radar</span>
+            <span class="cert-name notranslate" translate="no">Ransomware Defense</span>
+            <span class="cert-issuer notranslate" translate="no">SOC Radar</span>
           </div>
           <i data-lucide="info" class="action-icon"></i>
         </div>
@@ -128,14 +132,14 @@
         <div class="cert-card extra-cert" onclick="openCertModal('GenAI for SOC Analysts', 'SOC RADAR', 'Pemanfaatan Generative AI untuk mengoptimalkan operasional SOC, otomatisasi analisis log, dan deteksi ancaman.', ['Generative AI','SOC Automation','Log Analysis','Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
           <i data-lucide="cpu" class="cert-icon"></i>
           <div class="cert-info">
-            <span class="cert-name">GenAI for SOC Analysts</span>
-            <span class="cert-issuer">SOC Radar</span>
+            <span class="cert-name notranslate" translate="no">GenAI for SOC Analysts</span>
+            <span class="cert-issuer notranslate" translate="no">SOC Radar</span>
           </div>
           <i data-lucide="info" class="action-icon"></i>
         </div>
       </div>
 
-      <!-- Tombol Show More Minimalis -->
+      <!-- Button Toggle -->
       <button class="toggle-certs-btn" id="toggle-certs-btn" onclick="toggleCerts()">
         <span id="toggle-certs-text">Show More (+3)</span>
         <i data-lucide="chevron-down" id="toggle-certs-icon"></i>
@@ -158,8 +162,8 @@
           <img src="album.jpg" alt="Album Art" class="music-cover">
           <div class="music-details">
             <span class="music-tag">FAVORITE TRACK</span>
-            <span class="music-title">Making Love Out of Nothing At All</span>
-            <span class="music-artist">Air Supply</span>
+            <span class="music-title notranslate" translate="no">Making Love Out of Nothing At All</span>
+            <span class="music-artist notranslate" translate="no">Air Supply</span>
           </div>
         </div>
       </section>
@@ -175,10 +179,10 @@
   <div class="modal-backdrop" id="cert-modal" onclick="closeCertModal(event)" role="dialog" aria-modal="true">
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-top">
-        <span class="modal-issuer" id="modal-issuer-text">ISSUER</span>
+        <span class="modal-issuer notranslate" translate="no" id="modal-issuer-text">ISSUER</span>
         <button class="modal-close-btn" onclick="closeCertModalDirect()" aria-label="Close"><i data-lucide="x"></i></button>
       </div>
-      <h3 class="modal-title" id="modal-title-text">Certificate Title</h3>
+      <h3 class="modal-title notranslate" translate="no" id="modal-title-text">Certificate Title</h3>
       <p class="modal-desc" id="modal-desc-text">Description goes here...</p>
       
       <div class="modal-skills-heading">KEY SKILLS & COMPETENCIES</div>
@@ -193,7 +197,7 @@
   </div>
 
   <!-- JavaScript Files -->
-  <script src="script.js?v=2.0"></script>
+  <script src="script.js?v=2.1"></script>
   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
