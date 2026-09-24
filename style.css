@@ -1,13 +1,13 @@
 /* Custom Properties & Dark Mode Pekat */
 :root, body.dark-theme {
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --bg-main: #090d16;          /* Dark mode pekat */
-  --card-bg: #111726;           /* Warna kartu konsisten */
+  --bg-main: #090d16;
+  --card-bg: #111726;
   --card-hover: #1e293b;
   --border-color: rgba(255, 255, 255, 0.08);
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --accent-color: #38bdf8;      /* Soft Cyan */
+  --accent-color: #38bdf8;
   --accent-light: rgba(56, 189, 248, 0.12);
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
@@ -40,7 +40,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Sembunyikan Bawaan Google Translate Bar tanpa mematikan fungsinya */
+/* Sembunyikan Google Translate Frame dengan Aman */
 .goog-te-banner-frame,
 .goog-te-banner,
 .skiptranslate,
@@ -48,15 +48,14 @@ body {
 .goog-te-balloon-frame {
   display: none !important;
   visibility: hidden !important;
-  height: 0 !important;
-  width: 0 !important;
 }
 
 #google_translate_element {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-  visibility: hidden;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  opacity: 0.01 !important;
+  pointer-events: none !important;
 }
 
 .main-container {
@@ -209,6 +208,7 @@ body {
   width: 20px;
   height: 20px;
   color: var(--accent-color);
+  flex-shrink: 0;
 }
 
 .card-info {
@@ -232,11 +232,11 @@ body {
   color: var(--text-secondary);
 }
 
-/* Certifications Grid */
+/* Certifications Grid (GRID PRESISI RIGID 10PX) */
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 10px; /* Tepat 10px sejajar */
 }
 
 .cert-card {
@@ -284,27 +284,22 @@ body {
   color: var(--text-secondary);
 }
 
-/* More Certs Expandable */
-.more-certs-wrapper {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.3s ease;
-  margin-top: 0;
+/* Sembunyikan kartutambahan secara default */
+.cert-card.extra-cert {
+  display: none;
 }
 
-.more-certs-wrapper.expanded {
-  max-height: 300px;
-  opacity: 1;
-  margin-top: 10px; /* Jarak rapih & presisi 10px sama dengan gap grid */
+/* Ketika Grid Aktif Expanded: Tampilkan Kartu Tambahan */
+.cert-grid.expanded .cert-card.extra-cert {
+  display: flex;
 }
 
-/* Kartu ganjil terakhir otomatis melebar 2 kolom */
-.cert-grid-extra > .cert-card:last-child:nth-child(odd) {
+/* Kartu ganjil terakhir otomatis melebar 2 kolom penuh */
+.cert-grid.expanded .cert-card.extra-cert:last-child {
   grid-column: span 2;
 }
 
-/* Show More Button Minimalis */
+/* Show More Button */
 .toggle-certs-btn {
   display: flex;
   align-items: center;
@@ -337,7 +332,7 @@ body {
   transform: rotate(180deg);
 }
 
-/* Bottom Widgets Grid (Hobbies & Current Vibe) */
+/* Bottom Widgets Grid */
 .bottom-widgets-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -559,7 +554,7 @@ body {
     grid-template-columns: 1fr;
   }
   
-  .cert-grid-extra > .cert-card:last-child:nth-child(odd) {
+  .cert-grid.expanded .cert-card.extra-cert:last-child {
     grid-column: span 1;
   }
 }
