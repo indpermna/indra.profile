@@ -9,7 +9,8 @@ function setCookie(name, value, days) {
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toUTCString();
   }
-  document.cookie = name + "=" + (value || "") + "; path=/";
+  document.cookie = name + "=" + (value || "") + expires + "; path=/; domain=" + window.location.hostname;
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
 function getCookie(name) {
@@ -35,8 +36,9 @@ function googleTranslateElementInit() {
   );
 }
 
-// Terjemahan Bahasa Berbasis Cookie & Combo Trigger
+// Terjemahan Bahasa Berbasis Cookie & Trigger Elemen
 function changeLanguage(langCode) {
+  // Update UI tombol aktif
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === langCode);
   });
@@ -44,20 +46,30 @@ function changeLanguage(langCode) {
   const targetLang = langCode === 'jw' ? 'jw' : langCode;
 
   if (langCode === 'id') {
-    // Hapus cookie translate jika memilih Bahasa Indonesia (kembali ke teks asli)
+    // 1. Hapus cookie Google Translate
     setCookie('googtrans', '', -1);
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    
-    const selectElem = document.querySelector('.goog-te-combo');
-    if (selectElem) {
-      selectElem.value = 'id';
-      selectElem.dispatchEvent(new Event('change'));
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
+
+    // 2. Jika ada iframe Google Translate restoration, picu pemulihan
+    const iframe = document.querySelector('iframe.goog-te-banner-frame');
+    if (iframe) {
+      const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+      const restoreBtn = innerDoc.getElementById(':1.restore') || innerDoc.querySelector('button');
+      if (restoreBtn) {
+        restoreBtn.click();
+        return;
+      }
     }
-    window.location.reload();
+
+    // 3. Fallback reload halus untuk mengembalikan teks asli Bahasa Indonesia
+    setTimeout(() => {
+      window.location.reload();
+    }, 150);
     return;
   }
 
-  // Set cookie bawaan Google Translate
+  // Jika memilih EN atau JV:
   setCookie('googtrans', `/id/${targetLang}`, 1);
 
   const selectElem = document.querySelector('.goog-te-combo');
@@ -65,11 +77,13 @@ function changeLanguage(langCode) {
     selectElem.value = targetLang;
     selectElem.dispatchEvent(new Event('change'));
   } else {
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 150);
   }
 }
 
-// Deteksi Bahasa Aktif Saat Load
+// Deteksi Bahasa Aktif Saat Pertama Halaman Dimuat
 window.addEventListener('DOMContentLoaded', () => {
   const currentCookie = getCookie('googtrans');
   let activeLang = 'id';
