@@ -27,14 +27,13 @@ function changeLanguage(langCode) {
   }
 }
 
-// Set Bahasa Default ke EN (English)
+// Set Bahasa Default ke EN saat Halaman Dimuat
 document.addEventListener('DOMContentLoaded', () => {
   const enBtn = document.querySelector('.lang-btn[data-lang="en"]');
   if (enBtn) {
     enBtn.classList.add('active');
   }
 
-  // Pemicu otomatis terjemahan tanpa memunculkan bar atas
   const checkComboInterval = setInterval(() => {
     const gtCombo = document.querySelector('.goog-te-combo');
     if (gtCombo) {
