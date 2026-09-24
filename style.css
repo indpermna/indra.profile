@@ -1,16 +1,15 @@
-/* Minimalist, Clean Slate Theme */
-:root {
+/* Custom Properties & Dark Mode Lebih Gelap */
+:root, body.dark-theme {
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --bg-main: #0f172a;
-  --card-bg: #1e293b;
-  --card-hover: #334155;
+  --bg-main: #090d16;          /* Dark mode lebih gelap & pekat */
+  --card-bg: #111726;           /* Kartu menyatu alami */
+  --card-hover: #1e293b;
   --border-color: rgba(255, 255, 255, 0.08);
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --accent-color: #38bdf8; /* Soft Cyan */
-  --accent-light: rgba(56, 189, 248, 0.1);
-  --success-color: #2dd4bf; /* Mint Green */
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --accent-color: #38bdf8;      /* Soft Cyan */
+  --accent-light: rgba(56, 189, 248, 0.12);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 body.light-theme {
@@ -27,7 +26,10 @@ body.light-theme {
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Sembunyikan Google Translate Banner Frame di Paling Atas */
 body {
+  top: 0 !important;
+  position: static !important;
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-family: var(--font-family);
@@ -39,6 +41,21 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.goog-te-banner-frame,
+.goog-te-banner,
+.skiptranslate,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+#google_translate_element {
+  display: none !important;
+}
+
 .main-container {
   width: 100%;
   max-width: 580px;
@@ -47,37 +64,19 @@ body {
   gap: 24px;
 }
 
-/* Top Bar Controls */
+/* Top Bar Controls (Posisi Tengah) */
 .top-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-}
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--success-color);
-  border-radius: 50%;
+  width: 100%;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
 }
 
 .theme-toggle-btn {
@@ -122,12 +121,10 @@ body {
   background: var(--card-hover);
 }
 
-#google_translate_element { display: none !important; }
-
 /* Header Profile */
 .profile-header {
   text-align: center;
-  padding: 12px 0;
+  padding: 8px 0;
 }
 
 .avatar-wrapper {
@@ -249,6 +246,7 @@ body {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
+  min-height: 54px;
 }
 
 .cert-card:hover {
@@ -297,26 +295,28 @@ body {
   margin-top: 10px;
 }
 
+/* Show More Button Minimalis (Tanpa Border / Bingkai) */
 .toggle-certs-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 100%;
-  background: var(--card-bg);
-  border: 1px dashed var(--border-color);
+  width: auto;
+  margin: 8px auto 0;
+  background: transparent;
+  border: none;
   color: var(--accent-color);
-  padding: 10px;
-  border-radius: 10px;
+  padding: 6px 12px;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 10px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .toggle-certs-btn:hover {
-  background: var(--card-hover);
+  background: transparent;
+  opacity: 0.8;
+  transform: translateY(1px);
 }
 
 .toggle-certs-btn svg {
@@ -329,17 +329,24 @@ body {
   transform: rotate(180deg);
 }
 
-/* Bottom Widgets Grid */
+/* Bottom Widgets Grid (Hobbies & Current Vibe - Simetris) */
 .bottom-widgets-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  align-items: stretch;
+}
+
+.widget-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .hobby-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  height: 100%;
 }
 
 .hobby-chip {
@@ -348,13 +355,19 @@ body {
   gap: 8px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  padding: 10px 12px;
-  border-radius: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
   font-size: 0.8rem;
   color: var(--text-primary);
+  flex: 1;
 }
 
-.hobby-chip svg { width: 16px; height: 16px; color: var(--accent-color); }
+.hobby-chip svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
 
 .music-widget {
   display: flex;
@@ -362,32 +375,36 @@ body {
   gap: 12px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  padding: 10px;
-  border-radius: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  height: 100%;
 }
 
 .music-cover {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 8px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .music-details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   min-width: 0;
+  gap: 2px;
 }
 
 .music-tag {
-  font-size: 0.6rem;
+  font-size: 0.625rem;
   font-weight: 700;
   color: var(--accent-color);
   letter-spacing: 0.05em;
 }
 
 .music-title {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -395,7 +412,7 @@ body {
 }
 
 .music-artist {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
@@ -415,7 +432,7 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(4px);
   z-index: 1000;
   display: flex;
@@ -518,7 +535,7 @@ body {
   align-items: center;
   gap: 8px;
   background: var(--accent-color);
-  color: #000;
+  color: #000000;
   font-size: 0.85rem;
   font-weight: 700;
   padding: 10px 16px;
