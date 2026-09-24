@@ -1,8 +1,8 @@
-/* Custom Properties & Dark Mode Lebih Gelap */
+/* Custom Properties & Dark Mode Lebih Pekat */
 :root, body.dark-theme {
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --bg-main: #090d16;          /* Dark mode lebih gelap & pekat */
-  --card-bg: #111726;           /* Kartu menyatu alami */
+  --card-bg: #111726;           /* Warna kartu konsisten */
   --card-hover: #1e293b;
   --border-color: rgba(255, 255, 255, 0.08);
   --text-primary: #f8fafc;
@@ -26,7 +26,7 @@ body.light-theme {
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Sembunyikan Google Translate Banner Frame di Paling Atas */
+/* Menghilangkan Google Translate Bar Atas */
 body {
   top: 0 !important;
   position: static !important;
@@ -64,7 +64,7 @@ body {
   gap: 24px;
 }
 
-/* Top Bar Controls (Posisi Tengah) */
+/* Top Bar Controls (Di Tengah) */
 .top-bar {
   display: flex;
   justify-content: center;
@@ -229,7 +229,7 @@ body {
   color: var(--text-secondary);
 }
 
-/* Certifications 2 Columns Grid */
+/* Certifications Grid */
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -293,6 +293,11 @@ body {
   max-height: 300px;
   opacity: 1;
   margin-top: 10px;
+}
+
+/* SOLUSI B: Kartu Ganjil Terakhir Otomatis Memenuhi 2 Kolom */
+.cert-grid-extra > .cert-card:last-child:nth-child(odd) {
+  grid-column: span 2;
 }
 
 /* Show More Button Minimalis (Tanpa Border / Bingkai) */
@@ -549,5 +554,9 @@ body {
 @media (max-width: 520px) {
   .cert-grid, .bottom-widgets-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .cert-grid-extra > .cert-card:last-child:nth-child(odd) {
+    grid-column: span 1;
   }
 }
