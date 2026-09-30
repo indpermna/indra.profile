@@ -258,17 +258,14 @@ body {
   border-color: var(--accent-color);
 }
 
-/* Sertifikasi Pertama (CompTIA) Otomatis Memanjang Penuh 2 Kolom */
 .cert-card.featured-cert {
   grid-column: span 2;
 }
 
-/* Sembunyikan Sertifikasi Tambahan (2, 3, 4, 5) secara Default */
 .cert-card.extra-cert {
   display: none;
 }
 
-/* Tampilkan Saat State Expanded Aktif */
 .cert-grid.expanded .cert-card.extra-cert {
   display: flex;
 }
@@ -355,7 +352,6 @@ body {
   gap: 10px;
 }
 
-/* Hobby Card - Ukuran Disamakan Persis dengan Cert Card (Tinggi 54px) */
 .hobby-card {
   display: flex;
   align-items: center;
@@ -394,7 +390,7 @@ body {
   line-height: 1.2;
 }
 
-/* Music Widget Layout */
+/* Music Widget & Vinyl Style */
 .music-widget {
   display: flex;
   align-items: center;
@@ -406,12 +402,42 @@ body {
   box-sizing: border-box;
 }
 
-.music-cover {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  object-fit: cover;
+/* Container Vinyl untuk Lubang Tengah & Efek Glow */
+.vinyl-wrapper {
+  position: relative;
+  width: 52px;
+  height: 52px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinyl-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--card-bg);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.music-cover.vinyl {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+  animation: spinVinyl 8s linear infinite;
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .music-details {
