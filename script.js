@@ -1,166 +1,175 @@
-// Inisialisasi Lucide Icons
-lucide.createIcons();
-
-// Data Kamus Terjemahan Modal Native
-const certTranslations = {
-  'CompTIA Security+': {
-    en: 'Global industry standard certification validating core competencies in cybersecurity, threat management, risk mitigation, and network security architecture.',
-    id: 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.',
-    jw: 'Sertifikasi standar industri global sing ngesahake kompetensi inti ing keamanan siber, manajemen ancaman, mitigasi risiko, lan arsitektur keamanan jaringan.'
-  },
-  'Fortinet Associate': {
-    en: 'Foundational certification covering network security concepts, advanced firewall operation, and perimeter security infrastructure.',
-    id: 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.',
-    jw: 'Sertifikasi foundational babagan konsep keamanan jaringan, operasi firewall tingkat lanjut, lan pangerten infrastruktur keamanan perimeter.'
-  },
-  'Forcepoint DLP Admin': {
-    en: 'Expertise in Data Loss Prevention (DLP) management, sensitive data protection, and prevention of information leakage.',
-    id: 'Keahlian dalam manajemen Data Loss Prevention (DLP), perlindungan data sensitif, serta pencegahan kebocoran informasi.',
-    jw: 'Keahlian ing manajemen Data Loss Prevention (DLP), perlindungan data sensitif, lan pencegahan kebocoran informasi.'
-  },
-  'Ransomware Defense': {
-    en: 'Understanding mitigation, ransomware attack vector analysis, and system recovery procedures from malicious encryption threats.',
-    id: 'Pemahaman mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem dari ancaman enkripsi berbahaya.',
-    jw: 'Pangerten mitigasi, analisis vektor serangan ransomware, lan prosedur pemulihan sistem saka ancaman enkripsi mbebayani.'
-  },
-  'GenAI for SOC Analysts': {
-    en: 'Leveraging Generative AI to optimize SOC operations, automated log analysis, and threat detection.',
-    id: 'Pemanfaatan Generative AI untuk mengoptimalkan operasional SOC, otomatisasi analisis log, dan deteksi ancaman.',
-    jw: 'Pemanfaatan Generative AI kanggo ngoptimalake operasional SOC, otomatisasi analisis log, lan deteksi ancaman.'
-  }
-};
-
-let currentCertData = null;
-
-// Ambil Bahasa Aktif saat ini
-function getActiveLanguage() {
-  const activeBtn = document.querySelector('.lang-btn.active');
-  return activeBtn ? activeBtn.getAttribute('data-lang') : 'id';
-}
-
-// Inisialisasi Google Translate Widget
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement(
-    { pageLanguage: 'id', includedLanguages: 'en,id,jw', autoDisplay: false },
-    'google_translate_element'
-  );
-}
-
-// Switcher Bahasa Utama
-function changeLanguage(langCode) {
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === langCode);
-  });
-
-  const targetLang = langCode === 'jw' ? 'jw' : langCode;
+// Lucide Icons Initialization
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
   
-  if (langCode === 'id') {
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
-    window.location.reload();
-    return;
+  // Custom Audio Ended Listener
+  const audio = document.getElementById('vibe-audio');
+  const widget = document.getElementById('music-widget-card');
+  const playIcon = document.getElementById('audio-play-icon');
+  const statusText = document.getElementById('music-status-text');
+
+  if (audio) {
+    audio.addEventListener('ended', () => {
+      if (widget) widget.classList.remove('playing');
+      if (statusText) statusText.textContent = 'FAVORITE TRACK';
+      if (playIcon) playIcon.setAttribute('data-lucide', 'play');
+      lucide.createIcons();
+    });
   }
-
-  document.cookie = `googtrans=/id/${targetLang}; path=/;`;
-  document.cookie = `googtrans=/id/${targetLang}; path=/; domain=` + window.location.hostname;
-
-  const selectElem = document.querySelector('.goog-te-combo');
-  if (selectElem) {
-    selectElem.value = targetLang;
-    selectElem.dispatchEvent(new Event('change'));
-  } else {
-    window.location.reload();
-  }
-
-  // Jika modal sedang terbuka, update teks deskripsinya secara eksplisit
-  if (currentCertData && document.getElementById('cert-modal').classList.contains('active')) {
-    const lang = getActiveLanguage();
-    const descText = certTranslations[currentCertData.title]?.[lang] || currentCertData.desc;
-    document.getElementById('modal-desc-text').innerText = descText;
-  }
-}
-
-// Set Active Class saat Load Pertama
-window.addEventListener('DOMContentLoaded', () => {
-  const cookies = document.cookie.split(';');
-  let activeLang = 'id';
-  cookies.forEach(c => {
-    if (c.trim().startsWith('googtrans=')) {
-      if (c.includes('/en')) activeLang = 'en';
-      else if (c.includes('/jw')) activeLang = 'jw';
-    }
-  });
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === activeLang);
-  });
 });
 
-// Toggle Dark / Light Theme
+// Theme Switcher Functionality
 function toggleTheme() {
   const body = document.body;
   const themeIcon = document.getElementById('theme-icon');
   
-  body.classList.toggle('light-theme');
-  body.classList.toggle('dark-theme');
-
-  if (body.classList.contains('light-theme')) {
-    themeIcon.setAttribute('data-lucide', 'moon');
+  if (body.classList.contains('dark-theme')) {
+    body.classList.remove('dark-theme');
+    body.classList.add('light-theme');
+    if (themeIcon) themeIcon.setAttribute('data-lucide', 'moon');
+    localStorage.setItem('theme', 'light');
   } else {
-    themeIcon.setAttribute('data-lucide', 'sun');
+    body.classList.remove('light-theme');
+    body.classList.add('dark-theme');
+    if (themeIcon) themeIcon.setAttribute('data-lucide', 'sun');
+    localStorage.setItem('theme', 'dark');
   }
-  
   lucide.createIcons();
 }
 
-// Expand / Collapse Sertifikasi
-function toggleCerts() {
-  const certGrid = document.getElementById('cert-grid-main');
-  const btn = document.getElementById('toggle-certs-btn');
-  const btnText = document.getElementById('toggle-certs-text');
+// Restore saved theme on load
+(function() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
+  }
+})();
 
-  certGrid.classList.toggle('expanded');
-  btn.classList.toggle('expanded');
+// Real-time Clock Jakarta (UTC+7)
+function updateJakartaClock() {
+  const clockElement = document.getElementById('realtime-clock');
+  if (!clockElement) return;
 
-  if (certGrid.classList.contains('expanded')) {
-    btnText.innerText = 'Show Less';
+  const now = new Date();
+  const options = {
+    timeZone: 'Asia/Jakarta',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  };
+
+  const timeString = new Intl.DateTimeFormat('id-ID', options).format(now);
+  clockElement.textContent = `${timeString.replace(/\./g, ':')} WIB`;
+}
+
+updateJakartaClock();
+setInterval(updateJakartaClock, 1000);
+
+// Interactive Audio Preview untuk Current Vibe
+function toggleAudioPreview() {
+  const audio = document.getElementById('vibe-audio');
+  const widget = document.getElementById('music-widget-card');
+  const playIcon = document.getElementById('audio-play-icon');
+  const statusText = document.getElementById('music-status-text');
+
+  if (!audio || !widget) return;
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      widget.classList.add('playing');
+      statusText.textContent = 'PLAYING NOW';
+      if (playIcon) playIcon.setAttribute('data-lucide', 'pause');
+      lucide.createIcons();
+    }).catch(err => {
+      console.log('Audio preview file not ready or auto-play prevented:', err);
+    });
   } else {
-    btnText.innerText = 'Show More (+4)';
+    audio.pause();
+    widget.classList.remove('playing');
+    statusText.textContent = 'FAVORITE TRACK';
+    if (playIcon) playIcon.setAttribute('data-lucide', 'play');
+    lucide.createIcons();
   }
 }
 
-// Modal Detail Sertifikasi dengan Terjemahan Kamus Native
-function openCertModal(title, issuer, defaultDesc, skills, link) {
-  currentCertData = { title, issuer, desc: defaultDesc, skills, link };
-  
-  const currentLang = getActiveLanguage();
-  const descText = certTranslations[title]?.[currentLang] || defaultDesc;
+// Certifications Toggle Show More
+function toggleCerts() {
+  const grid = document.getElementById('cert-grid-main');
+  const btn = document.getElementById('toggle-certs-btn');
+  const text = document.getElementById('toggle-certs-text');
 
-  document.getElementById('modal-title-text').innerText = title;
-  document.getElementById('modal-issuer-text').innerText = issuer;
-  document.getElementById('modal-desc-text').innerText = descText;
-  document.getElementById('modal-verify-link').href = link;
+  if (!grid || !btn) return;
+
+  grid.classList.toggle('expanded');
+  btn.classList.toggle('expanded');
+
+  if (grid.classList.contains('expanded')) {
+    text.textContent = 'Show Less';
+  } else {
+    text.textContent = 'Show More (+4)';
+  }
+}
+
+// Certifications Modal Functions
+function openCertModal(title, issuer, desc, skills, verifyUrl) {
+  document.getElementById('modal-title-text').textContent = title;
+  document.getElementById('modal-issuer-text').textContent = issuer;
+  document.getElementById('modal-desc-text').textContent = desc;
+  
+  const verifyBtn = document.getElementById('modal-verify-link');
+  if (verifyUrl && verifyUrl !== '#') {
+    verifyBtn.href = verifyUrl;
+    verifyBtn.style.display = 'inline-flex';
+  } else {
+    verifyBtn.style.display = 'none';
+  }
 
   const skillsContainer = document.getElementById('modal-skills-container');
   skillsContainer.innerHTML = '';
-  
-  skills.forEach(skill => {
-    const tag = document.createElement('span');
-    tag.className = 'skill-tag notranslate';
-    tag.setAttribute('translate', 'no');
-    tag.innerText = skill;
-    skillsContainer.appendChild(tag);
-  });
+  if (Array.isArray(skills)) {
+    skills.forEach(skill => {
+      const tag = document.createElement('span');
+      tag.className = 'skill-tag notranslate';
+      tag.setAttribute('translate', 'no');
+      tag.textContent = skill;
+      skillsContainer.appendChild(tag);
+    });
+  }
 
   document.getElementById('cert-modal').classList.add('active');
-}
-
-function closeCertModal(event) {
-  if (event.target.id === 'cert-modal') {
-    document.getElementById('cert-modal').classList.remove('active');
-  }
+  document.body.style.overflow = 'hidden';
 }
 
 function closeCertModalDirect() {
   document.getElementById('cert-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeCertModal(event) {
+  if (event.target.id === 'cert-modal') {
+    closeCertModalDirect();
+  }
+}
+
+// Language Switcher & Google Translate Wrapper
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'id',
+    includedLanguages: 'en,id,jw',
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+
+function changeLanguage(langCode) {
+  const select = document.querySelector('.goog-te-combo');
+  if (select) {
+    select.value = langCode;
+    select.dispatchEvent(new Event('change'));
+  }
+  
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === langCode);
+  });
 }
