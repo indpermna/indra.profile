@@ -249,7 +249,8 @@ body {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-height: 54px;
+  height: 54px;
+  box-sizing: border-box;
 }
 
 .cert-card:hover {
@@ -292,11 +293,13 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .cert-issuer {
   font-size: 0.7rem;
   color: var(--text-secondary);
+  line-height: 1.2;
 }
 
 /* Show More Button */
@@ -337,42 +340,61 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .widget-col {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .hobby-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  height: 100%;
+  gap: 10px;
 }
 
-.hobby-chip {
+/* Hobby Card - Ukuran Disamakan Persis dengan Cert Card (Tinggi 54px) */
+.hobby-card {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   padding: 12px 14px;
   border-radius: 12px;
-  font-size: 0.8rem;
-  color: var(--text-primary);
-  flex: 1;
+  height: 54px;
+  box-sizing: border-box;
 }
 
-.hobby-chip svg {
-  width: 16px;
-  height: 16px;
+.hobby-icon {
+  width: 20px;
+  height: 20px;
   color: var(--accent-color);
   flex-shrink: 0;
 }
 
-/* Music Widget & Equalizer Layout */
+.hobby-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.hobby-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.hobby-sub {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+/* Music Widget Layout */
 .music-widget {
   display: flex;
   align-items: center;
@@ -381,7 +403,7 @@ body {
   border: 1px solid var(--border-color);
   padding: 14px 16px;
   border-radius: 12px;
-  height: 100%;
+  box-sizing: border-box;
 }
 
 .music-cover {
