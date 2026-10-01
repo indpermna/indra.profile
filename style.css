@@ -1,18 +1,22 @@
-/* Custom Properties & Translucent Glassmorphism Theme */
+/* Custom Properties & Translucent Glassmorphism Theme (Emerald Cyber Vibe) */
 :root, body.dark-theme {
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --bg-main: #090d16;
+  
+  /* Latar belakang Charcoal Gelap (Bukan Biru) */
+  --bg-main: #0b0f17;
   
   /* Latar belakang kartu dibuat transparan (RGBA) */
-  --card-bg: rgba(17, 23, 38, 0.6);
+  --card-bg: rgba(18, 24, 38, 0.6);
   --card-hover: rgba(30, 41, 59, 0.75);
   --border-color: rgba(255, 255, 255, 0.1);
   
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --accent-color: #38bdf8;
-  --accent-light: rgba(56, 189, 248, 0.15);
-  --shadow-sm: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  
+  /* Aksen Hijau Emerald Cyber */
+  --accent-color: #10b981; 
+  --accent-light: rgba(16, 185, 129, 0.15);
+  --shadow-sm: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
 }
 
 body.light-theme {
@@ -25,8 +29,8 @@ body.light-theme {
   
   --text-primary: #0f172a;
   --text-secondary: #64748b;
-  --accent-color: #0284c7;
-  --accent-light: rgba(2, 132, 199, 0.1);
+  --accent-color: #059669;
+  --accent-light: rgba(5, 150, 105, 0.1);
   --shadow-sm: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
 
@@ -36,10 +40,11 @@ body {
   top: 0 !important;
   position: static !important;
   background-color: var(--bg-main);
-  /* Tambahkan gradien halus di background agar efek transparan kartu lebih terlihat */
+  
+  /* Radial Gradient Aksen Hijau Transparan di Background */
   background-image: 
-    radial-gradient(at 20% 20%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(14, 165, 233, 0.05) 0px, transparent 50%);
+    radial-gradient(at 20% 20%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(5, 150, 105, 0.05) 0px, transparent 50%);
   background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-family);
@@ -156,7 +161,7 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent-color);
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
 }
 
 .profile-name {
@@ -206,7 +211,7 @@ body {
   font-weight: 600;
 }
 
-/* Sections & Cards */
+/* Sections & Cards Transparan */
 .section-block {
   display: flex;
   flex-direction: column;
@@ -552,7 +557,7 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
@@ -571,7 +576,7 @@ body {
 }
 
 .modal-card {
-  background: rgba(17, 23, 38, 0.85);
+  background: rgba(18, 24, 38, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
@@ -658,7 +663,7 @@ body {
   align-items: center;
   gap: 8px;
   background: var(--accent-color);
-  color: #000000;
+  color: #0b0f17;
   font-size: 0.85rem;
   font-weight: 700;
   padding: 10px 16px;
