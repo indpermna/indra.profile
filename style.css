@@ -1,27 +1,33 @@
-/* Custom Properties & Dark Mode Pekat */
+/* Custom Properties & Translucent Glassmorphism Theme */
 :root, body.dark-theme {
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --bg-main: #090d16;
-  --card-bg: #111726;
-  --card-hover: #1e293b;
-  --border-color: rgba(255, 255, 255, 0.08);
+  
+  /* Latar belakang kartu dibuat transparan (RGBA) */
+  --card-bg: rgba(17, 23, 38, 0.6);
+  --card-hover: rgba(30, 41, 59, 0.75);
+  --border-color: rgba(255, 255, 255, 0.1);
+  
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --accent-color: #38bdf8;
-  --accent-light: rgba(56, 189, 248, 0.12);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --accent-light: rgba(56, 189, 248, 0.15);
+  --shadow-sm: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 body.light-theme {
-  --bg-main: #f8fafc;
-  --card-bg: #ffffff;
-  --card-hover: #f1f5f9;
+  --bg-main: #f1f5f9;
+  
+  /* Latar belakang transparan mode terang */
+  --card-bg: rgba(255, 255, 255, 0.65);
+  --card-hover: rgba(241, 245, 249, 0.85);
   --border-color: rgba(0, 0, 0, 0.08);
+  
   --text-primary: #0f172a;
   --text-secondary: #64748b;
   --accent-color: #0284c7;
-  --accent-light: rgba(2, 132, 199, 0.08);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --accent-light: rgba(2, 132, 199, 0.1);
+  --shadow-sm: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,6 +36,11 @@ body {
   top: 0 !important;
   position: static !important;
   background-color: var(--bg-main);
+  /* Tambahkan gradien halus di background agar efek transparan kartu lebih terlihat */
+  background-image: 
+    radial-gradient(at 20% 20%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(14, 165, 233, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-family);
   min-height: 100vh;
@@ -86,13 +97,15 @@ body {
   height: 34px;
   border-radius: 10px;
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .theme-toggle-btn:hover { background: var(--card-hover); }
@@ -101,6 +114,8 @@ body {
 .lang-switcher {
   display: flex;
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 3px;
@@ -141,6 +156,7 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent-color);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
 .profile-name {
@@ -165,6 +181,8 @@ body {
   margin-top: 10px;
   padding: 6px 12px;
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   border-radius: 20px;
   font-size: 0.78rem;
@@ -203,7 +221,7 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* Social Cards */
+/* Social Cards Transparan */
 .social-grid {
   display: flex;
   flex-direction: column;
@@ -215,18 +233,21 @@ body {
   justify-content: space-between;
   align-items: center;
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   padding: 14px 16px;
   border-radius: 12px;
   text-decoration: none;
   color: var(--text-primary);
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-card:hover {
   background: var(--card-hover);
   border-color: var(--accent-color);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .card-left {
@@ -263,7 +284,7 @@ body {
   color: var(--text-secondary);
 }
 
-/* Certifications Grid */
+/* Certifications Grid Transparan */
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -275,11 +296,14 @@ body {
   align-items: center;
   gap: 12px;
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   padding: 12px 14px;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   height: 54px;
   box-sizing: border-box;
 }
@@ -287,6 +311,7 @@ body {
 .cert-card:hover {
   background: var(--card-hover);
   border-color: var(--accent-color);
+  transform: translateY(-2px);
 }
 
 .cert-card.featured-cert {
@@ -363,7 +388,7 @@ body {
   transform: rotate(180deg);
 }
 
-/* Bottom Widgets Grid */
+/* Bottom Widgets Grid Transparan */
 .bottom-widgets-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -388,11 +413,20 @@ body {
   align-items: center;
   gap: 12px;
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   padding: 12px 14px;
   border-radius: 12px;
   height: 54px;
   box-sizing: border-box;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.hobby-card:hover {
+  background: var(--card-hover);
+  border-color: var(--accent-color);
 }
 
 .hobby-icon {
@@ -421,16 +455,19 @@ body {
   line-height: 1.2;
 }
 
-/* Music Widget Layout */
+/* Music Widget Transparan */
 .music-widget {
   display: flex;
   align-items: center;
   gap: 12px;
   background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   padding: 14px 16px;
   border-radius: 12px;
   box-sizing: border-box;
+  box-shadow: var(--shadow-sm);
 }
 
 .music-cover {
@@ -511,12 +548,13 @@ body {
   color: var(--text-secondary);
 }
 
-/* Modal Styling */
+/* Modal Styling Transparan */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -533,13 +571,15 @@ body {
 }
 
 .modal-card {
-  background: var(--card-bg);
+  background: rgba(17, 23, 38, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: 16px;
   width: 100%;
   max-width: 440px;
   padding: 24px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   transform: scale(0.95);
   transition: transform 0.25s ease;
 }
