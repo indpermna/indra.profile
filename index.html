@@ -1,96 +1,246 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indra Permana - Profil</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Font Inter -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Indra Permana — IT Security & Network Engineer" />
+  <title>Indra Permana | Portfolio Links</title>
+  
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=3.5">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="dark-theme">
 
   <main class="main-container">
-
-    <!-- Control Atas (Bahasa & Tema) -->
+    
+    <!-- Top Bar Controls -->
     <div class="top-bar">
       <div class="header-actions">
-        <div class="lang-switcher">
-          <button class="lang-btn">EN</button>
-          <button class="lang-btn active">ID</button>
-          <button class="lang-btn">JV</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Theme">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+          <i data-lucide="sun" id="theme-icon"></i>
         </button>
+
+        <div class="lang-switcher notranslate" translate="no">
+          <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
+          <button class="lang-btn" data-lang="jw" onclick="changeLanguage('jw')">JV</button>
+        </div>
+        <div id="google_translate_element"></div>
       </div>
     </div>
 
-    <!-- Header Profil Ringkas -->
+    <!-- Profile Header -->
     <header class="profile-header">
-      <img src="avatar.jpg" alt="Indra Permana" class="avatar-img">
-      <h1 class="profile-name">Indra Permana</h1>
-      <p class="profile-role">IT Security & Network Engineer <span class="dot-sep">•</span> Cyber Security</p>
-      
-      <div class="location-time-widget">
-        <svg class="loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
-        <span>Jakarta, Indonesia (UTC+7) — <strong>09:10:42 WIB</strong></span>
+      <div class="avatar-wrapper">
+        <img src="avatar.jpg" alt="Indra Permana" class="avatar-img">
+      </div>
+      <h1 class="profile-name notranslate" translate="no">Indra Permana</h1>
+      <p class="profile-role">
+        <span class="notranslate" translate="no">IT Security & Network Engineer</span> 
+        <span class="dot-sep">•</span> 
+        <span class="notranslate" translate="no">Cyber Security</span>
+      </p>
+
+      <!-- Widget Lokasi & Jam Lokal Real-Time -->
+      <div class="location-time-widget notranslate" translate="no">
+        <i data-lucide="map-pin" class="loc-icon"></i>
+        <span>Jakarta, Indonesia (UTC+7) — <strong id="realtime-clock">--:--:-- WIB</strong></span>
       </div>
     </header>
 
-    <!-- Jaringan & Sosial (Disatukan Horizontal) -->
+    <!-- Socials & Networks -->
     <section class="section-block">
-      <span class="section-title">Jaringan & Sosial</span>
-      <div class="social-row">
-        <a href="https://linkedin.com/in/indpermana" target="_blank" class="social-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect x="2" y="9" width="4" height="12"/>
-            <circle cx="4" cy="4" r="2"/>
-          </svg>
-          LinkedIn
+      <h2 class="section-title">NETWORKS & SOCIALS</h2>
+      <div class="social-grid">
+        <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="social-card">
+          <div class="card-left">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+            <div class="card-info">
+              <span class="card-title notranslate" translate="no">LinkedIn</span>
+              <span class="card-sub notranslate" translate="no">linkedin.com/in/indpermana</span>
+            </div>
+          </div>
+          <i data-lucide="arrow-up-right" class="action-icon"></i>
         </a>
-        <a href="https://instagram.com/indpermana" target="_blank" class="social-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-          </svg>
-          Instagram
+
+        <a href="https://www.instagram.com/indpermna" target="_blank" rel="noopener noreferrer" class="social-card">
+          <div class="card-left">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <div class="card-info">
+              <span class="card-title notranslate" translate="no">Instagram</span>
+              <span class="card-sub notranslate" translate="no">@indpermna</span>
+            </div>
+          </div>
+          <i data-lucide="arrow-up-right" class="action-icon"></i>
         </a>
       </div>
     </section>
 
-    <!-- Sertifikasi Ringkas -->
-    <section class="section-block cert-section">
-      <span class="section-title">Sertifikasi</span>
-      <div class="cert-item">
-        <span>CompTIA Security+</span>
-        <span class="cert-issuer">CompTIA</span>
+    <!-- Verified Certifications -->
+    <section class="section-block">
+      <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
+      
+      <div class="cert-grid" id="cert-grid-main">
+        <div class="cert-card featured-cert" onclick="openCertModal('CompTIA Security+', 'COMPTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security','Threat Analysis','Risk Management','Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
+          <i data-lucide="award" class="cert-icon"></i>
+          <div class="cert-info">
+            <span class="cert-name notranslate" translate="no">CompTIA Security+</span>
+            <span class="cert-issuer notranslate" translate="no">CompTIA</span>
+          </div>
+          <i data-lucide="info" class="action-icon"></i>
+        </div>
+
+        <div class="cert-card extra-cert" onclick="openCertModal('Fortinet Associate', 'FORTINET', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.', ['Firewall Concepts','Network Perimeter','Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
+          <i data-lucide="shield-check" class="cert-icon"></i>
+          <div class="cert-info">
+            <span class="cert-name notranslate" translate="no">Fortinet Associate</span>
+            <span class="cert-issuer notranslate" translate="no">Fortinet</span>
+          </div>
+          <i data-lucide="info" class="action-icon"></i>
+        </div>
+
+        <div class="cert-card extra-cert" onclick="openCertModal('Forcepoint DLP Admin', 'FORCEPOINT', 'Keahlian dalam manajemen Data Loss Prevention (DLP), perlindungan data sensitif, serta pencegahan kebocoran informasi.', ['Data Protection','DLP Policies','Compliance','Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
+          <i data-lucide="lock" class="cert-icon"></i>
+          <div class="cert-info">
+            <span class="cert-name notranslate" translate="no">Forcepoint DLP Admin</span>
+            <span class="cert-issuer notranslate" translate="no">Forcepoint</span>
+          </div>
+          <i data-lucide="info" class="action-icon"></i>
+        </div>
+
+        <div class="cert-card extra-cert" onclick="openCertModal('Ransomware Defense', 'SOC RADAR', 'Pemahaman mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem dari ancaman enkripsi berbahaya.', ['Incident Response','Malware Analysis','Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
+          <i data-lucide="shield-alert" class="cert-icon"></i>
+          <div class="cert-info">
+            <span class="cert-name notranslate" translate="no">Ransomware Defense</span>
+            <span class="cert-issuer notranslate" translate="no">SOC Radar</span>
+          </div>
+          <i data-lucide="info" class="action-icon"></i>
+        </div>
+
+        <div class="cert-card extra-cert" onclick="openCertModal('GenAI for SOC Analysts', 'SOC RADAR', 'Pemanfaatan Generative AI untuk mengoptimalkan operasional SOC, otomatisasi analisis log, dan deteksi ancaman.', ['Generative AI','SOC Automation','Log Analysis','Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
+          <i data-lucide="cpu" class="cert-icon"></i>
+          <div class="cert-info">
+            <span class="cert-name notranslate" translate="no">GenAI for SOC Analysts</span>
+            <span class="cert-issuer notranslate" translate="no">SOC Radar</span>
+          </div>
+          <i data-lucide="info" class="action-icon"></i>
+        </div>
       </div>
+
+      <button class="toggle-certs-btn" id="toggle-certs-btn" onclick="toggleCerts()">
+        <span id="toggle-certs-text">Show More (+4)</span>
+        <i data-lucide="chevron-down" id="toggle-certs-icon"></i>
+      </button>
     </section>
+
+    <!-- Bottom Widgets Grid -->
+    <div class="bottom-widgets-grid">
+      <section class="section-block widget-col">
+        <h2 class="section-title">HOBBIES</h2>
+        <div class="hobby-list">
+          <div class="hobby-card">
+            <i data-lucide="camera" class="hobby-icon"></i>
+            <div class="hobby-info">
+              <span class="hobby-name notranslate" translate="no">Street Photography</span>
+              <span class="hobby-sub notranslate" translate="no">Visual & Arts</span>
+            </div>
+          </div>
+          <div class="hobby-card">
+            <i data-lucide="circle-dot" class="hobby-icon"></i>
+            <div class="hobby-info">
+              <span class="hobby-name notranslate" translate="no">Billiard</span>
+              <span class="hobby-sub notranslate" translate="no">Cue Sports</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Current Vibe -->
+      <section class="section-block widget-col">
+        <h2 class="section-title">CURRENT VIBE</h2>
+        <div class="music-widget">
+          <img src="album.jpg" alt="Album Art" class="music-cover">
+          <div class="music-details">
+            <div class="music-tag-wrapper">
+              <span class="music-tag">FAVORITE TRACK</span>
+              <div class="music-equalizer">
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+              </div>
+            </div>
+            <span class="music-title notranslate" translate="no">Making Love Out of Nothing At All</span>
+            <span class="music-artist notranslate" translate="no">Air Supply</span>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <!-- Footer -->
     <footer class="site-footer">
-      <p>© 2026 Indra Permana. Djamin & Dirancang kanthi Presisi.</p>
+      <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
     </footer>
-
   </main>
 
+  <!-- Modal Detail Sertifikasi -->
+  <div class="modal-backdrop" id="cert-modal" onclick="closeCertModal(event)" role="dialog" aria-modal="true">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-top">
+        <span class="modal-issuer notranslate" translate="no" id="modal-issuer-text">ISSUER</span>
+        <button class="modal-close-btn" onclick="closeCertModalDirect()" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <h3 class="modal-title notranslate" translate="no" id="modal-title-text">Certificate Title</h3>
+      <p class="modal-desc" id="modal-desc-text">Description goes here...</p>
+      
+      <div class="modal-skills-heading">KEY SKILLS & COMPETENCIES</div>
+      <div class="modal-skills-tags" id="modal-skills-container"></div>
+      
+      <div class="modal-footer">
+        <a href="#" id="modal-verify-link" target="_blank" rel="noopener noreferrer" class="btn-verify">
+          Verify Credential <i data-lucide="external-link"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Real-Time Clock -->
+  <script>
+    function updateRealtimeClock() {
+      const options = {
+        timeZone: 'Asia/Jakarta',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const now = new Date().toLocaleTimeString('id-ID', options);
+      const clockElem = document.getElementById('realtime-clock');
+      if (clockElem) {
+        clockElem.textContent = `${now.replace(/\./g, ':')} WIB`;
+      }
+    }
+    setInterval(updateRealtimeClock, 1000);
+    updateRealtimeClock();
+  </script>
+
+  <!-- JavaScript Files -->
+  <script src="script.js?v=3.2"></script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
