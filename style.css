@@ -40,7 +40,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Sembunyikan Google Translate Frame */
+/* Sembunyikan Google Translate Frame dengan Aman */
 .goog-te-banner-frame,
 .goog-te-banner,
 .skiptranslate,
@@ -157,33 +157,6 @@ body {
 
 .dot-sep { color: var(--accent-color); margin: 0 4px; }
 
-/* Location & Realtime Clock Badge */
-.location-clock-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  padding: 6px 12px;
-  border-radius: 20px;
-  margin-top: 10px;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.loc-icon {
-  width: 14px;
-  height: 14px;
-  color: var(--accent-color);
-}
-
-.clock-time {
-  font-weight: 600;
-  color: var(--text-primary);
-  font-variant-numeric: tabular-nums;
-}
-
 /* Sections & Cards */
 .section-block {
   display: flex;
@@ -285,14 +258,17 @@ body {
   border-color: var(--accent-color);
 }
 
+/* Sertifikasi Pertama (CompTIA) Otomatis Memanjang Penuh 2 Kolom */
 .cert-card.featured-cert {
   grid-column: span 2;
 }
 
+/* Sembunyikan Sertifikasi Tambahan (2, 3, 4, 5) secara Default */
 .cert-card.extra-cert {
   display: none;
 }
 
+/* Tampilkan Saat State Expanded Aktif */
 .cert-grid.expanded .cert-card.extra-cert {
   display: flex;
 }
@@ -379,6 +355,7 @@ body {
   gap: 10px;
 }
 
+/* Hobby Card - Ukuran Disamakan Persis dengan Cert Card (Tinggi 54px) */
 .hobby-card {
   display: flex;
   align-items: center;
@@ -417,7 +394,7 @@ body {
   line-height: 1.2;
 }
 
-/* Music Widget & Vinyl Style */
+/* Music Widget Layout */
 .music-widget {
   display: flex;
   align-items: center;
@@ -427,79 +404,14 @@ body {
   padding: 14px 16px;
   border-radius: 12px;
   box-sizing: border-box;
-  cursor: pointer;
-  position: relative;
-  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.music-widget:hover {
-  border-color: var(--accent-color);
-  transform: translateY(-1px);
-}
-
-.vinyl-wrapper {
-  position: relative;
-  width: 52px;
-  height: 52px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.vinyl-wrapper::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: var(--card-bg);
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-  z-index: 2;
-  box-sizing: border-box;
-}
-
-.music-cover.vinyl {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+.music-cover {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
   object-fit: cover;
-  border: 2px solid var(--accent-color);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
-  animation: spinVinyl 8s linear infinite;
-  animation-play-state: paused;
-}
-
-.music-widget.playing .music-cover.vinyl {
-  animation-play-state: running;
-}
-
-@keyframes spinVinyl {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.play-overlay-icon {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 3;
-}
-
-.music-widget:hover .play-overlay-icon {
-  opacity: 1;
-}
-
-.play-overlay-icon svg {
-  width: 18px;
-  height: 18px;
-  color: #ffffff;
+  flex-shrink: 0;
 }
 
 .music-details {
@@ -535,11 +447,6 @@ body {
   background-color: var(--accent-color);
   border-radius: 1px;
   animation: eqBounce 1.2s ease-in-out infinite alternate;
-  animation-play-state: paused;
-}
-
-.music-widget.playing .music-equalizer .eq-bar {
-  animation-play-state: running;
 }
 
 .eq-bar:nth-child(1) { height: 30%; animation-delay: 0s; }
@@ -575,27 +482,6 @@ body {
 .site-footer p {
   font-size: 0.75rem;
   color: var(--text-secondary);
-}
-
-/* Staggered Entry Fade-In Animation */
-.animate-fade {
-  opacity: 0;
-  transform: translateY(16px);
-  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-fade:nth-child(1) { animation-delay: 0.1s; }
-.animate-fade:nth-child(2) { animation-delay: 0.2s; }
-.animate-fade:nth-child(3) { animation-delay: 0.3s; }
-.animate-fade:nth-child(4) { animation-delay: 0.4s; }
-.animate-fade:nth-child(5) { animation-delay: 0.5s; }
-.animate-fade:nth-child(6) { animation-delay: 0.6s; }
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Modal Styling */
