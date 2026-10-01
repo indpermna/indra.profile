@@ -157,6 +157,37 @@ body {
 
 .dot-sep { color: var(--accent-color); margin: 0 4px; }
 
+/* Widget Lokasi & Jam Real-time */
+.location-time-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.location-time-widget:hover {
+  border-color: var(--accent-color);
+}
+
+.loc-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.location-time-widget strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* Sections & Cards */
 .section-block {
   display: flex;
@@ -258,17 +289,14 @@ body {
   border-color: var(--accent-color);
 }
 
-/* Sertifikasi Pertama (CompTIA) Otomatis Memanjang Penuh 2 Kolom */
 .cert-card.featured-cert {
   grid-column: span 2;
 }
 
-/* Sembunyikan Sertifikasi Tambahan (2, 3, 4, 5) secara Default */
 .cert-card.extra-cert {
   display: none;
 }
 
-/* Tampilkan Saat State Expanded Aktif */
 .cert-grid.expanded .cert-card.extra-cert {
   display: flex;
 }
@@ -355,7 +383,6 @@ body {
   gap: 10px;
 }
 
-/* Hobby Card - Ukuran Disamakan Persis dengan Cert Card (Tinggi 54px) */
 .hobby-card {
   display: flex;
   align-items: center;
