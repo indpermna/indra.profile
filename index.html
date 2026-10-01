@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=3.3">
+  <link rel="stylesheet" href="style.css?v=3.5">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,6 +27,7 @@
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
           <i data-lucide="sun" id="theme-icon"></i>
         </button>
+
         <div class="lang-switcher notranslate" translate="no">
           <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">EN</button>
           <button class="lang-btn" data-lang="id" onclick="changeLanguage('id')">ID</button>
@@ -47,6 +48,12 @@
         <span class="dot-sep">•</span> 
         <span class="notranslate" translate="no">Cyber Security</span>
       </p>
+
+      <!-- Widget Lokasi & Jam Lokal Real-Time -->
+      <div class="location-time-widget notranslate" translate="no">
+        <i data-lucide="map-pin" class="loc-icon"></i>
+        <span>Jakarta, Indonesia (UTC+7) — <strong id="realtime-clock">--:--:-- WIB</strong></span>
+      </div>
     </header>
 
     <!-- Socials & Networks -->
@@ -90,7 +97,6 @@
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       
       <div class="cert-grid" id="cert-grid-main">
-        <!-- 1. Sertifikasi Utama (Memanjang Penuh 2 Kolom) -->
         <div class="cert-card featured-cert" onclick="openCertModal('CompTIA Security+', 'COMPTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security','Threat Analysis','Risk Management','Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <i data-lucide="award" class="cert-icon"></i>
           <div class="cert-info">
@@ -100,7 +106,6 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
-        <!-- 2. Fortinet Associate (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Fortinet Associate', 'FORTINET', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.', ['Firewall Concepts','Network Perimeter','Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
           <i data-lucide="shield-check" class="cert-icon"></i>
           <div class="cert-info">
@@ -110,7 +115,6 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
-        <!-- 3. Forcepoint DLP Admin (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Forcepoint DLP Admin', 'FORCEPOINT', 'Keahlian dalam manajemen Data Loss Prevention (DLP), perlindungan data sensitif, serta pencegahan kebocoran informasi.', ['Data Protection','DLP Policies','Compliance','Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
           <i data-lucide="lock" class="cert-icon"></i>
           <div class="cert-info">
@@ -120,7 +124,6 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
-        <!-- 4. Ransomware Defense (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Ransomware Defense', 'SOC RADAR', 'Pemahaman mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem dari ancaman enkripsi berbahaya.', ['Incident Response','Malware Analysis','Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
           <i data-lucide="shield-alert" class="cert-icon"></i>
           <div class="cert-info">
@@ -130,7 +133,6 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
-        <!-- 5. GenAI for SOC Analysts (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('GenAI for SOC Analysts', 'SOC RADAR', 'Pemanfaatan Generative AI untuk mengoptimalkan operasional SOC, otomatisasi analisis log, dan deteksi ancaman.', ['Generative AI','SOC Automation','Log Analysis','Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
           <i data-lucide="cpu" class="cert-icon"></i>
           <div class="cert-info">
@@ -141,7 +143,6 @@
         </div>
       </div>
 
-      <!-- Tombol Show More (+4) -->
       <button class="toggle-certs-btn" id="toggle-certs-btn" onclick="toggleCerts()">
         <span id="toggle-certs-text">Show More (+4)</span>
         <i data-lucide="chevron-down" id="toggle-certs-icon"></i>
@@ -150,7 +151,6 @@
 
     <!-- Bottom Widgets Grid -->
     <div class="bottom-widgets-grid">
-      <!-- Hobbies Disamakan Ukuran & Strukturnya dengan Cert Card -->
       <section class="section-block widget-col">
         <h2 class="section-title">HOBBIES</h2>
         <div class="hobby-list">
@@ -171,7 +171,7 @@
         </div>
       </section>
 
-      <!-- Current Vibe (Kembali Statis) -->
+      <!-- Current Vibe -->
       <section class="section-block widget-col">
         <h2 class="section-title">CURRENT VIBE</h2>
         <div class="music-widget">
@@ -179,7 +179,6 @@
           <div class="music-details">
             <div class="music-tag-wrapper">
               <span class="music-tag">FAVORITE TRACK</span>
-              <!-- Equalizer Visual -->
               <div class="music-equalizer">
                 <span class="eq-bar"></span>
                 <span class="eq-bar"></span>
@@ -219,6 +218,26 @@
       </div>
     </div>
   </div>
+
+  <!-- Script Real-Time Clock -->
+  <script>
+    function updateRealtimeClock() {
+      const options = {
+        timeZone: 'Asia/Jakarta',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const now = new Date().toLocaleTimeString('id-ID', options);
+      const clockElem = document.getElementById('realtime-clock');
+      if (clockElem) {
+        clockElem.textContent = `${now.replace(/\./g, ':')} WIB`;
+      }
+    }
+    setInterval(updateRealtimeClock, 1000);
+    updateRealtimeClock();
+  </script>
 
   <!-- JavaScript Files -->
   <script src="script.js?v=3.2"></script>
