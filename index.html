@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=3.3">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -22,7 +22,7 @@
   <main class="main-container">
     
     <!-- Top Bar Controls -->
-    <div class="top-bar animate-fade">
+    <div class="top-bar">
       <div class="header-actions">
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
           <i data-lucide="sun" id="theme-icon"></i>
@@ -36,8 +36,8 @@
       </div>
     </div>
 
-    <!-- Profile Header dengan Widget Jam Real-Time -->
-    <header class="profile-header animate-fade">
+    <!-- Profile Header -->
+    <header class="profile-header">
       <div class="avatar-wrapper">
         <img src="avatar.jpg" alt="Indra Permana" class="avatar-img">
       </div>
@@ -47,18 +47,10 @@
         <span class="dot-sep">•</span> 
         <span class="notranslate" translate="no">Cyber Security</span>
       </p>
-      
-      <!-- Live Location & Real-time Clock Widget -->
-      <div class="location-clock-badge">
-        <i data-lucide="map-pin" class="loc-icon"></i>
-        <span>Jakarta, Indonesia (UTC+7)</span>
-        <span class="dot-sep">•</span>
-        <span id="realtime-clock" class="clock-time">00:00:00 WIB</span>
-      </div>
     </header>
 
     <!-- Socials & Networks -->
-    <section class="section-block animate-fade">
+    <section class="section-block">
       <h2 class="section-title">NETWORKS & SOCIALS</h2>
       <div class="social-grid">
         <a href="https://www.linkedin.com/in/indpermana" target="_blank" rel="noopener noreferrer" class="social-card">
@@ -94,10 +86,11 @@
     </section>
 
     <!-- Verified Certifications -->
-    <section class="section-block animate-fade">
+    <section class="section-block">
       <h2 class="section-title">VERIFIED CERTIFICATIONS</h2>
       
       <div class="cert-grid" id="cert-grid-main">
+        <!-- 1. Sertifikasi Utama (Memanjang Penuh 2 Kolom) -->
         <div class="cert-card featured-cert" onclick="openCertModal('CompTIA Security+', 'COMPTIA', 'Sertifikasi standar industri global yang mengesahkan kompetensi inti dalam keamanan siber, manajemen ancaman, mitigasi risiko, serta arsitektur keamanan jaringan.', ['Network Security','Threat Analysis','Risk Management','Cryptography'], 'https://www.credly.com/badges/457b99df-3268-496a-ba3c-fafbfa89d438')">
           <i data-lucide="award" class="cert-icon"></i>
           <div class="cert-info">
@@ -107,6 +100,7 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
+        <!-- 2. Fortinet Associate (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Fortinet Associate', 'FORTINET', 'Sertifikasi foundational mengenai konsep keamanan jaringan, pengoperasian firewall tingkat lanjut, serta pemahaman infrastruktur keamanan perimeter.', ['Firewall Concepts','Network Perimeter','Security Operations'], 'https://www.credly.com/badges/de81bd73-18c7-402d-96da-bb006546b565')">
           <i data-lucide="shield-check" class="cert-icon"></i>
           <div class="cert-info">
@@ -116,6 +110,7 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
+        <!-- 3. Forcepoint DLP Admin (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Forcepoint DLP Admin', 'FORCEPOINT', 'Keahlian dalam manajemen Data Loss Prevention (DLP), perlindungan data sensitif, serta pencegahan kebocoran informasi.', ['Data Protection','DLP Policies','Compliance','Endpoint Security'], 'https://education.forcepoint.com/achievements/certificate/242288211')">
           <i data-lucide="lock" class="cert-icon"></i>
           <div class="cert-info">
@@ -125,6 +120,7 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
+        <!-- 4. Ransomware Defense (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('Ransomware Defense', 'SOC RADAR', 'Pemahaman mitigasi, analisis vektor serangan ransomware, serta prosedur pemulihan sistem dari ancaman enkripsi berbahaya.', ['Incident Response','Malware Analysis','Threat Intelligence'], 'https://credsverse.com/credentials/7d415941-2272-42dd-b196-2679165fcaf9')">
           <i data-lucide="shield-alert" class="cert-icon"></i>
           <div class="cert-info">
@@ -134,6 +130,7 @@
           <i data-lucide="info" class="action-icon"></i>
         </div>
 
+        <!-- 5. GenAI for SOC Analysts (Masuk Show More) -->
         <div class="cert-card extra-cert" onclick="openCertModal('GenAI for SOC Analysts', 'SOC RADAR', 'Pemanfaatan Generative AI untuk mengoptimalkan operasional SOC, otomatisasi analisis log, dan deteksi ancaman.', ['Generative AI','SOC Automation','Log Analysis','Threat Hunting'], 'https://credsverse.com/credentials/5c8c77be-cf28-4205-af31-e7ab9b79bb4b?preview=1')">
           <i data-lucide="cpu" class="cert-icon"></i>
           <div class="cert-info">
@@ -144,6 +141,7 @@
         </div>
       </div>
 
+      <!-- Tombol Show More (+4) -->
       <button class="toggle-certs-btn" id="toggle-certs-btn" onclick="toggleCerts()">
         <span id="toggle-certs-text">Show More (+4)</span>
         <i data-lucide="chevron-down" id="toggle-certs-icon"></i>
@@ -151,8 +149,8 @@
     </section>
 
     <!-- Bottom Widgets Grid -->
-    <div class="bottom-widgets-grid animate-fade">
-      <!-- Hobbies -->
+    <div class="bottom-widgets-grid">
+      <!-- Hobbies Disamakan Ukuran & Strukturnya dengan Cert Card -->
       <section class="section-block widget-col">
         <h2 class="section-title">HOBBIES</h2>
         <div class="hobby-list">
@@ -173,20 +171,16 @@
         </div>
       </section>
 
-      <!-- Current Vibe (Interactive Vinyl Audio Player) -->
+      <!-- Current Vibe (Kembali Statis) -->
       <section class="section-block widget-col">
         <h2 class="section-title">CURRENT VIBE</h2>
-        <div class="music-widget" id="music-widget-card" onclick="toggleAudioPreview()">
-          <div class="vinyl-wrapper">
-            <img src="album.jpg" alt="Album Art" class="music-cover vinyl" id="vinyl-disc">
-            <div class="play-overlay-icon">
-              <i data-lucide="play" id="audio-play-icon"></i>
-            </div>
-          </div>
+        <div class="music-widget">
+          <img src="album.jpg" alt="Album Art" class="music-cover">
           <div class="music-details">
             <div class="music-tag-wrapper">
-              <span class="music-tag" id="music-status-text">CLICK TO PLAY</span>
-              <div class="music-equalizer" id="music-eq">
+              <span class="music-tag">FAVORITE TRACK</span>
+              <!-- Equalizer Visual -->
+              <div class="music-equalizer">
                 <span class="eq-bar"></span>
                 <span class="eq-bar"></span>
                 <span class="eq-bar"></span>
@@ -196,13 +190,11 @@
             <span class="music-artist notranslate" translate="no">Air Supply</span>
           </div>
         </div>
-        <!-- Tag Audio HTML5 -->
-        <audio id="vibe-audio" src="audio-preview.mp3" preload="none"></audio>
       </section>
     </div>
 
     <!-- Footer -->
-    <footer class="site-footer animate-fade">
+    <footer class="site-footer">
       <p>&copy; 2026 Indra Permana. Secured & Designed with Precision.</p>
     </footer>
   </main>
@@ -228,7 +220,8 @@
     </div>
   </div>
 
-  <script src="script.js?v=4.0"></script>
+  <!-- JavaScript Files -->
+  <script src="script.js?v=3.2"></script>
   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
